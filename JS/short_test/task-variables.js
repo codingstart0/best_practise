@@ -9,3 +9,16 @@ admin = name;
 alert(admin);
 
 
+const planet = "Earth";
+// my soliution
+
+let ourPlanetName = "Earth";
+// curiculum solution
+
+
+let user = "User_name";
+// my soliution
+
+let curentUserName = "Jim"
+// curiculum solution
+
