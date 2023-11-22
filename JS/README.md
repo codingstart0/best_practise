@@ -4,7 +4,10 @@ This JS repository it's for learning Java Script. In this repo I'll store learni
 For managing files I will used structure by naming files "JS_test#"
 
 
-#Time stamps
+# Time stamps
 
 2023-11-18 Start learning JS
+
 2023-11-19 Add JS_test1
+
+2023-11-22 Update JS_test2 project
