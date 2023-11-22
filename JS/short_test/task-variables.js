@@ -12,3 +12,5 @@ function updateBtn() {
     txt.textContent = "The machine is stopped.";
   }
 }
+
+console.log(btn)
