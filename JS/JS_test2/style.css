@@ -1,0 +1,16 @@
+.box {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    gap: 10px;
+}
+
+button {
+    height: 90px;
+    width: 90px;
+    color: rgb(219, 33, 33);
+    text-transform: uppercase;
+    font-weight: 900;
+    background-color: rgb(69, 84, 109);
+    border-radius: 360px;
+}
