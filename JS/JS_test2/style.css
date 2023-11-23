@@ -1,6 +1,7 @@
 body {
     background-color: rgb(153, 161, 161);
-    /* background-image: url(./image/a-red-orange-column-of-smoke-in-darkness.jpg); */
+    /*the background should changed then button is pushed
+    background-image: url(./image/a-red-orange-column-of-smoke-in-darkness.jpg);
     background-repeat: repeat;
     background-size: cover;
 
@@ -9,7 +10,6 @@ body {
 
 .box {
     padding: 15em;
-
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -25,6 +25,5 @@ button {
     font-weight: 900;
     background-color: rgb(23, 27, 35);
     border-radius: 360em;
-    
     box-shadow: 4px 3px 2px rgba(94, 107, 107, 0.876);
 }
