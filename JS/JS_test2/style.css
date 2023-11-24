@@ -1,13 +1,19 @@
 body {
+    font-size: 16px;
         background-color: rgb(153, 161, 161);
     /*the background should changed then button is pushed */
-    background-image: url(./image/a-red-orange-column-of-smoke-in-darkness.jpg);
+    /* background-image: url(./image/a-red-orange-column-of-smoke-in-darkness.jpg); */
     background-repeat: repeat;
     background-size: cover;
 }
 
+h1{
+    color: black;
+}
+
+
 .box {
-    padding: 15em;
+    padding: 4em;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -15,13 +21,26 @@ body {
     gap: 5em;
 }
 
-button {
+.start-button {
     height: 90px;
     width: 90px;
-    color: rgb(219, 33, 33);
+    color: rgb(36, 219, 33);
     text-transform: uppercase;
     font-weight: 900;
     background-color: rgb(23, 27, 35);
     border-radius: 360em;
     box-shadow: 4px 3px 2px rgba(94, 107, 107, 0.876);
+}
+button.started {
+    color: rgb(219, 33, 39);
+    background-color: hotpink;
+}
+
+.border-1 {
+    border: 5px solid rgb(232, 213, 232);
+}
+
+
+h1.started{
+    color: hotpink;
 }
