@@ -2,10 +2,14 @@
     display: flex;
     gap: 0.5rem;
     flex-direction: column;
-    align-self: center
-    
+    margin: auto;
   }
   
+  .storyPush {
+        text-align: center;
+        background-color: hotpink;
+      }
+
   button {
     width: 200px;
   }
