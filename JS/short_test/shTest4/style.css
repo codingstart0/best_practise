@@ -5,7 +5,7 @@
     margin: auto;
   }
   
-  .storyPush {
+  textarea.storyPush {
         text-align: center;
         background-color: hotpink;
       }
