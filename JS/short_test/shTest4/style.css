@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+    margin: auto;
+    }
+
+.storyPush {
+    text-align: center;
+    background-color: hotpink;
+    }
+
+button {
+    width: 200px;
+    align-self: center;
+    }
