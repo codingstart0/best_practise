@@ -9,9 +9,7 @@ setText.addEventListener(
   () => {
     story.textContent = 'It was a dark and stormy night...';
     story.classList.add(storyPush);
-    // story.style = storyPush;
-  }
-  // () => {"storyPush"},
+      }
 );
 
 const clearText = document.body.querySelector('#clear-text');
