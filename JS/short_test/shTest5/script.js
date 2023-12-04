@@ -30,7 +30,16 @@ momButton.addEventListener('click', () => {
 
 const removeChild = document.body.querySelector('#remove-child');
 removeChild.addEventListener('click', () => {
-  const children = document.body.querySelectorAll('.child');
+  const dadChildren = document.querySelector('dad').querySelector('.child');
+  const momChildren = document.querySelector('mom').querySelector('.child');
+
+  if (dadChildren.lenght > 0) {
+    dadChildren[dadChildren.lenght - 1].remove();
+  }
+  if (momChildren.lenght > 0) {
+    momChildren[momChildren.lenght - 1].remove();
+  }
+
   children.forEach((child) => {
     child.parentNode.removeChild(child);
   });
