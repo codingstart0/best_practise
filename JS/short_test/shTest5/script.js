@@ -30,17 +30,13 @@ momButton.addEventListener('click', () => {
 
 const removeChild = document.body.querySelector('#remove-child');
 removeChild.addEventListener('click', () => {
-  const dadChildren = document.querySelector('dad').querySelector('.child');
-  const momChildren = document.querySelector('mom').querySelector('.child');
+  const dadChildren = document.querySelector('.dad').querySelectorAll('.child');
+  const momChildren = document.querySelector('.mom').querySelectorAll('.child');
 
-  if (dadChildren.lenght > 0) {
-    dadChildren[dadChildren.lenght - 1].remove();
+  if (dadChildren.length > 0) {
+    dadChildren[dadChildren.length - 1].remove();
   }
-  if (momChildren.lenght > 0) {
-    momChildren[momChildren.lenght - 1].remove();
+  if (momChildren.length > 0) {
+    momChildren[momChildren.length - 1].remove();
   }
-
-  children.forEach((child) => {
-    child.parentNode.removeChild(child);
-  });
 });
