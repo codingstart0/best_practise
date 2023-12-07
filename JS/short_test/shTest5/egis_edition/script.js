@@ -1,27 +1,24 @@
 const dadBox = document.body.querySelector('.dad');
 const dadButton = document.querySelector('#add-child-dad');
 
-dadButton.addEventListener('click', () => {
-    if (dadBox.childNodes.length > 3) {
-    return;
-  }
-  const child = document.createElement('div');
-  child.classList.add('child');
-  child.textContent = 'child';
-  dadBox.appendChild(child);
-});
-
 const momBox = document.body.querySelector('.mom');
 const momButton = document.querySelector('#add-child-mom');
 
-momButton.addEventListener('click', () => {
-  if (momBox.childNodes.length > 4) {
-    return;
+function appendChildBox(box, childClassName, childText, max = 2) {
+  if (box.childNodes.length <= max) {
+    const child = document.createElement('div');
+    child.classList.add(childClassName);
+    child.textContent = childText;
+    box.append(child);
   }
-  const child = document.createElement('div');
-  child.classList.add('child');
-  child.textContent = 'child';
-  momBox.appendChild(child);
+}
+
+dadButton.addEventListener('click', () => {
+  appendChildBox(dadBox, 'child', 'tetes', 4);
+});
+
+momButton.addEventListener('click', () => {
+  appendChildBox(momBox, 'child', 'mamos', 3);
 });
 
 const removeChild = document.body.querySelector('#remove-child');
