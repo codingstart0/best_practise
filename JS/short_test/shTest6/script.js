@@ -1,44 +1,44 @@
-// On this one still working
-
+// This one is final code. It's work with "Log in" button until the end.
 
 document.getElementById('run').addEventListener('click', function () {
-    let promptStart = prompt("Who's there?");
-    let cancel = !promptStart;
-    let user = 'Admin';
-    
-    let greeting = 'Welcome';
-  
-  //   let wrongPass = alert('Wrong password');
-  
-    if (cancel) {
+  let promptStart = prompt("Who's there?");
+  let cancel = !promptStart;
+  let user = 'Admin';
+
+  if (cancel) {
+    alert('Canceled!');
+  } else if (promptStart === user) {
+    let passPrompt = prompt('Password');
+    let pass = 'password';
+    let cancelPass = !passPrompt;
+
+    if (cancelPass) {
       alert('Canceled!');
-    } else if (promptStart === user) {
-       function(prompt) {
-          let passPrompt = prompt('Password');
-          let pass =("password");
-          if (passPrompt = pass) {alert(greeting)}
-      };
+    } else if (passPrompt === pass) {
+      alert('Welcome, you are in the future!');
     } else {
-      alert("I don't know you!");
+      alert('Wrong password!');
     }
-  });
-
-
-// This one is OK, with button.But until password step.
-document.getElementById("run").addEventListener('click', function() {
-    let promptStart = prompt("Who's there?");
-    let cancel = !promptStart;
-    let user = ("Admin");
-    
-if (cancel) { alert("Canceled!")
-}
-else if (promptStart === user) {
-    prompt("Password"); 
-}
-else {alert("I don't know you!");
-}
+  } else {
+    alert("I don't know you!");
+  }
 });
 
+// This one is OK, with button.But until password step.
+
+// document.getElementById("run").addEventListener('click', function() {
+//     let promptStart = prompt("Who's there?");
+//     let cancel = !promptStart;
+//     let user = ("Admin");
+
+// if (cancel) { alert("Canceled!")
+// }
+// else if (promptStart === user) {
+//     prompt("Password");
+// }
+// else {alert("I don't know you!");
+// }
+// });
 
 // This one is OK, but without the button and until password step.
 
@@ -50,7 +50,7 @@ else {alert("I don't know you!");
 // if (cancel) { alert("Canceled!")
 // }
 // else if (promptStart === user) {
-//     prompt("Password"); 
+//     prompt("Password");
 // }
 // else {alert("I don't know you!");
 // };
