@@ -4,10 +4,28 @@ const h1 = document.querySelector('h1');
 
 select.addEventListener('change', () => {
   const choice = select.value;
-
+  
   // ADD CONDITIONAL HERE
-
-  createCalendar(days, choice);
+  if (
+    choice === 'January' ||
+    choice === 'March' ||
+    choice === 'May' ||
+    choice === 'July' ||
+    choice === 'August' ||
+    choice === 'October' ||
+    choice === 'December'
+  ) {
+    createCalendar(31, choice);
+  } else if (
+    choice === 'April' ||
+    choice === 'June' ||
+    choice === 'September' ||
+    choice === 'November'
+  ) {
+    createCalendar(30, choice);
+  } else if (choice === 'February') {
+    createCalendar(28, choice);
+  }
 });
 
 function createCalendar(days, choice) {
@@ -19,5 +37,3 @@ function createCalendar(days, choice) {
     list.appendChild(listItem);
   }
 }
-
-createCalendar(31, 'January');
