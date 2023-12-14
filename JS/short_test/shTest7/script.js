@@ -6,7 +6,20 @@ select.addEventListener('change', () => {
   const choice = select.value;
 
   // ADD CONDITIONAL HERE
+let days = 31;
 
+if (choice === "February")
+{ days = 28; }
+
+else if (
+ choice === "April" ||
+ choice === "June" ||
+ choice === "September" ||
+ choice === "November" )
+{days = 30 }
+
+createCalendar (days, choice);
+});
 
 
 // This one below is too long, but it's working fine.
@@ -42,3 +55,6 @@ function createCalendar(days, choice) {
     list.appendChild(listItem);
   }
 }
+
+
+createCalendar(31, "January");
