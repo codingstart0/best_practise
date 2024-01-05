@@ -43,6 +43,14 @@
 
     // Add your code here
 
+    function draw(){
+      ctx.beginPath();
+      ctx.strokeStyle = color;
+      ctx.rect(x, y, width, height);
+      ctx.stroke();
+    }
+
+    draw()
     // Don't edit the code below here!
 
     const section = document.querySelector('section');
