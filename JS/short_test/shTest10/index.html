@@ -1,93 +1,118 @@
 <!DOCTYPE html>
 <html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Functions: Task 2</title>
+    <style>
+      p {
+        color: purple;
+        margin: 0.5em 0;
+      }
 
-<head>
-  <meta charset="utf-8" />
-  <title>Functions: Task 2</title>
-  <style>
-    p {
-      color: purple;
-      margin: 0.5em 0;
+      * {
+        box-sizing: border-box;
+      }
+
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+
+  <body>
+    <input class="colorInput" type="text" />
+
+    <section></section>
+
+    <canvas width="480" height="320"> </canvas>
+  </body>
+  <script>
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // additional code
+    const input = document.querySelector('.colorInput');
+    const para = document.createElement('p');
+    let chooseColor = '';
+
+    input.addEventListener('input', function () {
+      chooseColor = input.value;
+      para.textContent = `Your chosen color is ${chooseColor} !`;
+    });
+
+    const section = document.querySelector('section');
+    section.appendChild(para);
+
+    // Blue rectangle
+    const blue = function drawRect() {
+      ctx.beginPath();
+      ctx.strokeStyle = 'blue';
+      ctx.rect(50, 60, 100, 75);
+      ctx.stroke();
     }
 
-    * {
-      box-sizing: border-box;
+    // Red rectangle
+    const red = function drawRect() {
+      ctx.beginPath();
+      ctx.lineWidth = '6';
+      ctx.strokeStyle = 'red';
+      ctx.rect(5, 5, 290, 140);
+      ctx.stroke();
     }
 
-    canvas {
-      border: 1px solid black;
+    // Green rectangle
+    const green = function drawRect() {
+      ctx.beginPath();
+      ctx.lineWidth = '4';
+      ctx.strokeStyle = 'green';
+      ctx.rect(30, 30, 50, 50);
+      ctx.stroke();
     }
-  </style>
-  <link rel="stylesheet" href="../styles.css" />
-</head>
 
-<body>
+    // Add your code here
 
-  <input class="colorInput" type="text">
+    // const x = 50;
+    // const y = 60;
+    // const width = 100;
+    // const height = 75;
+    // const color = 'blue';
 
-  <section></section>
+    // function draw() {
+    //   ctx.beginPath();
+    //   ctx.strokeStyle = color;
+    //   ctx.rect(x, y, width, height);
+    //   ctx.stroke();
+    // }
+    // draw()
 
-  <canvas width="480" height="320">
+    drawRect(red);
 
-  </canvas>
+    if ((chooseColor = 'red')) {
+      input.addEventListener('input', function () {
+        chooseColor = input.value;
+        para.textContent = `Your chosen color is ${chooseColor} !`;
+      });
+      drawRect(red);
+    } else if ((chooseColor = 'green')) {
+      input.addEventListener('input', function () {
+        chooseColor = input.value;
+        para.textContent = `Your chosen color is ${chooseColor} !`;
+      });
+      drawRect(green);
+    } else if ((chooseColor = 'blue')) {
+      input.addEventListener('input', function () {
+        chooseColor = input.value;
+        para.textContent = `Your chosen color is ${chooseColor} !`;
+      });
+      drawRect(blue);
+    } else {
+      input.addEventListener('input', function () {
+        chooseColor = input.value;
+        para.textContent = `${chooseColor} it's not right color! Choose red, green or blue`;
+      });
+    }
 
-</body>
-<script>
-  const canvas = document.querySelector('canvas');
-  const ctx = canvas.getContext('2d');
-
-  // additional code
-  const input = document.querySelector('.colorInput');
-  const para = document.createElement('p');
-  let chooseColor = '';
-
-  // document.addEventListener('keydown', chooseColor);
-  input.addEventListener('input', function () {
-    chooseColor = (input.value);
-    para.textContent = `Your chosen color is ${chooseColor} !`;
-  });
-
-  const section = document.querySelector('section');
-  section.appendChild(para);
-
-
-  // Blue rectangle 
-  const x = 50;
-  const y = 60;
-  const width = 100;
-  const height = 75;
-  const color = 'blue';
-
-  // Red rectangle
-  ctx.beginPath();
-  ctx.lineWidth = "6";
-  ctx.strokeStyle = "red";
-  ctx.rect(5, 5, 290, 140);
-  ctx.stroke();
-
-  // Green rectangle
-  ctx.beginPath();
-  ctx.lineWidth = "4";
-  ctx.strokeStyle = "green";
-  ctx.rect(30, 30, 50, 50);
-  ctx.stroke();
-
-  // Add your code here
-
-  function draw() {
-    ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.rect(x, y, width, height);
-    ctx.stroke();
-  }
-
-  draw()
-
-
-  // Don't edit the code below here!
-
-
-
-</script>
-
+    // Don't edit the code below here!
+  </script>
 </html>
