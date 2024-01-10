@@ -29,12 +29,16 @@
     const names = ['Chris', 'Li Kang', 'Anne', 'Francesca', 'Mustafa', 'Tina', 'Bert', 'Jada'];
     const para = document.createElement('p');
 
-    function isShort(name) {
-      return name.length < 5;
-    }
+    // Arrow Function
+    const isShort = (name) => name.length < 5;
 
+    // Traditional Function
+    // function isShort(name) {
+    //   return name.length < 5;
+    // }
+    
     const shortNames = names.filter(isShort);
-    para.textContent = shortNames;
+    para.textContent = `These names are shorter than 5 characters ${shortNames}`;
 
     // Don't edit the code below here!
 
