@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>Functions: Task 4</title>
     <style>
       p {
@@ -17,34 +17,65 @@
   </head>
 
   <body>
-
-    <section class="preview">
-
-
-
-    </section>
-
+    <section class="preview"></section>
   </body>
   <script>
-    const names = ['Chris', 'Li Kang', 'Anne', 'Francesca', 'Mustafa', 'Tina', 'Bert', 'Jada'];
+    const names = [
+      'Chris',
+      'Joe',
+      'Limon',
+      'Adon',
+      'Rik',
+      'Li Kang',
+      'Anne',
+      'Francesca',
+      'Mustafa',
+      'Tina',
+      'Bert',
+      'Jada',
+    ];
+
     const para = document.createElement('p');
+    const paraShort = document.createElement('p');
+    const para5 = document.createElement('p');
+    const paraLong = document.createElement('p');
+
+    // More compact arrow functions
+    const shortNames = names.filter((name) => name.length < 5);
+    const longNames = names.filter((name) => name.length > 5);
+    const equalNames = names.filter((name) => name.length === 5);
+
+    const shortNamesList = shortNames.length;
+    const longNamesList = longNames.length;
+    const equalNamesList = equalNames.length;
+    const listLength = names.length;
+
+    paraShort.textContent = `These ${shortNamesList} names are shorter than 5 characters: ${shortNames.join(
+      ', '
+    )}`;
+    para.textContent = `These ${longNamesList} names are longer than 5 characters: ${longNames.join(
+      ', '
+    )}`;
+    para5.textContent = `These ${equalNamesList} names are 5 characters long: ${equalNames.join(
+      ', '
+    )}`;
+    paraLong.textContent = `This list contains ${listLength} names`;
 
     // Arrow Function
-    const isShort = (name) => name.length < 5;
+    // const isShort = (name) => name.length <= 5;
 
     // Traditional Function
     // function isShort(name) {
     //   return name.length < 5;
     // }
-    
-    const shortNames = names.filter(isShort);
-    para.textContent = `These names are shorter than 5 characters ${shortNames}`;
 
     // Don't edit the code below here!
 
     const section = document.querySelector('section');
 
+    section.appendChild(paraShort);
+    section.appendChild(para5);
     section.appendChild(para);
+    section.appendChild(paraLong);
   </script>
-
 </html>
