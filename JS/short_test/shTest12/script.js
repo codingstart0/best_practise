@@ -33,3 +33,9 @@ function min(a, b){
     return (a < b)  ? a : b;
 }
 alert(min(1, 1));
+
+
+function sayHi() {
+    alert( "Hello" );
+  }
+  sayHi()
