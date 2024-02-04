@@ -37,7 +37,7 @@ When starting new project:
     git check out main
     change your branch to "main" and start over from first step in this list
 
-# time Stamp
+# time Stamps
 
-2023-11-24 Update README file
-2024-02-04 Update README file
+1. Update README file 2023-11-24 
+2. Update README file 2024-02-04 
