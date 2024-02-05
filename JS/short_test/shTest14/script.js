@@ -14,7 +14,6 @@ function multiply(a, b) {
 }
 alert(multiply(a, b));
 
-
 let cap = prompt('write a string');
 // This function takes a string and returns that string with the first letter capitalized & the rest of not changed.
 function capitalize() {
@@ -22,6 +21,10 @@ function capitalize() {
 }
 // This function takes a string and returns that string with only the first letter capitalized.
 function capitalizeOnly0() {
-return cap[0].toUpperCase() + cap.substring(1).toLowerCase();
+  return cap[0].toUpperCase() + cap.substring(1).toLowerCase();
 }
-alert(capitalize(cap));
+// This function takes a string and returns that string with all letter capitalized
+function capitalizeAll(cap) {
+  return cap.toUpperCase();
+}
+alert(capitalizeOnly0(cap));
