@@ -17,19 +17,19 @@ When starting new project:
 4. git checkout -b shtest#
    in "/short_test" direction create new branch ant switch to it, saty in "/short_tes"t dir.
 
-5. mkdir shtest#
+5. mkdir shTest#
    create new direction
 
-6. cp index.html style.css script.js shtest#/
+6. cp index.html style.css script.js shTest#/
    copy existing files template to this new direction
 
-7. git add shtest#
+7. git add shTest#
    stage the progress of the project in shtest# branch, MAKE SHURE your are on "/short_test" direction
 
 8. git commit -m "shTest##Add.."
    leave a mesage for your project progress
 
-9. git push origin shtest#
+9. git push origin shTest#
 
 10. cdbest
     go to "best_practice" repo
@@ -39,5 +39,6 @@ When starting new project:
 
 # time Stamps
 
-1. Update README file 2023-11-24 
-2. Update README file 2024-02-04 
+1. Update README file 2023-11-24
+2. Update README file 2024-02-04
+3. Update README file 2024-02-05
