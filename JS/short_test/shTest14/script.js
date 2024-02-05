@@ -20,5 +20,8 @@ let cap = prompt('write a string');
 function capitalize() {
   return cap[0].toUpperCase() + cap.substring(1);
 }
-
+// This function takes a string and returns that string with only the first letter capitalized.
+function capitalizeOnly0() {
+return cap[0].toUpperCase() + cap.substring(1).toLowerCase();
+}
 alert(capitalize(cap));
