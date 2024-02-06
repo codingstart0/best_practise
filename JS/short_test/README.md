@@ -6,36 +6,46 @@ This folder contain files stucture with templates in a files for simple JS tasks
 When starting new project:
 
 1. cdbest
-   make shure you'r in "best_practise" repo on you local git & changed branch to "main"
+
+- make shure you'r in "best_practise" repo on you local git & changed branch to "main"
 
 2. git pull git@github.com:codingstart0/best_practise.git
-   pull newest version of "best_practise" repo from remote github
+
+- pull newest version of "best_practise" repo from remote github
 
 3. cd JS/short_test
-   go to "short_test" direction
+
+- go to "short_test" direction
 
 4. git checkout -b shtest#
-   in "/short_test" direction create new branch ant switch to it, saty in "/short_tes"t dir.
+
+- in "/short_test" direction create new branch ant switch to it, saty in "/short_tes"t dir.
 
 5. mkdir shTest#
-   create new direction
+
+- create new direction
 
 6. cp index.html style.css script.js shTest#/
-   copy existing files template to this new direction
+
+- copy existing files template to this new direction
 
 7. git add shTest#
-   stage the progress of the project in shtest# branch, MAKE SHURE your are on "/short_test" direction
+
+- stage the progress of the project in shtest# branch, MAKE SHURE your are on "/short_test" direction
 
 8. git commit -m "shTest##Add.."
-   leave a mesage for your project progress
+
+- leave a mesage for your project progress
 
 9. git push origin shTest#
 
 10. cdbest
-    go to "best_practice" repo
 
-    git checkout main
-    change your branch to "main" and start over from first step in this list
+- go to "best_practice" repo
+
+11. git checkout main
+
+- change your branch to "main" and start over from first step in this list
 
 # Time Stamps
 
