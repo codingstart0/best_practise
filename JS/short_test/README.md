@@ -34,11 +34,12 @@ When starting new project:
 10. cdbest
     go to "best_practice" repo
 
-    git check out main
+    git checkout main
     change your branch to "main" and start over from first step in this list
 
-# time Stamps
+# Time Stamps
 
 1. Update README file 2023-11-24
 2. Update README file 2024-02-04
 3. Update README file 2024-02-05
+4. Update README file 2024-02-06
