@@ -28,3 +28,13 @@ function capitalizeAll(cap) {
   return cap.toUpperCase();
 }
 alert(capitalizeOnly0(cap));
+
+// This function takes a string and returns the very last letter of that string.
+let str = prompt('write second string');
+function lastLetter(last) {
+  return last.slice(-1);
+}
+alert('Last leter is ' + '"' + lastLetter(str) + '"');
+
+// this alert includes first string with capitalized first leter and shows the last letter of this string.
+alert('In word ' + '"' + capitalizeOnly0(cap) + '"' + ' the last character is ' + '"' + lastLetter(cap) + '"')
