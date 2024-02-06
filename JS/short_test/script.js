@@ -29,7 +29,42 @@
 // alert(min(1, 1));
 
 // A solution with a question mark operator '?'
-function min(a, b){
-    return (a < b)  ? a : b;
+// function min(a, b){
+//     return (a < b)  ? a : b;
+// }
+// alert(min(1, 1));
+
+
+
+// The JavaScript engine will issue a stack overflow error
+// function fn() {
+//     fn();
+// }
+// fn();
+
+
+
+// This example uses a big loop to simulate a blocking function
+function task(message) {
+    // emulate time consuming task
+    let n = 10000000000;
+    while (n > 0){
+        n--;
+    }
+    console.log(message);
 }
-alert(min(1, 1));
+
+console.log('Start script...');
+task('Call an API');
+console.log('Done!');
+
+
+
+// To prevent a blocking function from blocking other activities, you typically put it in a callback function for execution later.
+// console.log('Start script...');
+
+// setTimeout(() => {
+//     task('Download a file.');
+// }, 1000);
+
+// console.log('Done!');
