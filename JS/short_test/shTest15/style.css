@@ -1,0 +1,6 @@
+h1 {
+  color: hotpink;
+  background-color: aquamarine;
+  display: flex;
+  justify-content: center;
+}
