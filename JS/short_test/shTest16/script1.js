@@ -1,3 +1,5 @@
+// creat promp for five digits aray insertion and digit for equality 7 of two digits from aray
+
 // our two sum function which will return
 // all pairs in the array that sum up to S
 function twoSum(arr, S) {
