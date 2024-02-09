@@ -24,4 +24,8 @@ function twoSum(arr, S) {
 
 }
 
-alert(twoSum([3, 5, 2, -4, 8, 11], 19));
+// twoSum([3, 5, 2, -4, 8, 11], 19) = document.querySelector('#sum');
+
+// const suma = twoSum([3, 5, 2, -4, 8, 11], 19);
+const toWeb = document.querySelector('#sum');
+toWeb.textContent = twoSum([3, 5, 2, -4, 8, 11], 19);

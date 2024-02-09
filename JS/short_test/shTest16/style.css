@@ -5,3 +5,9 @@ h1 {
   display: flex;
   justify-content: center;
 }
+#sum {
+  color: hotpink;
+  font-size: larger;
+  display: flex;
+  justify-content: center;
+}
