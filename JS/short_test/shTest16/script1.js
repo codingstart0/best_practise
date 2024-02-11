@@ -35,7 +35,14 @@ function formatOutput(pairs) {
   let formattedPairs = pairs.map(pair => "[" + pair.join('+') + "]");
   return formattedPairs.join('  ');
 }
-
 document.querySelector('#sumoff').textContent = "Result of this pair is " + sumaPrompt;
+
+// Add mathematical operation
+document.querySelector('#math').textContent = "Mathematical operation " + formatMath(twoSum(splitInsertion, (sumaPrompt))) + ".";
+function formatMath(pairs) {
+  let formattedPairs = pairs.map(pair => pair.join('+') + "=" + sumaPrompt);
+  return formattedPairs.join('; ');
+}
+
 
 // line 3,5,2,-4,8,11,6,1
