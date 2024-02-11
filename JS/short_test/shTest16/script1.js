@@ -25,4 +25,17 @@ function twoSum(arr, S) {
   return sums;
 }
 
-twoSum([3, 5, 2, -4, 8, 11], 7);
+let insertion = prompt('Add digits aray with coma seperate them.');
+let splitInsertion = insertion.split(',');
+
+let sumaPrompt = prompt('Add result for two numbers from aray.');
+
+document.querySelector('#sum').textContent = "Numbers pairs " + formatOutput(twoSum(splitInsertion, (sumaPrompt)));
+function formatOutput(pairs) {
+  let formattedPairs = pairs.map(pair => "[" + pair.join('+') + "]");
+  return formattedPairs.join('  ');
+}
+
+document.querySelector('#sumoff').textContent = "Result of this pair is " + sumaPrompt;
+
+// line 3,5,2,-4,8,11,6,1

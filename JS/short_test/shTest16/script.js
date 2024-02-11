@@ -20,7 +20,7 @@ function twoSum(arr, S) {
 
 // Add two digits witch sum equality is 19 into html file id sum.
 document.querySelector('#sum').textContent = twoSum([3, 5, 2, -4, 8, 11], 19);
-
+document.querySelector('#sumoff').textContent = 19
 // Add two digits witch sum equality is 19 into html file id sum.
 // const toWeb = document.querySelector('#sum');
 // toWeb.textContent = twoSum([3, 5, 2, -4, 8, 11], 19);

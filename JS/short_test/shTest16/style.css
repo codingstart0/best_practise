@@ -8,6 +8,15 @@ h1 {
 #sum {
   color: hotpink;
   font-size: larger;
+  padding-top: 5em;
+  display: flex;
+  justify-content: center;
+}
+
+#sumoff {
+  color: #d61f0a;
+  font-size: larger;
+  padding-top: 3em;
   display: flex;
   justify-content: center;
 }
