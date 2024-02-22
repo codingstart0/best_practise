@@ -15,27 +15,27 @@ let randomNumber = Math.floor(Math.random() * 10) + 1;
 
     const userGuess = Number(guessField.value);
     if(guessCount === 1) {
-      guesses.textContent = 'Previous guesses: ';
+      guesses.textContent = 'Tavo spėjimai: ';
     }
     guesses.textContent += userGuess + ' ';
 
     if(userGuess === randomNumber) {
-      lastResult.textContent = 'Congratulations! You got it right!';
+      lastResult.textContent = 'Sveikinu ateiviai skrenda namo!';
       lastResult.style.backgroundColor = 'green';
       lowOrHi.textContent = '';
       setGameOver();
     } else if(guessCount === 3) {
       lastResult.textContent = '!!!GAME OVER!!!';
       // Change text and shows the answer number.
-        lowOrHi.textContent = 'Right number was ' + randomNumber;
+        lowOrHi.textContent = 'Teisingas skaičius buvo ' + randomNumber;
         setGameOver();
     } else {
-      lastResult.textContent = 'Wrong!';
+      lastResult.textContent = 'Neteisingai!';
       lastResult.style.backgroundColor = 'red';
       if(userGuess < randomNumber) {
-        lowOrHi.textContent = 'Last guess was too low!';
+        lowOrHi.textContent = 'Paskutinis spėjimas buvo per mažas!';
       } else if(userGuess > randomNumber) {
-        lowOrHi.textContent = 'Last guess was too high!';
+        lowOrHi.textContent = 'Paskutinis spėjimas buvo per didelis!';
       }
     }
 
@@ -50,7 +50,7 @@ let randomNumber = Math.floor(Math.random() * 10) + 1;
 	  guessField.disabled = true;
 	  guessSubmit.disabled = true;
 	  resetButton = document.createElement('button');
-	  resetButton.textContent = 'Start new game';
+	  resetButton.textContent = 'Pradėti iš naujo';
 	  document.body.appendChild(resetButton);
 	  
     //change addeventListener to addEventListener
@@ -71,7 +71,7 @@ let randomNumber = Math.floor(Math.random() * 10) + 1;
 	  guessField.value = '';
 	  guessField.focus();
 
-	  lastResult.style.backgroundColor = 'white';
+	  lastResult.style.backgroundColor = 'lime';
 	  
 	//Add *10 to Math.random, that it will return number from 0 to 9.
 	//So now randomNumber is from 1 to 10
