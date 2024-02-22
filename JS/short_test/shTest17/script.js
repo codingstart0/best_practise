@@ -43,6 +43,7 @@ let randomNumber = Math.floor(Math.random() * 10) + 1;
     guessField.value = '';
     guessField.focus();
   }
+  //change addeventListener to addEventListener
   guessSubmit.addEventListener('click', checkGuess);
 
   function setGameOver() {
@@ -51,6 +52,7 @@ let randomNumber = Math.floor(Math.random() * 10) + 1;
 	  resetButton = document.createElement('button');
 	  resetButton.textContent = 'Start new game';
 	  document.body.appendChild(resetButton);
+	  
     //change addeventListener to addEventListener
 	  resetButton.addEventListener('click', resetGame);
   }
