@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Number guessing game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <h1>ATSPĖK SKAIČIŲ</h1>
+
+    <p>
+      Ateiviai tau siunčia atsitiktinį skaičių nuo 1 iki 10. Jeigu per tris bandymus jį atspėsi žali žmogeliukai nieko tau nedarys ir skris namo.
+      Kitu atveju būk atsargus!!!
+    </p>
+    <p>
+      Kad būtų lengviau jie tau padės sakydami tavo spėjimas buvo per didelis ar per mažas.
+    </p>
+
+    <div class="form">
+      <label for="guessField">TAVO SPĖJIMAS: </label>
+      <input type="text" id="guessField" class="guessField" />
+      <input type="submit" value="SPAUSK" class="guessSubmit" />
+    </div>
+
+    <div class="resultParas">
+      <p class="guesses"></p>
+      <p class="lastResult"></p>
+      <p class="lowOrHi"></p>
+    </div>
+  </body>
+
+  <script src="script.js"></script>
+</html>
