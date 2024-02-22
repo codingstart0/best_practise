@@ -1,6 +1,6 @@
+//Add *10 to Math.random, that it will return number from 0 to 9.
+//So now randomNumber is from 1 to 10
 let randomNumber = Math.floor(Math.random() * 10) + 1;
-// console.log(randomNumber);
-
 
   const guesses = document.querySelector('.guesses');
   const lastResult = document.querySelector('.lastResult');
@@ -70,10 +70,8 @@ let randomNumber = Math.floor(Math.random() * 10) + 1;
 	  guessField.focus();
 
 	  lastResult.style.backgroundColor = 'white';
-
+	  
+	//Add *10 to Math.random, that it will return number from 0 to 9.
+	//So now randomNumber is from 1 to 10
 	  randomNumber = Math.floor(Math.random() *10) + 1;
   }
-// console.log(randomNumber);
-
-
-  // A logic error
