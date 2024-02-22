@@ -1,8 +1,10 @@
-let randomNumber = Math.floor(Math.random()) + 1;
+let randomNumber = Math.floor(Math.random() * 10) + 1;
+// console.log(randomNumber);
+
 
   const guesses = document.querySelector('.guesses');
   const lastResult = document.querySelector('.lastResult');
-  const lowOrHi = document.querySelector('lowOrHi');
+  const lowOrHi = document.querySelector('.lowOrHi');
   const guessSubmit = document.querySelector('.guessSubmit');
   const guessField = document.querySelector('.guessField');
 
@@ -22,9 +24,11 @@ let randomNumber = Math.floor(Math.random()) + 1;
       lastResult.style.backgroundColor = 'green';
       lowOrHi.textContent = '';
       setGameOver();
-    } else if(guessCount === 10) {
+    } else if(guessCount === 3) {
       lastResult.textContent = '!!!GAME OVER!!!';
-      setGameOver();
+      // Change text and shows the answer number.
+        lowOrHi.textContent = 'Right number was ' + randomNumber;
+        setGameOver();
     } else {
       lastResult.textContent = 'Wrong!';
       lastResult.style.backgroundColor = 'red';
@@ -39,7 +43,7 @@ let randomNumber = Math.floor(Math.random()) + 1;
     guessField.value = '';
     guessField.focus();
   }
-  guessSubmit.addeventListener('click', checkGuess);
+  guessSubmit.addEventListener('click', checkGuess);
 
   function setGameOver() {
 	  guessField.disabled = true;
@@ -47,7 +51,8 @@ let randomNumber = Math.floor(Math.random()) + 1;
 	  resetButton = document.createElement('button');
 	  resetButton.textContent = 'Start new game';
 	  document.body.appendChild(resetButton);
-	  resetButton.addeventListener('click', resetGame);
+    //change addeventListener to addEventListener
+	  resetButton.addEventListener('click', resetGame);
   }
 
   function resetGame() {
@@ -66,5 +71,9 @@ let randomNumber = Math.floor(Math.random()) + 1;
 
 	  lastResult.style.backgroundColor = 'white';
 
-	  randomNumber = Math.floor(Math.random()) + 1;
+	  randomNumber = Math.floor(Math.random() *10) + 1;
   }
+// console.log(randomNumber);
+
+
+  // A logic error
