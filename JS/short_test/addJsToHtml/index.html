@@ -3,11 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Short test</title>
+    <title>Linking JavaScript with HTML</title>
     <link rel="stylesheet" href="style.css" />
     <script>console.log('Hello World in head');</script>
   </head>
   <body>
+    <button onclick="console.log('Hello World inline JS code console.log')">Inline JavaScript code console.log</button>
+    <button onclick="alert('Hello World inline JS code alert')">Inline JavaScript code alert</button>
     <script>console.log('Hello World in body');</script>
     <script src='script.js'></script>
   </body>
