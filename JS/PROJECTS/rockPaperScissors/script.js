@@ -7,7 +7,7 @@ const choices = ['rock', 'paper', 'scissors'];
 function playRound(playerSelection, computerSelection) {
 }
 
-
+// Add p tag to create string of game name
   const gameName = document.createElement('p');
   gameName.textContent = 'GAME';
   document.body.appendChild(gameName);
@@ -33,12 +33,11 @@ function playRound(playerSelection, computerSelection) {
     const selectedOption = selectElement.value;
       const playerSelection = selectedOption;
 
+    // Add string in web with players choice after player push submit button 
       const choiceName = document.createElement('p');
       choiceName.textContent = 'Player selected: ' + playerSelection;
       document.body.appendChild(choiceName);
   }
-// const playerSelection = selectElement.value[document.querySelector(options)];
-
 
 // Or via prompt player can add playerSelection by string 
 // So make shure it's case-insensitive, users can input rock, ROCK, RocK or any other variation.
