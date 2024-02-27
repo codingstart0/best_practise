@@ -27,12 +27,8 @@ function playRound(playerSelection, computerSelection) {
   document.body.appendChild(button);
   function getPlayerSelection() {
     const selectedOption = selectElement.value;
-    if (choices.includes(selectedOption)) {
       const playerSelection = selectedOption;
       console.log('Player selected:', playerSelection);
-    } else {
-      console.log('Invalid selection. Please choose rock, paper, or scissors.');
-    }
   }
 // const playerSelection = selectElement.value[document.querySelector(options)];
 
