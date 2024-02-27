@@ -8,6 +8,10 @@ function playRound(playerSelection, computerSelection) {
 }
 
 
+  const gameName = document.createElement('p');
+  gameName.textContent = 'GAME';
+  document.body.appendChild(gameName);
+
 // Player should choise from list ‘Rock’, ‘Paper’ or ‘Scissors’.
   // Create a select element
   const selectElement = document.createElement('select');
@@ -28,7 +32,10 @@ function playRound(playerSelection, computerSelection) {
   function getPlayerSelection() {
     const selectedOption = selectElement.value;
       const playerSelection = selectedOption;
-      console.log('Player selected:', playerSelection);
+
+      const choiceName = document.createElement('p');
+      choiceName.textContent = 'Player selected: ' + playerSelection;
+      document.body.appendChild(choiceName);
   }
 // const playerSelection = selectElement.value[document.querySelector(options)];
 
