@@ -1,10 +1,6 @@
 // declare choise as an array: ["rock", "paper", "scissors"]
 const choices = ['rock', 'paper', 'scissors'];
 
-// Play game  The function should take two parameters - the playerSelection and computerSelection
-// And return a string that declares the winner. E. g. like so: "You Lose! Paper beats Rock"
-function playRound(playerSelection, computerSelection) {}
-
 // Add p tag to create string of game name
 const gameName = document.createElement('p');
 gameName.textContent = 'ROCK PAPER SCISSORS';
@@ -50,3 +46,12 @@ function getPlayerSelection() {
 // Computer should randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’.
 const computerSelection = choices[Math.floor(Math.random() * choices.length)];
 console.log('Computer selected:', computerSelection);
+
+// playRound function should take two parameters - the playerSelection and computerSelection
+// Then compare them and return a string that declares the winner. E. g. like so: "You Lose! Paper beats Rock"
+function playRound(playerSelection, computerSelection) {}
+
+// ISSUE computerSelection returns the same value untill the browser is reloded!!!
+// This function play a five round game that keeps score.
+// And reports a winner or loser at the end.
+playGame()
