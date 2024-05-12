@@ -48,10 +48,11 @@ const computerSelection = choices[Math.floor(Math.random() * choices.length)];
 console.log('Computer selected:', computerSelection);
 
 // playRound function should take two parameters - the playerSelection and computerSelection
+// ISSUE computerSelection returns the same value untill the browser is reloded!!!
+// computerSelection should return new value then playerSelection changed
 // Then compare them and return a string that declares the winner. E. g. like so: "You Lose! Paper beats Rock"
 function playRound(playerSelection, computerSelection) {}
 
-// ISSUE computerSelection returns the same value untill the browser is reloded!!!
 // This function play a five round game that keeps score.
 // And reports a winner or loser at the end.
 playGame()
