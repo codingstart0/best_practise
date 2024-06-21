@@ -1,12 +1,6 @@
 // declare choise as an array: ["rock", "paper", "scissors"]
 const choices = ['rock', 'paper', 'scissors'];
 
-// Add p tag to create string of game name
-// // Remove this!!!! 
-// const gameName = document.createElement('p');
-// gameName.textContent = 'ROCK PAPER SCISSORS';
-// document.body.appendChild(gameName);
-
 // Player should choise from list ‘Rock’, ‘Paper’ or ‘Scissors’.
 // Create a select element
 const selectElement = document.createElement('select');
@@ -49,7 +43,6 @@ function getPlayerSelection() {
 //    }
 
 // playRound function should take two parameters - the playerSelection and computerSelection
-// ISSUE computerSelection returns the same value untill the browser is reloded!!!
 // computerSelection should return new value then playerSelection changed
 // Then compare them and return a string that declares the winner. E. g. like so: "You Lose! Paper beats Rock"
 function playRound(playerSelection, computerSelection) {}
