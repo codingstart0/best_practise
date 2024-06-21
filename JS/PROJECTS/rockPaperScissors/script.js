@@ -2,9 +2,10 @@
 const choices = ['rock', 'paper', 'scissors'];
 
 // Add p tag to create string of game name
-const gameName = document.createElement('p');
-gameName.textContent = 'ROCK PAPER SCISSORS';
-document.body.appendChild(gameName);
+// // Remove this!!!! 
+// const gameName = document.createElement('p');
+// gameName.textContent = 'ROCK PAPER SCISSORS';
+// document.body.appendChild(gameName);
 
 // Player should choise from list ‘Rock’, ‘Paper’ or ‘Scissors’.
 // Create a select element
@@ -20,12 +21,16 @@ choices.forEach((choice) => {
 document.body.appendChild(selectElement);
 // Add a button to get the player's selection
 const button = document.createElement('button');
-button.textContent = 'Submit';
+button.textContent = 'Paspausk';
 button.addEventListener('click', getPlayerSelection);
 document.body.appendChild(button);
+
 function getPlayerSelection() {
   const selectedOption = selectElement.value;
   const playerSelection = selectedOption;
+
+  // Generate a new computer selection each time the function is called
+  const computerSelection = choices[Math.floor(Math.random() * choices.length)];
 
   // Add string in web with players choice after player push submit button
   const playerChoice = document.body.appendChild(document.createElement('p'));
@@ -42,10 +47,6 @@ function getPlayerSelection() {
 //     selectElement = document.querySelector(options);
 //     output = selectElement.value;
 //    }
-
-// Computer should randomly return either ‘Rock’, ‘Paper’ or ‘Scissors’.
-const computerSelection = choices[Math.floor(Math.random() * choices.length)];
-console.log('Computer selected:', computerSelection);
 
 // playRound function should take two parameters - the playerSelection and computerSelection
 // ISSUE computerSelection returns the same value untill the browser is reloded!!!
