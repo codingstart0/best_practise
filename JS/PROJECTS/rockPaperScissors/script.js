@@ -47,12 +47,23 @@ function playRound() {
       computerSelection;
     document.body.appendChild(winner);
   }
-  //   else if (playerSelection === 'rock' & computerSelection === 'scissors') {
+    else if (playerSelection === 'rock' & computerSelection === 'scissors') {
+      const winner = document.createElement('h2');
+      const win = document.createElement('span');
+      win.textContent = 'WIN ';
+      win.classList.add('win-color'); // Add the 'win-color' class to style the text
+  
+      winner.innerHTML =
+        "You " +
+        tie.outerHTML +
+        playerSelection +
+        ' beats ' +
+        computerSelection;
+      document.body.appendChild(winner);
+    }
+  }
+  //   else if (playerSelection === 'rock' & computerSelection === 'paper')}
 
-  //   }
-
-  //   else if ()
-}
 
 // This function play a five round game that keeps score.
 // And reports a winner or loser at the end.
