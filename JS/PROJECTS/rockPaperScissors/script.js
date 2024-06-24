@@ -55,10 +55,23 @@ function playRound() {
     const win = document.createElement('span');
     win.textContent = 'WIN ';
     win.classList.add('win-color'); // Add the 'win-color' class to style the text
-    document.body.appendChild(winner);
 
     winner.innerHTML =
       'You ' + win.outerHTML + playerSelection + ' beats ' + computerSelection;
+    document.body.appendChild(winner);
+  }
+
+  else if (
+    (playerSelection === 'Rock') &
+    (computerSelection === 'Paper')
+  ) {
+    const winner = document.createElement('h2');
+    const lose = document.createElement('span');
+    lose.textContent = 'LOSE ';
+    lose.classList.add('lose-color'); // Add the 'win-color' class to style the text
+
+    winner.innerHTML =
+      'You ' + lose.outerHTML + computerSelection + ' beats ' + playerSelection;
     document.body.appendChild(winner);
   }
 }
