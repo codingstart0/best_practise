@@ -37,7 +37,6 @@ function playRound() {
     const tie = document.createElement('span');
     tie.textContent = 'TIE ';
     tie.classList.add('tie-color'); // Add the 'tie-color' class to style the text
-
     winner.innerHTML =
       "It's a " +
       tie.outerHTML +
@@ -45,9 +44,7 @@ function playRound() {
       ' is equal to ' +
       computerSelection;
     document.body.appendChild(winner);
-  } 
-  
-  else if (
+  } else if (
     (playerSelection === 'Rock') &
     (computerSelection === 'Scissors')
   ) {
@@ -59,12 +56,7 @@ function playRound() {
     winner.innerHTML =
       'You ' + win.outerHTML + playerSelection + ' beats ' + computerSelection;
     document.body.appendChild(winner);
-  }
-
-  else if (
-    (playerSelection === 'Rock') &
-    (computerSelection === 'Paper')
-  ) {
+  } else if ((playerSelection === 'Rock') & (computerSelection === 'Paper')) {
     const winner = document.createElement('h2');
     const lose = document.createElement('span');
     lose.textContent = 'LOSE ';
@@ -74,7 +66,20 @@ function playRound() {
       'You ' + lose.outerHTML + computerSelection + ' beats ' + playerSelection;
     document.body.appendChild(winner);
   }
-}
+
+  else if (
+    (playerSelection === 'Paper') &
+    (computerSelection === 'Rock')
+  ) {
+    const winner = document.createElement('h2');
+    const win = document.createElement('span');
+    win.textContent = 'WIN ';
+    win.classList.add('win-color'); // Add the 'win-color' class to style the text
+
+    winner.innerHTML =
+      'You ' + win.outerHTML + playerSelection + ' beats ' + computerSelection;
+    document.body.appendChild(winner);
+}}
 //   else if (playerSelection === 'rock' & computerSelection === 'paper')}
 
 // This function play a five round game that keeps score.
