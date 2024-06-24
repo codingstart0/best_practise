@@ -44,7 +44,9 @@ function playRound() {
       ' is equal to ' +
       computerSelection;
     document.body.appendChild(winner);
-  } else if (
+  }
+  
+  else if (
     (playerSelection === 'Rock') &
     (computerSelection === 'Scissors')
   ) {
@@ -52,7 +54,6 @@ function playRound() {
     const win = document.createElement('span');
     win.textContent = 'WIN ';
     win.classList.add('win-color'); // Add the 'win-color' class to style the text
-
     winner.innerHTML =
       'You ' + win.outerHTML + playerSelection + ' beats ' + computerSelection;
     document.body.appendChild(winner);
@@ -61,7 +62,6 @@ function playRound() {
     const lose = document.createElement('span');
     lose.textContent = 'LOSE ';
     lose.classList.add('lose-color'); // Add the 'win-color' class to style the text
-
     winner.innerHTML =
       'You ' + lose.outerHTML + computerSelection + ' beats ' + playerSelection;
     document.body.appendChild(winner);
@@ -75,11 +75,20 @@ function playRound() {
     const win = document.createElement('span');
     win.textContent = 'WIN ';
     win.classList.add('win-color'); // Add the 'win-color' class to style the text
-
     winner.innerHTML =
       'You ' + win.outerHTML + playerSelection + ' beats ' + computerSelection;
     document.body.appendChild(winner);
-}}
+}
+else if ((playerSelection === 'Paper') & (computerSelection === 'Scissors')) {
+  const winner = document.createElement('h2');
+  const lose = document.createElement('span');
+  lose.textContent = 'LOSE ';
+  lose.classList.add('lose-color'); // Add the 'win-color' class to style the text
+  winner.innerHTML =
+    'You ' + lose.outerHTML + computerSelection + ' beats ' + playerSelection;
+  document.body.appendChild(winner);
+}
+}
 //   else if (playerSelection === 'rock' & computerSelection === 'paper')}
 
 // This function play a five round game that keeps score.
