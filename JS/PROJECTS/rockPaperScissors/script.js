@@ -15,7 +15,7 @@ choices.forEach((choice) => {
 document.body.appendChild(selectElement);
 // Add a button to get the player's selection
 const button = document.createElement('button');
-button.textContent = 'Paspausk';
+button.textContent = 'Play';
 button.addEventListener('click', playRound);
 document.body.appendChild(button);
 
@@ -24,7 +24,7 @@ function playRound() {
   const playerSelection = selectedOption;
   // Add string in web with players choice after player push submit button
   const playerChoice = document.body.appendChild(document.createElement('p'));
-  playerChoice.textContent = 'Player selected: ' + playerSelection;
+  playerChoice.textContent = 'You selected: ' + playerSelection;
 
   // Generate a new computer selection each time the function is called
   const computerSelection = choices[Math.floor(Math.random() * choices.length)];
