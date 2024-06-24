@@ -1,3 +1,7 @@
 h1 {
-    color: chartreuse;
+  color: rgba(24, 134, 193, 0.679);
+}
+
+.tie-color {
+  color: rgba(193, 24, 58, 0.679);
 }

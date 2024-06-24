@@ -1,5 +1,5 @@
 // declare choise as an array: ["rock", "paper", "scissors"]
-const choices = ['rock', 'paper', 'scissors'];
+const choices = ['Rock', 'Paper', 'Scissors'];
 
 // Player should choise from list ‘Rock’, ‘Paper’ or ‘Scissors’.
 // Create a select element
@@ -33,11 +33,25 @@ function playRound() {
   computerChoice.textContent = 'Computer selected: ' + computerSelection;
 
   if (playerSelection === computerSelection) {
-    const winner = document.createElement('h1');
-    winner.textContent =
-      "It's a TIE - " + playerSelection + ' is equal to ' + computerSelection;
+    const winner = document.createElement('h2');
+    const tie = document.createElement('span');
+    tie.textContent = 'TIE';
+    tie.classList.add('tie-color'); // Add the 'tie-color' class to style the text
+
+    winner.innerHTML =
+      "It's a " +
+      tie.outerHTML +
+      ' ' +
+      playerSelection +
+      ' is equal to ' +
+      computerSelection;
     document.body.appendChild(winner);
   }
+  //   else if (playerSelection === 'rock' & computerSelection === 'scissors') {
+
+  //   }
+
+  //   else if ()
 }
 
 // This function play a five round game that keeps score.
