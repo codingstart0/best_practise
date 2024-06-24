@@ -5,3 +5,7 @@ h1 {
 .tie-color {
   color: rgba(87, 121, 235, 0.679);
 }
+
+.win-color {
+  color: #e85050;
+}
