@@ -127,14 +127,26 @@ function playGame() {
       document.body.appendChild(winner);
       computerScore++;
     }
-    console.log("Player Score:", playerScore);
-    console.log("Computer Score:", computerScore);
+    const result = document.createElement('h1');
+    result.classList.add('result-color');
+    // playerScore.textContent = 'Player Score:';
+    // computerScore.textContent = 'Computer Score:';
+    result.innerHTML =
+      'RESULT ' +
+      'Player Score: ' +
+      playerScore +
+      ' ' +
+      'Computer Score: ' +
+      computerScore;
+      document.body.appendChild(result);
+
+    console.log('Player Score:', playerScore);
+    console.log('Computer Score:', computerScore);
   }
 
   for (let i = 0; i < 5; i++) {
-    playRound();}
-
-    
+    playRound();
+  }
 }
 
 // Player should choise from list ‘Rock’, ‘Paper’ or ‘Scissors’.

@@ -7,9 +7,13 @@ h1 {
 }
 
 .win-color {
-  color: #e85050;
+  color: #63e18f
 }
 
 .lose-color {
-  color: #63e18f;
+  color: #e85050;
+}
+
+.result-color {
+  color: rgb(42, 79, 42);
 }
