@@ -9,21 +9,127 @@ function playGame() {
     // Generate a random computer selection
     const computerSelection =
       choices[Math.floor(Math.random() * choices.length)];
+    const computerChoice = document.body.appendChild(
+      document.createElement('p')
+    );
+    computerChoice.textContent = 'Computer selected: ' + computerSelection;
 
     // Determine the winner of the round
     if (playerSelection === computerSelection) {
-      console.log("It's a tie!");
+      const winner = document.createElement('h2');
+      const tie = document.createElement('span');
+      tie.textContent = 'TIE ';
+      tie.classList.add('tie-color'); // Add the 'tie-color' class to style the text
+      winner.innerHTML =
+        "It's a " +
+        tie.outerHTML +
+        playerSelection +
+        ' is equal to ' +
+        computerSelection;
+      document.body.appendChild(winner);
     } else if (
-      (playerSelection === 'Rock' && computerSelection === 'Scissors') ||
-      (playerSelection === 'Paper' && computerSelection === 'Rock') ||
-      (playerSelection === 'Scissors' && computerSelection === 'Paper')
+      (playerSelection === 'Rock') &
+      (computerSelection === 'Scissors')
     ) {
+      const winner = document.createElement('h2');
+      const win = document.createElement('span');
+      win.textContent = 'WIN ';
+      win.classList.add('win-color'); // Add the 'win-color' class to style the text
+      winner.innerHTML =
+        'You ' +
+        win.outerHTML +
+        playerSelection +
+        ' beats ' +
+        computerSelection;
+      document.body.appendChild(winner);
       playerScore++;
-      console.log('You win this round!');
-    } else {
+    } else if ((playerSelection === 'Rock') & (computerSelection === 'Paper')) {
+      const winner = document.createElement('h2');
+      const lose = document.createElement('span');
+      lose.textContent = 'LOSE ';
+      lose.classList.add('lose-color'); // Add the 'win-color' class to style the text
+      winner.innerHTML =
+        'You ' +
+        lose.outerHTML +
+        computerSelection +
+        ' beats ' +
+        playerSelection;
+      document.body.appendChild(winner);
       computerScore++;
-      console.log('Computer wins this round!');
+    } else if ((playerSelection === 'Paper') & (computerSelection === 'Rock')) {
+      const winner = document.createElement('h2');
+      const win = document.createElement('span');
+      win.textContent = 'WIN ';
+      win.classList.add('win-color'); // Add the 'win-color' class to style the text
+      winner.innerHTML =
+        'You ' +
+        win.outerHTML +
+        playerSelection +
+        ' beats ' +
+        computerSelection;
+      document.body.appendChild(winner);
+      playerScore++;
+    } else if (
+      (playerSelection === 'Paper') &
+      (computerSelection === 'Scissors')
+    ) {
+      const winner = document.createElement('h2');
+      const lose = document.createElement('span');
+      lose.textContent = 'LOSE ';
+      lose.classList.add('lose-color'); // Add the 'win-color' class to style the text
+      winner.innerHTML =
+        'You ' +
+        lose.outerHTML +
+        computerSelection +
+        ' beats ' +
+        playerSelection;
+      document.body.appendChild(winner);
+      computerScore++;
+    } else if (
+      (playerSelection === 'Scissors') &
+      (computerSelection === 'Paper')
+    ) {
+      const winner = document.createElement('h2');
+      const win = document.createElement('span');
+      win.textContent = 'WIN ';
+      win.classList.add('win-color'); // Add the 'win-color' class to style the text
+      winner.innerHTML =
+        'You ' +
+        win.outerHTML +
+        playerSelection +
+        ' beats ' +
+        computerSelection;
+      document.body.appendChild(winner);
+      playerScore++;
+    } else if (
+      (playerSelection === 'Scissors') &
+      (computerSelection === 'Rock')
+    ) {
+      const winner = document.createElement('h2');
+      const lose = document.createElement('span');
+      lose.textContent = 'LOSE ';
+      lose.classList.add('lose-color'); // Add the 'win-color' class to style the text
+      winner.innerHTML =
+        'You ' +
+        lose.outerHTML +
+        computerSelection +
+        ' beats ' +
+        playerSelection;
+      document.body.appendChild(winner);
+      computerScore++;
     }
+    const result = document.createElement('h1');
+    result.classList.add('result-color');
+    // playerScore.textContent = 'Player Score:';
+    // computerScore.textContent = 'Computer Score:';
+    result.innerHTML =
+      'RESULT ' +
+      'Player Score: ' +
+      playerScore +
+      ' ' +
+      'Computer Score: ' +
+      computerScore;
+    document.body.appendChild(result);
 
     // Display the choices and scores after each round
     console.log('Player Selection:', playerSelection);
@@ -32,11 +138,15 @@ function playGame() {
     console.log('Computer Score:', computerScore);
 
     currentRound++;
-    if (currentRound < 5) {
+    if (currentRound < 3) {
       // Call the function to present choices for the next round
       playRoundPrompt();
     } else {
-      console.log('Game Over!');
+      const gameOver = document.createElement('h3');
+      gameOver.classList.add('result-color');
+      gameOver.innerHTML = 'GAME OVER!';
+      document.body.appendChild(gameOver);
+      console.log(gameOver);
     }
   }
 
