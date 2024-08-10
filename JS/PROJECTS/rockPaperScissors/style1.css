@@ -32,17 +32,24 @@ h1{
     font-size: 5rem;
     margin: 30px 0;
 }
-
-.blueText {
-  color: rgba(197, 181, 72, 0.679);
-  background-color: rgb(48, 82, 61) ;
+.scoreDisplay{
+    font-size: 2rem;    
 }
-
+.blueText {
+    color: rgba(197, 181, 72, 0.679);
+    background-color: rgb(48, 82, 61) ;
+}
 .greenText {
     color: #63e18f;
     background-color: cadetblue;
 }
-  .redText {
+.redText {
     color: #e85050;
     background-color: black ;
-  }
+}
+#playerScoreDisplay{
+    color: #63e18f;
+}
+#computerScoreDisplay{
+    color: #e85050;
+}
