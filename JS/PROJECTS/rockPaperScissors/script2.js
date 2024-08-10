@@ -30,4 +30,18 @@ else{
 playerDisplay.textContent = `PLAYER: ${playerChoise}`;
 computerDisplay.textContent = `COMPUTER: ${computerChoise}`;
 resultDisplay.textContent = result;
+
+resultDisplay.classList.remove("greenText", "redText", "blueText");
+
+switch(result){
+    case "IT'S A TIE!":
+        resultDisplay.classList.add("blueText");
+        break;
+    case "YOU WIN!":
+        resultDisplay.classList.add("greenText");
+        break;
+    case "YOU LOSE!":
+        resultDisplay.classList.add("redText");
+        break;
+}
 }
