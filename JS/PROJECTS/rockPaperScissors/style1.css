@@ -53,3 +53,16 @@ h1{
 #computerScoreDisplay{
     color: #e85050;
 }
+.scoreSum{
+    font-size: 3rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+ .zeroColor{
+    color: magenta;
+ }
+.plusColor{
+    color: green;
+}
+.minusColor{
+    color: red;
+}

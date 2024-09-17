@@ -1,4 +1,4 @@
-// declare choise as an array: ["rock", "paper", "scissors"]
+// declare choice as an array: ["rock", "paper", "scissors"]
 const choices = ['Rock', 'Paper', 'Scissors'];
 let playerScore = 0;
 let computerScore = 0;
@@ -149,7 +149,7 @@ function playGame() {
   }
 }
 
-// Player should choise from list ‘Rock’, ‘Paper’ or ‘Scissors’.
+// Player shouldc choice from list ‘Rock’, ‘Paper’ or ‘Scissors’.
 // Create a select element
 const selectElement = document.createElement('select');
 // Add options to the dropdown list
