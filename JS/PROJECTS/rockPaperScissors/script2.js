@@ -7,8 +7,7 @@ const resultDisplay = document.getElementById('resultDisplay');
 const playerScoreDisplay = document.getElementById('playerScoreDisplay');
 const computerScoreDisplay = document.getElementById('computerScoreDisplay');
 const scoreSumDisplay = document.getElementById('scoreSumDisplay');
-const playerChoiceElement = document.getElementById('playerChoice');
-const computerChoiceElement = document.getElementById('computerChoice');
+
 const possibleResults = {
   draw: 0,
   userWins: 1,
@@ -25,9 +24,24 @@ let playerScore = 0;
 let computerScore = 0;
 // let scoreDifference = 0;
 
+function showChoices(playerChoice, computerChoice) {
+  const playerChoiceElement = document.getElementById('playerChoice');
+  const computerChoiceElement = document.getElementById('computerChoice');
+
+  playerChoiceElement.textContent = playerChoice;
+  // playerDisplay.textContent = `PLAYER: ${playerChoice}`;
+  computerChoiceElement.textContent = computerChoice;
+  // computerDisplay.textContent = `COMPUTER: ${computerChoice}`;
+}
+
+function getComputerChoice() {
+  // const computerChoice = choicesArray[Math.floor(Math.random() * choicesArray.length)];
+  // return computerChoice;
+  return choicesArray[Math.floor(Math.random() * choicesArray.length)];
+}
 
 function playGame(playerChoice) {
-  const computerChoice = choicesArray[Math.floor(Math.random() * choicesArray.length)];
+  const computerChoice = getComputerChoice();
   let result = '';
   let userWins = false;
   let draw = false;
@@ -49,10 +63,8 @@ function playGame(playerChoice) {
     result = userWins ? possibleResults.userWins : possibleResults.userLoses
   }
 
-  playerChoiceElement.textContent = playerChoice;
-  // playerDisplay.textContent = `PLAYER: ${playerChoice}`;
-  computerChoiceElement.textContent = computerChoice;
-  // computerDisplay.textContent = `COMPUTER: ${computerChoice}`;
+  showChoices(playerChoice, computerChoice);
+
 
   switch (result) {
     case possibleResults.draw:
