@@ -1,13 +1,3 @@
-// ROCK PAPER SCISSORS
-
-// const choices = ['rock', 'paper', 'scissors'];
-const playerDisplay = document.getElementById('playerDisplay');
-const computerDisplay = document.getElementById('computerDisplay');
-const resultDisplay = document.getElementById('resultDisplay');
-const playerScoreDisplay = document.getElementById('playerScoreDisplay');
-const computerScoreDisplay = document.getElementById('computerScoreDisplay');
-const scoreSumDisplay = document.getElementById('scoreSumDisplay');
-
 const possibleResults = {
   draw: 0,
   userWins: 1,
@@ -22,16 +12,23 @@ const choicesArray = Object.values(choices);
 
 let playerScore = 0;
 let computerScore = 0;
-// let scoreDifference = 0;
+
+// const choices = ['rock', 'paper', 'scissors'];
+// 1 TASK this list of const should go inside the functions
+// const playerDisplay = document.getElementById('playerDisplay');
+// const computerDisplay = document.getElementById('computerDisplay');
+const resultDisplay = document.getElementById('resultDisplay');
+const playerScoreDisplay = document.getElementById('playerScoreDisplay');
+const computerScoreDisplay = document.getElementById('computerScoreDisplay');
+const scoreSumDisplay = document.getElementById('scoreSumDisplay');
+
+// 2 TASK seperate functions to indipendent ones from function playGame 
 
 function showChoices(playerChoice, computerChoice) {
   const playerChoiceElement = document.getElementById('playerChoice');
   const computerChoiceElement = document.getElementById('computerChoice');
-
   playerChoiceElement.textContent = playerChoice;
-  // playerDisplay.textContent = `PLAYER: ${playerChoice}`;
   computerChoiceElement.textContent = computerChoice;
-  // computerDisplay.textContent = `COMPUTER: ${computerChoice}`;
 }
 
 function getComputerChoice() {
