@@ -32,8 +32,6 @@ function showChoices(playerChoice, computerChoice) {
 }
 
 function getComputerChoice() {
-  // const computerChoice = choicesArray[Math.floor(Math.random() * choicesArray.length)];
-  // return computerChoice;
   return choicesArray[Math.floor(Math.random() * choicesArray.length)];
 }
 
