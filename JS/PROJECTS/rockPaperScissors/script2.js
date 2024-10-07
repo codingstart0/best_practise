@@ -17,10 +17,11 @@ let computerScore = 0;
 // 1 TASK this list of const should go inside the functions
 // const playerDisplay = document.getElementById('playerDisplay');
 // const computerDisplay = document.getElementById('computerDisplay');
-const resultDisplay = document.getElementById('resultDisplay');
-const playerScoreDisplay = document.getElementById('playerScoreDisplay');
-const computerScoreDisplay = document.getElementById('computerScoreDisplay');
-const scoreSumDisplay = document.getElementById('scoreSumDisplay');
+
+// UŽKOMENTINAU 3 apatinius const, bet niekas nepagriuvo
+// const playerScoreDisplay = document.getElementById('playerScoreDisplay');
+// const computerScoreDisplay = document.getElementById('computerScoreDisplay');
+// const scoreSumDisplay = document.getElementById('scoreSumDisplay');
 
 // 2 TASK seperate functions to indipendent ones from function playGame 
 
@@ -59,7 +60,7 @@ function playGame(playerChoice) {
   }
 
   showChoices(playerChoice, computerChoice);
-
+  showResult (playerScore, computerScore)
 
   switch (result) {
     case possibleResults.draw:
@@ -90,7 +91,9 @@ function playGame(playerChoice) {
       computerScoreDisplay.textContent = computerScore;
       break;
   }
+}
 
+function showResult (playerScore, computerScore) {
   let scoreDifference = playerScore - computerScore;
   scoreSumDisplay.textContent = `${scoreDifference}`;
 
@@ -104,3 +107,37 @@ function playGame(playerChoice) {
   }
   // this is alow to change score color depends on ho wins the game in the moment
 }
+
+//   NEBAIGTAS resultConclusion!!!!!
+// function resultConclusiontest() {
+  // const resultDisplayTest = document.getElementById('resultDisplayTest');
+  // switch (result) {
+    // case possibleResults.draw:
+      // resultDisplay.textContent = "IT'S A TIE!";
+      // break;
+    // case possibleResults.userWins:
+      // resultDisplay.textContent = "YOU WIN!";
+      // break;
+    // case possibleResults.userLoses:
+      // resultDisplay.textContent = "YOU LOSE!";
+      // break;
+  // }
+  // resultDisplay.classList.remove('greenText', 'redText', 'blueText');
+// 
+  // switch (result) {
+    // case possibleResults.draw:
+      // resultDisplay.classList.add('blueText');
+      // break;
+    // case possibleResults.userWins:
+      // resultDisplay.classList.add('greenText');
+      // playerScore++;
+      // playerScoreDisplay.textContent = playerScore;
+      // break;
+    // case possibleResults.userLoses:
+      // resultDisplay.classList.add('redText');
+      // computerScore++;
+      // computerScoreDisplay.textContent = computerScore;
+      // break;
+  // }
+// }
+// 
