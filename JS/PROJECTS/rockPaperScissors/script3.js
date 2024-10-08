@@ -12,9 +12,6 @@ const choicesArray = Object.values(choices);
 
 let playerScore = 0;
 let computerScore = 0;
-// let scoreDifference = 0;
-let result = '';
-
 
 // const choices = ['rock', 'paper', 'scissors'];
 // 1 TASK this list of const should go inside the functions
@@ -28,10 +25,6 @@ let result = '';
 
 // 2 TASK seperate functions to indipendent ones from function playGame 
 
-function getComputerChoice() {
-  return choicesArray[Math.floor(Math.random() * choicesArray.length)];
-}
-
 function showChoices(playerChoice, computerChoice) {
   const playerChoiceElement = document.getElementById('playerChoice');
   const computerChoiceElement = document.getElementById('computerChoice');
@@ -39,28 +32,15 @@ function showChoices(playerChoice, computerChoice) {
   computerChoiceElement.textContent = computerChoice;
 }
 
-
-
-function showResult (playerScore, computerScore) {
-  const scoreSumDisplay = document.getElementById('scoreSumDisplay');
-  let scoreDifference = playerScore - computerScore;
-  scoreSumDisplay.textContent = `${scoreDifference}`;
-
-  scoreSumDisplay.classList.remove('zeroColor', 'plusColor', 'minusColor');
-  if (scoreDifference < 0) {
-    scoreSumDisplay.classList.add('minusColor');
-  } else if (scoreDifference > 0) {
-    scoreSumDisplay.classList.add('plusColor');
-  } else {
-    scoreSumDisplay.classList.add('zeroColor');
-  }
-  // this is alow to change score color depends on ho wins the game in the moment
+function getComputerChoice() {
+  return choicesArray[Math.floor(Math.random() * choicesArray.length)];
 }
 
 function playGame(playerChoice) {
   const computerChoice = getComputerChoice();
-  // let result = '';
+  let result = '';
   let userWins = false;
+  let draw = false;
 
   if (playerChoice === computerChoice) {
     result = possibleResults.draw
@@ -81,57 +61,83 @@ function playGame(playerChoice) {
 
   showChoices(playerChoice, computerChoice);
   showResult (playerScore, computerScore)
-  resultConclusion (possibleResults)
-  
-  resultDisplay.classList.remove('greenText', 'redText', 'blueText');
-  switch (result) {
-    case possibleResults.draw:
-      resultDisplay.textContent = "IT'S A TIE!";
-      resultDisplay.classList.add('blueText');
-      break;
-    case possibleResults.userWins:
-      resultDisplay.textContent = "YOU WIN!";
-      resultDisplay.classList.add('greenText');
-      break;
-    case possibleResults.userLoses:
-      resultDisplay.textContent = "YOU LOSE!";
-      resultDisplay.classList.add('redText');
-      break;
-  }
 
   switch (result) {
     case possibleResults.draw:
+      resultDisplay.textContent = "IT'S A TIE!";
       break;
     case possibleResults.userWins:
+      resultDisplay.textContent = "YOU WIN!";
+      break;
+    case possibleResults.userLoses:
+      resultDisplay.textContent = "YOU LOSE!";
+      break;
+  }
+
+  resultDisplay.classList.remove('greenText', 'redText', 'blueText');
+
+  switch (result) {
+    case possibleResults.draw:
+      resultDisplay.classList.add('blueText');
+      break;
+    case possibleResults.userWins:
+      resultDisplay.classList.add('greenText');
       playerScore++;
       playerScoreDisplay.textContent = playerScore;
       break;
     case possibleResults.userLoses:
+      resultDisplay.classList.add('redText');
       computerScore++;
       computerScoreDisplay.textContent = computerScore;
       break;
   }
 }
 
-//   NEBAIGTAS resultConclusion!!!!!
-//  Ties čia Still warking!!!!!
-function resultConclusion(possibleResults) {
-  const resultDisplayTest = document.getElementById('resultDisplayTest');
-  
-  resultDisplayTest.classList.remove('greenText', 'redText', 'blueText');
+function showResult (playerScore, computerScore) {
+  let scoreDifference = playerScore - computerScore;
+  scoreSumDisplay.textContent = `${scoreDifference}`;
 
-  switch (result) {
-    case possibleResults.draw:
-      resultDisplayTest.textContent = "IT'S A TIE!";
-      resultDisplayTest.classList.add('blueText');
-      break;
-    case possibleResults.userWins:
-      resultDisplayTest.textContent = "YOU WIN!";
-      resultDisplayTest.classList.add('greenText');
-      break;
-    case possibleResults.userLoses:
-      resultDisplayTest.textContent = "YOU LOSE!";
-      resultDisplayTest.classList.add('redText');
-      break;
+  scoreSumDisplay.classList.remove('zeroColor', 'plusColor', 'minusColor');
+  if (scoreDifference < 0) {
+    scoreSumDisplay.classList.add('minusColor');
+  } else if (scoreDifference > 0) {
+    scoreSumDisplay.classList.add('plusColor');
+  } else {
+    scoreSumDisplay.classList.add('zeroColor');
   }
+  // this is alow to change score color depends on ho wins the game in the moment
 }
+
+//   NEBAIGTAS resultConclusion!!!!!
+// function resultConclusiontest() {
+  // const resultDisplayTest = document.getElementById('resultDisplayTest');
+  // switch (result) {
+    // case possibleResults.draw:
+      // resultDisplay.textContent = "IT'S A TIE!";
+      // break;
+    // case possibleResults.userWins:
+      // resultDisplay.textContent = "YOU WIN!";
+      // break;
+    // case possibleResults.userLoses:
+      // resultDisplay.textContent = "YOU LOSE!";
+      // break;
+  // }
+  // resultDisplay.classList.remove('greenText', 'redText', 'blueText');
+// 
+  // switch (result) {
+    // case possibleResults.draw:
+      // resultDisplay.classList.add('blueText');
+      // break;
+    // case possibleResults.userWins:
+      // resultDisplay.classList.add('greenText');
+      // playerScore++;
+      // playerScoreDisplay.textContent = playerScore;
+      // break;
+    // case possibleResults.userLoses:
+      // resultDisplay.classList.add('redText');
+      // computerScore++;
+      // computerScoreDisplay.textContent = computerScore;
+      // break;
+  // }
+// }
+// 
