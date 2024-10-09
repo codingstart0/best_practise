@@ -37,7 +37,7 @@ function showChoices(playerChoice, computerChoice) {
   computerChoiceElement.textContent = computerChoice;
 }
 
-function showConclusion(possibleResults) {
+function showConclusion(result) {
   const resultDisplay = document.getElementById('resultDisplay');
   
   resultDisplay.classList.remove('greenText', 'redText', 'blueText');
@@ -57,7 +57,7 @@ function showConclusion(possibleResults) {
   }
 }
 
-function showScore (possibleResults){
+function calculateScore (result){
   switch (result) {
     case possibleResults.draw:
       break;
@@ -70,11 +70,28 @@ function showScore (possibleResults){
       computerScoreDisplay.textContent = computerScore;
       break;
   }
+
+  return playerScore - computerScore;
+}
+
+function showScore (result){
+  switch (result) {
+    case possibleResults.draw:
+      break;
+    case possibleResults.userWins:
+      playerScoreDisplay.textContent = playerScore;
+      break;
+    case possibleResults.userLoses:
+      computerScoreDisplay.textContent = computerScore;
+      break;
+  }
+
+  return playerScore - computerScore;
 }
 
 function showResult (playerScore, computerScore) {
   const scoreSumDisplay = document.getElementById('scoreSumDisplay');
-  let scoreDifference = playerScore - computerScore;
+  const scoreDifference = playerScore - computerScore;
   scoreSumDisplay.textContent = `${scoreDifference}`;
 
   scoreSumDisplay.classList.remove('zeroColor', 'plusColor', 'minusColor');
@@ -87,9 +104,9 @@ function showResult (playerScore, computerScore) {
   }
 }
 
-function playGame(playerChoice) {
+function playRound(playerChoice) {
   const computerChoice = getComputerChoice();
-  // let result = '';
+  let result = '';
   let userWins = false;
 
   if (playerChoice === computerChoice) {
@@ -108,9 +125,11 @@ function playGame(playerChoice) {
     }
     result = userWins ? possibleResults.userWins : possibleResults.userLoses
   }
+  
+  const totalScore = calculateScore(result);
 
   showChoices(playerChoice, computerChoice);
-  showResult (playerScore, computerScore);
-  showConclusion (possibleResults);
-  showScore (possibleResults);
+  showConclusion (result);
+  showScore (result);
+  showResult (totalScore);
 }
