@@ -57,6 +57,21 @@ function showConclusion(possibleResults) {
   }
 }
 
+function showScore (possibleResults){
+  switch (result) {
+    case possibleResults.draw:
+      break;
+    case possibleResults.userWins:
+      playerScore++;
+      playerScoreDisplay.textContent = playerScore;
+      break;
+    case possibleResults.userLoses:
+      computerScore++;
+      computerScoreDisplay.textContent = computerScore;
+      break;
+  }
+}
+
 function showResult (playerScore, computerScore) {
   const scoreSumDisplay = document.getElementById('scoreSumDisplay');
   let scoreDifference = playerScore - computerScore;
@@ -95,19 +110,7 @@ function playGame(playerChoice) {
   }
 
   showChoices(playerChoice, computerChoice);
-  showResult (playerScore, computerScore)
-  showConclusion (possibleResults)
- 
-  switch (result) {
-    case possibleResults.draw:
-      break;
-    case possibleResults.userWins:
-      playerScore++;
-      playerScoreDisplay.textContent = playerScore;
-      break;
-    case possibleResults.userLoses:
-      computerScore++;
-      computerScoreDisplay.textContent = computerScore;
-      break;
-  }
+  showResult (playerScore, computerScore);
+  showConclusion (possibleResults);
+  showScore (possibleResults);
 }
