@@ -13,8 +13,6 @@ const choicesArray = Object.values(choices);
 let playerScore = 0;
 let computerScore = 0;
 // let scoreDifference = 0;
-let result = '';
-
 
 // const choices = ['rock', 'paper', 'scissors'];
 // 1 TASK this list of const should go inside the functions
@@ -39,7 +37,25 @@ function showChoices(playerChoice, computerChoice) {
   computerChoiceElement.textContent = computerChoice;
 }
 
-
+function showConclusion(possibleResults) {
+  const resultDisplay = document.getElementById('resultDisplay');
+  
+  resultDisplay.classList.remove('greenText', 'redText', 'blueText');
+  switch (result) {
+    case possibleResults.draw:
+      resultDisplay.textContent = "IT'S A TIE!";
+      resultDisplay.classList.add('blueText');
+      break;
+    case possibleResults.userWins:
+      resultDisplay.textContent = "YOU WIN!";
+      resultDisplay.classList.add('greenText');
+      break;
+    case possibleResults.userLoses:
+      resultDisplay.textContent = "YOU LOSE!";
+      resultDisplay.classList.add('redText');
+      break;
+  }
+}
 
 function showResult (playerScore, computerScore) {
   const scoreSumDisplay = document.getElementById('scoreSumDisplay');
@@ -54,7 +70,6 @@ function showResult (playerScore, computerScore) {
   } else {
     scoreSumDisplay.classList.add('zeroColor');
   }
-  // this is alow to change score color depends on ho wins the game in the moment
 }
 
 function playGame(playerChoice) {
@@ -81,24 +96,8 @@ function playGame(playerChoice) {
 
   showChoices(playerChoice, computerChoice);
   showResult (playerScore, computerScore)
-  resultConclusion (possibleResults)
-  
-  resultDisplay.classList.remove('greenText', 'redText', 'blueText');
-  switch (result) {
-    case possibleResults.draw:
-      resultDisplay.textContent = "IT'S A TIE!";
-      resultDisplay.classList.add('blueText');
-      break;
-    case possibleResults.userWins:
-      resultDisplay.textContent = "YOU WIN!";
-      resultDisplay.classList.add('greenText');
-      break;
-    case possibleResults.userLoses:
-      resultDisplay.textContent = "YOU LOSE!";
-      resultDisplay.classList.add('redText');
-      break;
-  }
-
+  showConclusion (possibleResults)
+ 
   switch (result) {
     case possibleResults.draw:
       break;
@@ -109,29 +108,6 @@ function playGame(playerChoice) {
     case possibleResults.userLoses:
       computerScore++;
       computerScoreDisplay.textContent = computerScore;
-      break;
-  }
-}
-
-//   NEBAIGTAS resultConclusion!!!!!
-//  Ties čia Still warking!!!!!
-function resultConclusion(possibleResults) {
-  const resultDisplayTest = document.getElementById('resultDisplayTest');
-  
-  resultDisplayTest.classList.remove('greenText', 'redText', 'blueText');
-
-  switch (result) {
-    case possibleResults.draw:
-      resultDisplayTest.textContent = "IT'S A TIE!";
-      resultDisplayTest.classList.add('blueText');
-      break;
-    case possibleResults.userWins:
-      resultDisplayTest.textContent = "YOU WIN!";
-      resultDisplayTest.classList.add('greenText');
-      break;
-    case possibleResults.userLoses:
-      resultDisplayTest.textContent = "YOU LOSE!";
-      resultDisplayTest.classList.add('redText');
       break;
   }
 }
