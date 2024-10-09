@@ -12,19 +12,6 @@ const choicesArray = Object.values(choices);
 
 let playerScore = 0;
 let computerScore = 0;
-// let scoreDifference = 0;
-
-// const choices = ['rock', 'paper', 'scissors'];
-// 1 TASK this list of const should go inside the functions
-// const playerDisplay = document.getElementById('playerDisplay');
-// const computerDisplay = document.getElementById('computerDisplay');
-
-// UŽKOMENTINAU 3 apatinius const, bet niekas nepagriuvo
-// const playerScoreDisplay = document.getElementById('playerScoreDisplay');
-// const computerScoreDisplay = document.getElementById('computerScoreDisplay');
-// const scoreSumDisplay = document.getElementById('scoreSumDisplay');
-
-// 2 TASK seperate functions to indipendent ones from function playGame 
 
 function getComputerChoice() {
   return choicesArray[Math.floor(Math.random() * choicesArray.length)];
@@ -70,7 +57,6 @@ function calculateScore (result){
       computerScoreDisplay.textContent = computerScore;
       break;
   }
-  
   return playerScore - computerScore;
 }
 
@@ -89,7 +75,6 @@ function showScore (result){
 
 function showTotalScore (totalScore) {
   const scoreSumDisplay = document.getElementById('scoreSumDisplay');
-  // const scoreDifference = playerScore - computerScore;
   scoreSumDisplay.textContent = `${totalScore}`;
 
   scoreSumDisplay.classList.remove('zeroColor', 'plusColor', 'minusColor');
@@ -104,6 +89,7 @@ function showTotalScore (totalScore) {
 
 function playRound(playerChoice) {
   const computerChoice = getComputerChoice();
+  
   let result = '';
   let userWins = false;
 
