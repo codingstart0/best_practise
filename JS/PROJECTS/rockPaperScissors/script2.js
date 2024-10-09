@@ -70,7 +70,7 @@ function calculateScore (result){
       computerScoreDisplay.textContent = computerScore;
       break;
   }
-
+  
   return playerScore - computerScore;
 }
 
@@ -85,19 +85,17 @@ function showScore (result){
       computerScoreDisplay.textContent = computerScore;
       break;
   }
-
-  return playerScore - computerScore;
 }
 
-function showResult (playerScore, computerScore) {
+function showTotalScore (totalScore) {
   const scoreSumDisplay = document.getElementById('scoreSumDisplay');
-  const scoreDifference = playerScore - computerScore;
-  scoreSumDisplay.textContent = `${scoreDifference}`;
+  // const scoreDifference = playerScore - computerScore;
+  scoreSumDisplay.textContent = `${totalScore}`;
 
   scoreSumDisplay.classList.remove('zeroColor', 'plusColor', 'minusColor');
-  if (scoreDifference < 0) {
+  if (totalScore < 0) {
     scoreSumDisplay.classList.add('minusColor');
-  } else if (scoreDifference > 0) {
+  } else if (totalScore > 0) {
     scoreSumDisplay.classList.add('plusColor');
   } else {
     scoreSumDisplay.classList.add('zeroColor');
@@ -131,5 +129,5 @@ function playRound(playerChoice) {
   showChoices(playerChoice, computerChoice);
   showConclusion (result);
   showScore (result);
-  showResult (totalScore);
+  showTotalScore (totalScore);
 }
