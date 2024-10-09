@@ -47,30 +47,22 @@ function showConclusion(result) {
 function calculateScore (result){
   switch (result) {
     case possibleResults.draw:
+      playerScore++;
+      computerScore++;
       break;
     case possibleResults.userWins:
       playerScore++;
-      playerScoreDisplay.textContent = playerScore;
       break;
     case possibleResults.userLoses:
       computerScore++;
-      computerScoreDisplay.textContent = computerScore;
       break;
   }
   return playerScore - computerScore;
 }
 
-function showScore (result){
-  switch (result) {
-    case possibleResults.draw:
-      break;
-    case possibleResults.userWins:
-      playerScoreDisplay.textContent = playerScore;
-      break;
-    case possibleResults.userLoses:
-      computerScoreDisplay.textContent = computerScore;
-      break;
-  }
+function showScore (playerScore, computerScore){
+  playerScoreDisplay.textContent = playerScore;
+  computerScoreDisplay.textContent = computerScore;
 }
 
 function showTotalScore (totalScore) {
@@ -114,6 +106,6 @@ function playRound(playerChoice) {
 
   showChoices(playerChoice, computerChoice);
   showConclusion (result);
-  showScore (result);
+  showScore (playerScore, computerScore);
   showTotalScore (totalScore);
 }
