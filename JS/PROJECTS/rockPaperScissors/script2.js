@@ -12,7 +12,7 @@ const choicesArray = Object.values(choices);
 
 // Create array that contains buttons click action steps
 const gameHistory = [];
-let currentStepIndex = -1;
+let currentStepIndex = 0;
 
 let playerScore = 0;
 let computerScore = 0;
@@ -87,69 +87,6 @@ function showTotalScore(totalScore) {
   }
 }
 
-// function playRound(playerChoice) {
-//   const computerChoice = getComputerChoice();
-
-//   let result = '';
-//   let userWins = false;
-
-//   if (playerChoice === computerChoice) {
-//     result = possibleResults.draw;
-//   } else {
-//     switch (playerChoice) {
-//       case choices.rock:
-//         userWins = computerChoice === choices.scissors;
-//         break;
-//       case choices.paper:
-//         userWins = computerChoice === choices.rock;
-//         break;
-//       case choices.scissors:
-//         userWins = computerChoice === choices.paper;
-//         break;
-//     }
-//     result = userWins ? possibleResults.userWins : possibleResults.userLoses;
-//   }
-
-//   const totalScore = calculateScore(result);
-
-//   showChoices(playerChoice, computerChoice);
-//   showConclusion(result);
-//   showScore(playerScore, computerScore);
-//   showTotalScore(totalScore);
-// }
-
-function undo() {
-    // tai planas kad currentStepIndex vienu pamazeja
-  // ir tada turi paimti is gameHistory choices pagal pamazinta step index
-  // tada tuos choices paduot i playRound
-  // kaip ir veiks, redo atvirksciai
-currentStepIndex = currentStepIndex -1
-// function playUndo (playerChoice, computerChoice){
-// playRound(playerChoice, computerChoice);
-// }
-const playerChoice =  ;
-const computerChoice = ; 
-
-playRound(playerChoice, computerChoice);
-  // atasargiai kai stepIndex maziau 0 arba daugiau nei array.length - 1
-
-  console.log('Game History:', gameHistory);
-}
-
-function redo() {
-  currentStepIndex = currentStepIndex +1
-  console.error('redo');
-}
-
-// gameHistory store 3 values:
-// playerChoise
-// computerChoise
-// step
-
-// function fightChoise shoud spit:
-// playerChoise
-// computerChoise
-
 function playRound(playerChoice, computerChoice) {
   let result = '';
   let userWins = false;
@@ -184,7 +121,7 @@ function addGameToHistory(playerChoice, computerChoice) {
   //   playerChoice: playerChoice,
   //   computerChoice: computerChoice,
   // });
-  currentStepIndex = currentStepIndex + 1;
+  
   // cia reiktu pasitikrinti ar currentStepIndex nera maziau nei gameHistory.length -1
   // nes tokiu atveju mum reiktu isvalyti visus sekancius array item nuo sito zingsnio
   // ir tik tada irasyti nauja game.
@@ -192,7 +129,59 @@ function addGameToHistory(playerChoice, computerChoice) {
     playerChoice: playerChoice,
     computerChoice: computerChoice,
   };
+  currentStepIndex = currentStepIndex + 1;
 }
+
+function undo() {
+  // tai planas kad currentStepIndex vienu pamazeja
+  // ir tada turi paimti is gameHistory choices pagal pamazinta step index
+  // tada tuos choices paduot i playRound
+  // kaip ir veiks, redo atvirksciai
+  if (currentStepIndex > 0) {
+    if (gameHistory.length === currentStepIndex) {
+      currentStepIndex = currentStepIndex - 2;
+    } else {
+      currentStepIndex = currentStepIndex - 1;
+    }
+   
+    console.log(currentStepIndex);
+    const game = gameHistory[currentStepIndex];
+    console.log('Current Game:', game);
+    playRound(game.playerChoice, game.computerChoice);
+    
+    console.log('History Lenght: ', gameHistory.length);
+  }
+
+  // function playUndo (playerChoice, computerChoice){
+  // playRound(playerChoice, computerChoice);
+  // }
+  // let playerChoice = gameHistory[(objArray, "playerChoice");
+  // let playerChoice = _.map(gameHistory, _.property(playerChoice))
+  // console.log(gameHistory[currentStepIndex].playerChoice);
+  
+  // const computerChoice = ;
+  // playRound(playerChoice, computerChoice);
+  // atasargiai kai stepIndex maziau 0 arba daugiau nei array.length - 1
+}
+
+function redo() {
+  // if (currentStepIndex < gameHistory.lenght) {
+    currentStepIndex = currentStepIndex + 1;
+    console.log(currentStepIndex);
+    const game = gameHistory[currentStepIndex];
+    playRound(game.playerChoice, game.computerChoice);
+    console.log('Game History Redo:', gameHistory);
+  
+}
+
+// gameHistory store 3 values:
+// playerChoise
+// computerChoise
+// step
+
+// function fightChoise shoud spit:
+// playerChoise
+// computerChoise
 
 function onPlayerChoice(playerChoice) {
   const computerChoice = getComputerChoice();
