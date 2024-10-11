@@ -133,22 +133,8 @@ function addGameToHistory(playerChoice, computerChoice) {
 }
 
 function undo() {
-  // tai planas kad currentStepIndex vienu pamazeja
-  // ir tada turi paimti is gameHistory choices pagal pamazinta step index
-  // tada tuos choices paduot i playRound
-  // kaip ir veiks, redo atvirksciai
-
   if (currentStepIndex > 0) {
     currentStepIndex = currentStepIndex - 1;
-
-    // Version -2
-    // if (currentStepIndex > 0) {
-    //   if (gameHistory.length === currentStepIndex) {
-    //     currentStepIndex = currentStepIndex - 2;
-    //   } else {
-    //     currentStepIndex = currentStepIndex - 1;
-    //   }
-
     const game = gameHistory[currentStepIndex];
     console.log('History Lenght: ', gameHistory.length);
     console.log('UndoStepIndex: ', currentStepIndex);
@@ -156,15 +142,11 @@ function undo() {
 
     playRound(game.playerChoice, game.computerChoice);
   }
-  // const computerChoice = ;
-  // playRound(playerChoice, computerChoice);
-  // atasargiai kai stepIndex maziau 0 arba daugiau nei array.length - 1
 }
 
 function redo() {
   if (currentStepIndex < gameHistory.length - 1) {
     currentStepIndex = currentStepIndex + 1;
-
     const game = gameHistory[currentStepIndex];
     console.log('History Lenght: ', gameHistory.length);
     console.log('redoStepIndex: ', currentStepIndex);
@@ -173,15 +155,6 @@ function redo() {
     playRound(game.playerChoice, game.computerChoice);
   }
 }
-
-// gameHistory store 3 values:
-// playerChoise
-// computerChoise
-// step
-
-// function fightChoise shoud spit:
-// playerChoise
-// computerChoise
 
 function onPlayerChoice(playerChoice) {
   const computerChoice = getComputerChoice();
