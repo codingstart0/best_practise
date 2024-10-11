@@ -114,23 +114,30 @@ function playRound(playerChoice, computerChoice) {
   showConclusion(result);
   showScore(playerScore, computerScore);
   showTotalScore(totalScore);
+
+  return result;
 }
 
-function addGameToHistory(playerChoice, computerChoice) {
-  // gameHistory.push({
-  //   playerChoice: playerChoice,
-  //   computerChoice: computerChoice,
-  // });
+function addGameToHistory(playerChoice, computerChoice, playerScore, computerScore) {
 
+  let totalPlayerScore = playerScore;
+  let totalComputerScore = computerScore;
+
+  if (currentStepIndex > -1) {
+    const game = gameHistory[currentStepIndex];
+    totalPlayerScore = game.playerScore + totalPlayerScore;
+    totalComputerScore = game.computerScore + totalComputerScore;
+  }
   // cia reiktu pasitikrinti ar currentStepIndex nera maziau nei gameHistory.length -1
   // nes tokiu atveju mum reiktu isvalyti visus sekancius array item nuo sito zingsnio
   // ir tik tada irasyti nauja game.
+
   currentStepIndex = currentStepIndex + 1;
   gameHistory[currentStepIndex] = {
     playerChoice: playerChoice,
     computerChoice: computerChoice,
-    playerScore: playerScore,
-    computerScore: computerScore,
+    playerScore: totalPlayerScore,
+    computerScore: totalComputerScore,
   };
 }
 
@@ -152,18 +159,21 @@ function redo() {
   if (currentStepIndex < gameHistory.length - 1) {
     currentStepIndex = currentStepIndex + 1;
     const game = gameHistory[currentStepIndex];
+    const stepScore = gameHistory[currentStepIndex];
     console.log('History Lenght: ', gameHistory.length);
     console.log('redoStepIndex: ', currentStepIndex);
     console.log('Game:', game);
 
     playRound(game.playerChoice, game.computerChoice);
+    showScore(stepScore.playerScore, stepScore.computerScore)
   }
 }
 
 function onPlayerChoice(playerChoice) {
   const computerChoice = getComputerChoice();
 
-  playRound(playerChoice, computerChoice);
+  const result = playRound(playerChoice, computerChoice);
+  console.log (result);
   // cia reikia atsargiai, nes jeigu buvo padaryta
   // undo - galimai mes norim idet zaidima nuo currentStepIndex + 1
   // o ne i esamo array gala, bet tuo paciu reikia ir isvalyti visus
