@@ -121,7 +121,7 @@ function addGameToHistory(playerChoice, computerChoice) {
   //   playerChoice: playerChoice,
   //   computerChoice: computerChoice,
   // });
-  
+
   // cia reiktu pasitikrinti ar currentStepIndex nera maziau nei gameHistory.length -1
   // nes tokiu atveju mum reiktu isvalyti visus sekancius array item nuo sito zingsnio
   // ir tik tada irasyti nauja game.
@@ -137,19 +137,28 @@ function undo() {
   // ir tada turi paimti is gameHistory choices pagal pamazinta step index
   // tada tuos choices paduot i playRound
   // kaip ir veiks, redo atvirksciai
+
   if (currentStepIndex > 0) {
     if (gameHistory.length === currentStepIndex) {
       currentStepIndex = currentStepIndex - 2;
     } else {
       currentStepIndex = currentStepIndex - 1;
     }
-   
-    console.log(currentStepIndex);
+
+    // Version -2
+    // if (currentStepIndex > 0) {
+    //   if (gameHistory.length === currentStepIndex) {
+    //     currentStepIndex = currentStepIndex - 2;
+    //   } else {
+    //     currentStepIndex = currentStepIndex - 1;
+    //   }
+
     const game = gameHistory[currentStepIndex];
-    console.log('Current Game:', game);
-    playRound(game.playerChoice, game.computerChoice);
-    
+    console.log('UndoStepIndex: ', currentStepIndex);
     console.log('History Lenght: ', gameHistory.length);
+    console.log('Current Game:', game);
+
+    playRound(game.playerChoice, game.computerChoice);
   }
 
   // function playUndo (playerChoice, computerChoice){
@@ -158,20 +167,22 @@ function undo() {
   // let playerChoice = gameHistory[(objArray, "playerChoice");
   // let playerChoice = _.map(gameHistory, _.property(playerChoice))
   // console.log(gameHistory[currentStepIndex].playerChoice);
-  
+
   // const computerChoice = ;
   // playRound(playerChoice, computerChoice);
   // atasargiai kai stepIndex maziau 0 arba daugiau nei array.length - 1
 }
 
 function redo() {
-  // if (currentStepIndex < gameHistory.lenght) {
+    if (gameHistory.lenght = currentStepIndex) {
     currentStepIndex = currentStepIndex + 1;
-    console.log(currentStepIndex);
     const game = gameHistory[currentStepIndex];
-    playRound(game.playerChoice, game.computerChoice);
+    console.log('redoStepIndex: ', currentStepIndex);
+    console.log('History Lenght: ', gameHistory.length);
     console.log('Game History Redo:', gameHistory);
-  
+
+    playRound(game.playerChoice, game.computerChoice);
+  }
 }
 
 // gameHistory store 3 values:
