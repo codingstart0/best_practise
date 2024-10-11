@@ -138,16 +138,14 @@ function undo() {
   if (currentStepIndex > 0) {
     currentStepIndex = currentStepIndex - 1;
     const game = gameHistory[currentStepIndex];
+    const stepScore = gameHistory[currentStepIndex];
     console.log('History Lenght: ', gameHistory.length);
     console.log('UndoStepIndex: ', currentStepIndex);
     console.log('Current Game:', game);
-    
-    playRound(game.playerChoice, game.computerChoice);
 
-    // calculateScore(playerScore.currentStepIndex, computerScore.currentStepIndex);
-    playerScore = gameHistory[playerScore];
-    computerScore = gameHistory[computerScore];
-      }
+    playRound(game.playerChoice, game.computerChoice);
+    showScore(stepScore.playerScore, stepScore.computerScore)
+  }
 }
 
 function redo() {
@@ -174,3 +172,6 @@ function onPlayerChoice(playerChoice) {
   console.log('currentStepIndex: ', currentStepIndex, gameHistory);
 }
 
+// kad ištrinti buvusius žaidimus kai pradedam vėl žaisti po
+// undo & redo panaudojimo, taikyti slice arba splice metoda
+// array.slice(currentStepIndex, )
