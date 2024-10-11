@@ -118,10 +118,10 @@ function playRound(playerChoice, computerChoice) {
   return result;
 }
 
-function addGameToHistory(playerChoice, computerChoice, playerScore, computerScore) {
+function addGameToHistory(playerChoice, computerChoice, score) {
 
-  let totalPlayerScore = playerScore;
-  let totalComputerScore = computerScore;
+  let totalPlayerScore = score.playerScore;
+  let totalComputerScore = score.computerScore;
 
   if (currentStepIndex > -1) {
     const game = gameHistory[currentStepIndex];
@@ -169,16 +169,40 @@ function redo() {
   }
 }
 
+function getScore(result) {
+  const score = {
+    playerScore: 0,
+    computerScore: 0,
+  };
+
+  switch (result) {
+    case possibleResults.draw:
+      score.playerScore++;
+      score.computerScore++;
+      break;
+    case possibleResults.userWins:
+      score.playerScore++;
+      break;
+    case possibleResults.userLoses:
+      score.computerScore++;
+      break;
+  }
+
+  return score;
+}
+
 function onPlayerChoice(playerChoice) {
   const computerChoice = getComputerChoice();
 
   const result = playRound(playerChoice, computerChoice);
-  console.log (result);
+  console.log ('Current Result:', result);
+  const score = getScore(result);
+  console.log('Score:', score);
   // cia reikia atsargiai, nes jeigu buvo padaryta
   // undo - galimai mes norim idet zaidima nuo currentStepIndex + 1
   // o ne i esamo array gala, bet tuo paciu reikia ir isvalyti visus
   // sekancius array items nuo currentStepIndex
-  addGameToHistory(playerChoice, computerChoice);
+  addGameToHistory(playerChoice, computerChoice, score);
   console.log('currentStepIndex: ', currentStepIndex, gameHistory);
 }
 
