@@ -173,3 +173,4 @@ function onPlayerChoice(playerChoice) {
   addGameToHistory(playerChoice, computerChoice);
   console.log('currentStepIndex: ', currentStepIndex, gameHistory);
 }
+
