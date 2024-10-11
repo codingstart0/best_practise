@@ -129,6 +129,8 @@ function addGameToHistory(playerChoice, computerChoice) {
   gameHistory[currentStepIndex] = {
     playerChoice: playerChoice,
     computerChoice: computerChoice,
+    playerScore: playerScore,
+    computerScore: computerScore,
   };
 }
 
@@ -139,9 +141,13 @@ function undo() {
     console.log('History Lenght: ', gameHistory.length);
     console.log('UndoStepIndex: ', currentStepIndex);
     console.log('Current Game:', game);
-
+    
     playRound(game.playerChoice, game.computerChoice);
-  }
+
+    // calculateScore(playerScore.currentStepIndex, computerScore.currentStepIndex);
+    playerScore = gameHistory[playerScore];
+    computerScore = gameHistory[computerScore];
+      }
 }
 
 function redo() {
