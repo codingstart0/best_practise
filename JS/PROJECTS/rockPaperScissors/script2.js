@@ -166,6 +166,7 @@ function redo() {
 
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore)
+    // getScore
   }
 }
 
@@ -188,16 +189,17 @@ function getScore(result) {
       break;
   }
 
+  console.log (score);
   return score;
-}
+  }
 
 function onPlayerChoice(playerChoice) {
   const computerChoice = getComputerChoice();
 
   const result = playRound(playerChoice, computerChoice);
-  console.log ('Current Result:', result);
+  console.log ('Winning Result:', result);
   const score = getScore(result);
-  console.log('Score:', score);
+  console.log('Score from onPlayerChoice:', score);
   // cia reikia atsargiai, nes jeigu buvo padaryta
   // undo - galimai mes norim idet zaidima nuo currentStepIndex + 1
   // o ne i esamo array gala, bet tuo paciu reikia ir isvalyti visus
