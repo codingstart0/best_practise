@@ -119,7 +119,6 @@ function playRound(playerChoice, computerChoice) {
 }
 
 function addGameToHistory(playerChoice, computerChoice, score) {
-
   let totalPlayerScore = score.playerScore;
   let totalComputerScore = score.computerScore;
 
@@ -139,7 +138,12 @@ function addGameToHistory(playerChoice, computerChoice, score) {
     playerScore: totalPlayerScore,
     computerScore: totalComputerScore,
   };
-  console.log ('Total scores after addGameToHistory: ', score, totalComputerScore, totalPlayerScore);
+  console.log(
+    'Total scores after addGameToHistory: ',
+    score,
+    totalComputerScore,
+    totalPlayerScore
+  );
 }
 
 function undo() {
@@ -155,7 +159,7 @@ function undo() {
     console.log('Undo stepScore: ', stepScore);
 
     playRound(game.playerChoice, game.computerChoice);
-    showScore(stepScore.playerScore, stepScore.computerScore)
+    showScore(stepScore.playerScore, stepScore.computerScore);
     showTotalScore(undoTotalScore);
   }
 }
@@ -165,13 +169,15 @@ function redo() {
     currentStepIndex = currentStepIndex + 1;
     const game = gameHistory[currentStepIndex];
     const stepScore = gameHistory[currentStepIndex];
+    const redoTotalScore = stepScore.playerScore - stepScore.computerScore;
+
     console.log('History Lenght: ', gameHistory.length);
     console.log('redoStepIndex: ', currentStepIndex);
-    console.log('Game:', game);
+    console.log('Curent Game:', game);
 
     playRound(game.playerChoice, game.computerChoice);
-    showScore(stepScore.playerScore, stepScore.computerScore)
-    // getScore
+    showScore(stepScore.playerScore, stepScore.computerScore);
+    showTotalScore(redoTotalScore);
   }
 }
 
@@ -194,15 +200,15 @@ function getScore(result) {
       break;
   }
 
-  console.log ('score from getScore', score);
+  console.log('score from getScore', score);
   return score;
-  }
+}
 
 function onPlayerChoice(playerChoice) {
   const computerChoice = getComputerChoice();
 
   const result = playRound(playerChoice, computerChoice);
-  console.log ('Winning Result:', result);
+  console.log('Winning Result:', result);
   const score = getScore(result);
   console.log('Score from onPlayerChoice:', score);
   // cia reikia atsargiai, nes jeigu buvo padaryta
