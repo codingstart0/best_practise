@@ -139,6 +139,7 @@ function addGameToHistory(playerChoice, computerChoice, score) {
     playerScore: totalPlayerScore,
     computerScore: totalComputerScore,
   };
+  console.log ('Total scores after addGameToHistory: ', score, totalComputerScore, totalPlayerScore);
 }
 
 function undo() {
@@ -146,12 +147,16 @@ function undo() {
     currentStepIndex = currentStepIndex - 1;
     const game = gameHistory[currentStepIndex];
     const stepScore = gameHistory[currentStepIndex];
+    const undoTotalScore = stepScore.playerScore - stepScore.computerScore;
+
     console.log('History Lenght: ', gameHistory.length);
     console.log('UndoStepIndex: ', currentStepIndex);
     console.log('Current Game:', game);
+    console.log('Undo stepScore: ', stepScore);
 
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore)
+    showTotalScore(undoTotalScore);
   }
 }
 
@@ -189,7 +194,7 @@ function getScore(result) {
       break;
   }
 
-  console.log (score);
+  console.log ('score from getScore', score);
   return score;
   }
 
