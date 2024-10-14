@@ -14,17 +14,8 @@ const choicesArray = Object.values(choices);
 const gameHistory = [];
 let currentStepIndex = -1;
 
-// TASK susitvarkyti mess 
-// Istrinti Šitus global
-// let playerScore = 0;
-// let computerScore = 0;
-
 function getComputerChoice() {
   return choicesArray[Math.floor(Math.random() * choicesArray.length)];
-}
-
-function playerPush(playerChoice) {
-  console.log(playerChoice, getComputerChoice);
 }
 
 function showChoices(playerChoice, computerChoice) {
@@ -53,22 +44,6 @@ function showConclusion(result) {
       break;
   }
 }
-
-// function calculateScore(result) {
-//   switch (result) {
-//     case possibleResults.draw:
-//       playerScore++;
-//       computerScore++;
-//       break;
-//     case possibleResults.userWins:
-//       playerScore++;
-//       break;
-//     case possibleResults.userLoses:
-//       computerScore++;
-//       break;
-//   }
-//   return playerScore - computerScore;
-// }
 
 function showScore(playerScore, computerScore) {
   playerScoreDisplay.textContent = playerScore;
@@ -110,13 +85,8 @@ function playRound(playerChoice, computerChoice) {
     }
     result = userWins ? possibleResults.userWins : possibleResults.userLoses;
   }
-
-  // const totalScore = calculateScore(result);
-
   showChoices(playerChoice, computerChoice);
   showConclusion(result);
-  // showScore(playerScore, computerScore);
-  // showTotalScore(totalScore);
 
   return result;
 }
@@ -212,8 +182,8 @@ function onPlayerChoice(playerChoice) {
   console.log('Winning Result:', result);
   const score = getGameScore(result);
   console.log('Score from onPlayerChoice:', score);
-  
-  // TASK 1 
+
+  // TASK 1
   // cia reikia atsargiai, nes jeigu buvo padaryta
   // undo - galimai mes norim idet zaidima nuo currentStepIndex + 1
   // o ne i esamo array gala, bet tuo paciu reikia ir isvalyti visus
@@ -231,5 +201,7 @@ function onPlayerChoice(playerChoice) {
 }
 
 // TASK final
-// Create side bar for steps index and bold curent step
-// Add html element
+// 1.  Create side bar for steps index
+//     Add html element
+// 2.  Bolded curent step
+//     Make so that every time this side bar will be redraw again
