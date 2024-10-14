@@ -14,8 +14,9 @@ const choicesArray = Object.values(choices);
 const gameHistory = [];
 let currentStepIndex = -1;
 
-let playerScore = 0;
-let computerScore = 0;
+// I6trinti Šitus global
+// let playerScore = 0;
+// let computerScore = 0;
 
 function getComputerChoice() {
   return choicesArray[Math.floor(Math.random() * choicesArray.length)];
@@ -52,28 +53,29 @@ function showConclusion(result) {
   }
 }
 
-function calculateScore(result) {
-  switch (result) {
-    case possibleResults.draw:
-      playerScore++;
-      computerScore++;
-      break;
-    case possibleResults.userWins:
-      playerScore++;
-      break;
-    case possibleResults.userLoses:
-      computerScore++;
-      break;
-  }
-  return playerScore - computerScore;
-}
+// function calculateScore(result) {
+//   switch (result) {
+//     case possibleResults.draw:
+//       playerScore++;
+//       computerScore++;
+//       break;
+//     case possibleResults.userWins:
+//       playerScore++;
+//       break;
+//     case possibleResults.userLoses:
+//       computerScore++;
+//       break;
+//   }
+//   return playerScore - computerScore;
+// }
 
 function showScore(playerScore, computerScore) {
   playerScoreDisplay.textContent = playerScore;
   computerScoreDisplay.textContent = computerScore;
 }
 
-function showTotalScore(totalScore) {
+function showTotalScore(playerScore, computerScore) {
+  const totalScore = playerScore - computerScore;
   const scoreSumDisplay = document.getElementById('scoreSumDisplay');
   scoreSumDisplay.textContent = `${totalScore}`;
 
@@ -108,12 +110,12 @@ function playRound(playerChoice, computerChoice) {
     result = userWins ? possibleResults.userWins : possibleResults.userLoses;
   }
 
-  const totalScore = calculateScore(result);
+  // const totalScore = calculateScore(result);
 
   showChoices(playerChoice, computerChoice);
   showConclusion(result);
-  showScore(playerScore, computerScore);
-  showTotalScore(totalScore);
+  // showScore(playerScore, computerScore);
+  // showTotalScore(totalScore);
 
   return result;
 }
@@ -151,7 +153,6 @@ function undo() {
     currentStepIndex = currentStepIndex - 1;
     const game = gameHistory[currentStepIndex];
     const stepScore = gameHistory[currentStepIndex];
-    const undoTotalScore = stepScore.playerScore - stepScore.computerScore;
 
     console.log('History Lenght: ', gameHistory.length);
     console.log('UndoStepIndex: ', currentStepIndex);
@@ -160,7 +161,7 @@ function undo() {
 
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
-    showTotalScore(undoTotalScore);
+    showTotalScore(stepScore.playerScore, stepScore.computerScore);
   }
 }
 
@@ -169,7 +170,6 @@ function redo() {
     currentStepIndex = currentStepIndex + 1;
     const game = gameHistory[currentStepIndex];
     const stepScore = gameHistory[currentStepIndex];
-    const redoTotalScore = stepScore.playerScore - stepScore.computerScore;
 
     console.log('History Lenght: ', gameHistory.length);
     console.log('redoStepIndex: ', currentStepIndex);
@@ -177,11 +177,11 @@ function redo() {
 
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
-    showTotalScore(redoTotalScore);
+    showTotalScore(stepScore.playerScore, stepScore.computerScore);
   }
 }
 
-function getScore(result) {
+function getGameScore(result) {
   const score = {
     playerScore: 0,
     computerScore: 0,
@@ -209,13 +209,17 @@ function onPlayerChoice(playerChoice) {
 
   const result = playRound(playerChoice, computerChoice);
   console.log('Winning Result:', result);
-  const score = getScore(result);
+  const score = getGameScore(result);
   console.log('Score from onPlayerChoice:', score);
   // cia reikia atsargiai, nes jeigu buvo padaryta
   // undo - galimai mes norim idet zaidima nuo currentStepIndex + 1
   // o ne i esamo array gala, bet tuo paciu reikia ir isvalyti visus
   // sekancius array items nuo currentStepIndex
   addGameToHistory(playerChoice, computerChoice, score);
+
+  const lastGame = gameHistory[currentStepIndex];
+  showScore(lastGame.playerScore, lastGame.computerScore);
+  showTotalScore(lastGame.playerScore, lastGame.computerScore);
   console.log('currentStepIndex: ', currentStepIndex, gameHistory);
 }
 
