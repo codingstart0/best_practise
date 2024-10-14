@@ -14,7 +14,8 @@ const choicesArray = Object.values(choices);
 const gameHistory = [];
 let currentStepIndex = -1;
 
-// I6trinti Šitus global
+// TASK susitvarkyti mess 
+// Istrinti Šitus global
 // let playerScore = 0;
 // let computerScore = 0;
 
@@ -211,10 +212,16 @@ function onPlayerChoice(playerChoice) {
   console.log('Winning Result:', result);
   const score = getGameScore(result);
   console.log('Score from onPlayerChoice:', score);
+  
+  // TASK 1 
   // cia reikia atsargiai, nes jeigu buvo padaryta
   // undo - galimai mes norim idet zaidima nuo currentStepIndex + 1
   // o ne i esamo array gala, bet tuo paciu reikia ir isvalyti visus
   // sekancius array items nuo currentStepIndex
+
+  // kad ištrinti buvusius žaidimus kai pradedam vėl žaisti po
+  // undo & redo panaudojimo, taikyti slice arba splice metoda
+  // array.slice(currentStepIndex, )
   addGameToHistory(playerChoice, computerChoice, score);
 
   const lastGame = gameHistory[currentStepIndex];
@@ -223,6 +230,6 @@ function onPlayerChoice(playerChoice) {
   console.log('currentStepIndex: ', currentStepIndex, gameHistory);
 }
 
-// kad ištrinti buvusius žaidimus kai pradedam vėl žaisti po
-// undo & redo panaudojimo, taikyti slice arba splice metoda
-// array.slice(currentStepIndex, )
+// TASK final
+// Create side bar for steps index and bold curent step
+// Add html element
