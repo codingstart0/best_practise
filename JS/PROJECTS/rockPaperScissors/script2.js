@@ -10,8 +10,7 @@ const choices = {
 };
 const choicesArray = Object.values(choices);
 
-// Create array that contains buttons click action steps
-const gameHistory = [];
+let gameHistory = [];
 let currentStepIndex = -1;
 
 function getComputerChoice() {
@@ -100,9 +99,6 @@ function addGameToHistory(playerChoice, computerChoice, score) {
     totalPlayerScore = game.playerScore + totalPlayerScore;
     totalComputerScore = game.computerScore + totalComputerScore;
   }
-  // cia reiktu pasitikrinti ar currentStepIndex nera maziau nei gameHistory.length -1
-  // nes tokiu atveju mum reiktu isvalyti visus sekancius array item nuo sito zingsnio
-  // ir tik tada irasyti nauja game.
 
   currentStepIndex = currentStepIndex + 1;
   gameHistory[currentStepIndex] = {
@@ -111,28 +107,9 @@ function addGameToHistory(playerChoice, computerChoice, score) {
     playerScore: totalPlayerScore,
     computerScore: totalComputerScore,
   };
-  console.log;
-  // sitas nlb reikalingas(
-  // 'Round score from addGameToHistory: ',
-  // score,
-  // );
-  // console.log(
-  //   'Total scores after addGameToHistory: ',
-  //   totalComputerScore,
-  //   totalPlayerScore
-  // );
-  // console.log(
-  //   'Player & Computer choice after addGameToHistory: ',
-  //   playerChoice,
-  //   computerChoice
-  // );
-  console.log(
-    'currentStepIndex from addGameToHistory: ',
-    currentStepIndex
-    //  gameHistory
-  );
-  console.log('History Lenght: ', gameHistory.length);
 
+  console.log('currentStepIndex from addGameToHistory: ', currentStepIndex);
+  console.log('addGameToHistory History Lenght: ', gameHistory.length);
 }
 
 function undo() {
@@ -141,12 +118,8 @@ function undo() {
     const game = gameHistory[currentStepIndex];
     const stepScore = gameHistory[currentStepIndex];
 
-    console.log('History Lenght: ', gameHistory.length);
+    console.log('undo History Lenght: ', gameHistory.length);
     console.log('UndoStepIndex: ', currentStepIndex);
-    // Kodel sitas negrazina
-    // console.log('Current Game:', game);
-    console.log(gameHistory);
-    // grazina gameHistory is onPlayerChoice const lastGame bet sito irgi nlb reikia
     console.log('Undo step choice & Score: ', stepScore);
 
     playRound(game.playerChoice, game.computerChoice);
@@ -161,12 +134,9 @@ function redo() {
     const game = gameHistory[currentStepIndex];
     const stepScore = gameHistory[currentStepIndex];
 
-    console.log('History Lenght: ', gameHistory.length);
+    console.log('redo History Lenght: ', gameHistory.length);
     console.log('redoStepIndex: ', currentStepIndex);
     console.log(gameHistory);
-
-    // console.log('Curent Game:', game);
-    // console.log('Redo step choice & Score: ', stepScore);
 
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
@@ -192,8 +162,6 @@ function getGameScore(result) {
       score.computerScore++;
       break;
   }
-
-  // console.log('score from getScore', score);
   return score;
 }
 
@@ -202,29 +170,18 @@ function onPlayerChoice(playerChoice) {
 
   const result = playRound(playerChoice, computerChoice);
   const score = getGameScore(result);
+
+  if (currentStepIndex !== gameHistory.length - 1) {
+    gameHistory = gameHistory.slice(0, currentStepIndex + 1);
+    console.log('!!!!!sliced gameHistory:', gameHistory);
+  }
   addGameToHistory(playerChoice, computerChoice, score);
 
   const lastGame = gameHistory[currentStepIndex];
   showScore(lastGame.playerScore, lastGame.computerScore);
   showTotalScore(lastGame.playerScore, lastGame.computerScore);
   console.log(gameHistory);
-
-  const deleteIndexCount = gameHistory.length - currentStepIndex;
-  if (currentStepIndex < gameHistory.length - 1) {
-    gameHistory.splice(currentStepIndex - 1, deleteIndexCount);
-    console.log(deleteIndexCount);
-  }
 }
-
-
-
-// function onPlayerChoice(playerChoice) {
-//   const computerChoice = getComputerChoice();
-
-//   const result = playRound(playerChoice, computerChoice);
-//   // console.log('Winning Result:', result);
-//   const score = getGameScore(result);
-//   // console.log('Score from onPlayerChoice:', score);
 
 //   // TASK 1
 //   // cia reikia atsargiai, nes jeigu buvo padaryta
