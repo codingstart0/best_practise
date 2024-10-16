@@ -107,9 +107,6 @@ function addGameToHistory(playerChoice, computerChoice, score) {
     playerScore: totalPlayerScore,
     computerScore: totalComputerScore,
   };
-
-  console.log('currentStepIndex from addGameToHistory: ', currentStepIndex);
-  console.log('addGameToHistory History Lenght: ', gameHistory.length);
 }
 
 function undo() {
@@ -117,10 +114,6 @@ function undo() {
     currentStepIndex = currentStepIndex - 1;
     const game = gameHistory[currentStepIndex];
     const stepScore = gameHistory[currentStepIndex];
-
-    console.log('undo History Lenght: ', gameHistory.length);
-    console.log('UndoStepIndex: ', currentStepIndex);
-    console.log('Undo step choice & Score: ', stepScore);
 
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
@@ -133,10 +126,6 @@ function redo() {
     currentStepIndex = currentStepIndex + 1;
     const game = gameHistory[currentStepIndex];
     const stepScore = gameHistory[currentStepIndex];
-
-    console.log('redo History Lenght: ', gameHistory.length);
-    console.log('redoStepIndex: ', currentStepIndex);
-    console.log(gameHistory);
 
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
@@ -173,42 +162,14 @@ function onPlayerChoice(playerChoice) {
 
   if (currentStepIndex !== gameHistory.length - 1) {
     gameHistory = gameHistory.slice(0, currentStepIndex + 1);
-    console.log('!!!!!sliced gameHistory:', gameHistory);
   }
+
   addGameToHistory(playerChoice, computerChoice, score);
 
   const lastGame = gameHistory[currentStepIndex];
   showScore(lastGame.playerScore, lastGame.computerScore);
   showTotalScore(lastGame.playerScore, lastGame.computerScore);
-  console.log(gameHistory);
 }
-
-//   // TASK 1
-//   // cia reikia atsargiai, nes jeigu buvo padaryta
-//   // undo - galimai mes norim idet zaidima nuo currentStepIndex + 1
-//   // o ne i esamo array gala, bet tuo paciu reikia ir isvalyti visus
-//   // sekancius array items nuo currentStepIndex
-
-//   // kad ištrinti buvusius žaidimus kai pradedam vėl žaisti po
-//   // undo & redo panaudojimo, taikyti slice arba splice metoda
-//   // array.slice(currentStepIndex, )
-//   addGameToHistory(playerChoice, computerChoice, score);
-
-//   const lastGame = gameHistory[currentStepIndex];
-//   showScore(lastGame.playerScore, lastGame.computerScore);
-//   showTotalScore(lastGame.playerScore, lastGame.computerScore);
-//   console.log(
-//          gameHistory
-//   // 'currentStepIndex: ',
-//     );
-
-// const deleteIndexCount = gameHistory.length - currentStepIndex;
-//     if (currentStepIndex < gameHistory.length - 1) {
-//       gameHistory.splice(currentStepIndex, deleteIndexCount)
-//       console.log(deleteIndexCount)
-//     }
-
-// }
 
 // TASK final
 // 1.  Create side bar for steps index
