@@ -1,3 +1,9 @@
+*{
+    margin:0;
+    padding: 0;
+    font-family: 'Popppins', sans-serif;
+}
+
 body{
     font-family: Arial, sans-serif;
     font-weight: bold;
@@ -6,6 +12,31 @@ body{
     flex-direction: column;
     align-items: center;
 }
+
+::webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ffff;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background: linear-gradient(-45deg, #18572f, #00c7a6);
+    display: flex;
+    flex-direction: column;
+}
+
+header h2 {
+    font-size: 32px;
+    color: #ffff;
+}
+
 h1{
     font-size: 3.5rem;
     color: hsl(0, 0%, 20%);
