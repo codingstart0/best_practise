@@ -111,12 +111,28 @@ function addGameToHistory(playerChoice, computerChoice, score) {
     playerScore: totalPlayerScore,
     computerScore: totalComputerScore,
   };
+  console.log;
+  // sitas nlb reikalingas(
+  // 'Round score from addGameToHistory: ',
+  // score,
+  // );
+  // console.log(
+  //   'Total scores after addGameToHistory: ',
+  //   totalComputerScore,
+  //   totalPlayerScore
+  // );
+  // console.log(
+  //   'Player & Computer choice after addGameToHistory: ',
+  //   playerChoice,
+  //   computerChoice
+  // );
   console.log(
-    'Total scores after addGameToHistory: ',
-    score,
-    totalComputerScore,
-    totalPlayerScore
+    'currentStepIndex from addGameToHistory: ',
+    currentStepIndex
+    //  gameHistory
   );
+  console.log('History Lenght: ', gameHistory.length);
+
 }
 
 function undo() {
@@ -127,8 +143,11 @@ function undo() {
 
     console.log('History Lenght: ', gameHistory.length);
     console.log('UndoStepIndex: ', currentStepIndex);
-    console.log('Current Game:', game);
-    console.log('Undo stepScore: ', stepScore);
+    // Kodel sitas negrazina
+    // console.log('Current Game:', game);
+    console.log(gameHistory);
+    // grazina gameHistory is onPlayerChoice const lastGame bet sito irgi nlb reikia
+    console.log('Undo step choice & Score: ', stepScore);
 
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
@@ -144,7 +163,10 @@ function redo() {
 
     console.log('History Lenght: ', gameHistory.length);
     console.log('redoStepIndex: ', currentStepIndex);
-    console.log('Curent Game:', game);
+    console.log(gameHistory);
+
+    // console.log('Curent Game:', game);
+    // console.log('Redo step choice & Score: ', stepScore);
 
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
@@ -171,7 +193,7 @@ function getGameScore(result) {
       break;
   }
 
-  console.log('score from getScore', score);
+  // console.log('score from getScore', score);
   return score;
 }
 
@@ -179,26 +201,57 @@ function onPlayerChoice(playerChoice) {
   const computerChoice = getComputerChoice();
 
   const result = playRound(playerChoice, computerChoice);
-  console.log('Winning Result:', result);
   const score = getGameScore(result);
-  console.log('Score from onPlayerChoice:', score);
-
-  // TASK 1
-  // cia reikia atsargiai, nes jeigu buvo padaryta
-  // undo - galimai mes norim idet zaidima nuo currentStepIndex + 1
-  // o ne i esamo array gala, bet tuo paciu reikia ir isvalyti visus
-  // sekancius array items nuo currentStepIndex
-
-  // kad ištrinti buvusius žaidimus kai pradedam vėl žaisti po
-  // undo & redo panaudojimo, taikyti slice arba splice metoda
-  // array.slice(currentStepIndex, )
   addGameToHistory(playerChoice, computerChoice, score);
 
   const lastGame = gameHistory[currentStepIndex];
   showScore(lastGame.playerScore, lastGame.computerScore);
   showTotalScore(lastGame.playerScore, lastGame.computerScore);
-  console.log('currentStepIndex: ', currentStepIndex, gameHistory);
+  console.log(gameHistory);
+
+  const deleteIndexCount = gameHistory.length - currentStepIndex;
+  if (currentStepIndex < gameHistory.length - 1) {
+    gameHistory.splice(currentStepIndex - 1, deleteIndexCount);
+    console.log(deleteIndexCount);
+  }
 }
+
+
+
+// function onPlayerChoice(playerChoice) {
+//   const computerChoice = getComputerChoice();
+
+//   const result = playRound(playerChoice, computerChoice);
+//   // console.log('Winning Result:', result);
+//   const score = getGameScore(result);
+//   // console.log('Score from onPlayerChoice:', score);
+
+//   // TASK 1
+//   // cia reikia atsargiai, nes jeigu buvo padaryta
+//   // undo - galimai mes norim idet zaidima nuo currentStepIndex + 1
+//   // o ne i esamo array gala, bet tuo paciu reikia ir isvalyti visus
+//   // sekancius array items nuo currentStepIndex
+
+//   // kad ištrinti buvusius žaidimus kai pradedam vėl žaisti po
+//   // undo & redo panaudojimo, taikyti slice arba splice metoda
+//   // array.slice(currentStepIndex, )
+//   addGameToHistory(playerChoice, computerChoice, score);
+
+//   const lastGame = gameHistory[currentStepIndex];
+//   showScore(lastGame.playerScore, lastGame.computerScore);
+//   showTotalScore(lastGame.playerScore, lastGame.computerScore);
+//   console.log(
+//          gameHistory
+//   // 'currentStepIndex: ',
+//     );
+
+// const deleteIndexCount = gameHistory.length - currentStepIndex;
+//     if (currentStepIndex < gameHistory.length - 1) {
+//       gameHistory.splice(currentStepIndex, deleteIndexCount)
+//       console.log(deleteIndexCount)
+//     }
+
+// }
 
 // TASK final
 // 1.  Create side bar for steps index
