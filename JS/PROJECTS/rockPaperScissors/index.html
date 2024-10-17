@@ -8,57 +8,83 @@
   </head>
   <body>
     <h1>ROCK PAPER SCISSORS</h1>
-<nav class='sidebar'>
-  <header>
-    <h2>History</h2>
-  </header>
-  <div class='scrollbox'>
-    <div class='scrollbox-inner'>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem, blanditiis quasi assumenda praesentium repudiandae magnam repellendus molestiae, sed id dolores totam earum deleniti minima error? Natus temporibus vel rerum aut.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim excepturi suscipit, numquam magni a maxime autem. Enim nihil rem earum qui in quam quidem ex blanditiis. Id hic eos illum.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem, blanditiis quasi assumenda praesentium repudiandae magnam repellendus molestiae, sed id dolores totam earum deleniti minima error? Natus temporibus vel rerum aut.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim excepturi suscipit, numquam magni a maxime autem. Enim nihil rem earum qui in quam quidem ex blanditiis. Id hic eos illum.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem, blanditiis quasi assumenda praesentium repudiandae magnam repellendus molestiae, sed id dolores totam earum deleniti minima error? Natus temporibus vel rerum aut.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim excepturi suscipit, numquam magni a maxime autem. Enim nihil rem earum qui in quam quidem ex blanditiis. Id hic eos illum.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem, blanditiis quasi assumenda praesentium repudiandae magnam repellendus molestiae, sed id dolores totam earum deleniti minima error? Natus temporibus vel rerum aut.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim excepturi suscipit, numquam magni a maxime autem. Enim nihil rem earum qui in quam quidem ex blanditiis. Id hic eos illum.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem, blanditiis quasi assumenda praesentium repudiandae magnam repellendus molestiae, sed id dolores totam earum deleniti minima error? Natus temporibus vel rerum aut.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim excepturi suscipit, numquam magni a maxime autem. Enim nihil rem earum qui in quam quidem ex blanditiis. Id hic eos illum.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem, blanditiis quasi assumenda praesentium repudiandae magnam repellendus molestiae, sed id dolores totam earum deleniti minima error? Natus temporibus vel rerum aut.
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim excepturi suscipit, numquam magni a maxime autem. Enim nihil rem earum qui in quam quidem ex blanditiis. Id hic eos illum.</p>
-    </div>
-  </div>
-</nav>
-
-    <div class="choices">
-      <button onclick="onPlayerChoice('ROCK')">✊</button>
-      <button onclick="onPlayerChoice('PAPER')">🫳</button>
-      <button onclick="onPlayerChoice('SCISSORS')">🤞</button>
-    </div>
-
-    <div id="choicesDisplay">
-      <div>
-        PLAYER:
-        <span id="playerChoice"></span>
+    <nav class="sidebar">
+      <header>
+        <h2>History</h2>
+      </header>
+      <div class="scrollbox">
+        <div class="scrollbox-inner">
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem,
+            blanditiis quasi assumenda praesentium repudiandae magnam
+            repellendus molestiae, sed id dolores totam earum deleniti minima
+            error? Natus temporibus vel rerum aut. Lorem ipsum dolor sit amet,
+            consectetur adipisicing elit. Enim excepturi suscipit, numquam magni
+            a maxime autem. Enim nihil rem earum qui in quam quidem ex
+            blanditiis. Id hic eos illum.Lorem ipsum dolor sit amet consectetur,
+            adipisicing elit. Autem, blanditiis quasi assumenda praesentium
+            repudiandae magnam repellendus molestiae, sed id dolores totam earum
+            deleniti minima error? Natus temporibus vel rerum aut. Lorem ipsum
+            dolor sit amet, consectetur adipisicing elit. Enim excepturi
+            suscipit, numquam magni a maxime autem. Enim nihil rem earum qui in
+            quam quidem ex blanditiis. Id hic eos illum.Lorem ipsum dolor sit
+            amet consectetur, adipisicing elit. Autem, blanditiis quasi
+            assumenda praesentium repudiandae magnam repellendus molestiae, sed
+            id dolores totam earum deleniti minima error? Natus temporibus vel
+            rerum aut. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Enim excepturi suscipit, numquam magni a maxime autem. Enim nihil
+            rem earum qui in quam quidem ex blanditiis. Id hic eos illum.Lorem
+            ipsum dolor sit amet consectetur, adipisicing elit. Autem,
+            blanditiis quasi assumenda praesentium repudiandae magnam
+            repellendus molestiae, sed id dolores totam earum deleniti minima
+            error? Natus temporibus vel rerum aut. Lorem ipsum dolor sit amet,
+            consectetur adipisicing elit.
+          </p>
+        </div>
       </div>
-      <div>
-        COMPUTER:
-        <span id="computerChoice"></span>
+      <footer>
+        <h2>Footer</h2>
+      </footer>
+    </nav>
+
+    <div class="game">
+      <div class="choices">
+        <button onclick="onPlayerChoice('ROCK')">✊</button>
+        <button onclick="onPlayerChoice('PAPER')">🫳</button>
+        <button onclick="onPlayerChoice('SCISSORS')">🤞</button>
       </div>
-    </div>
-    <div id="resultDisplay"></div>
-    <div class="scoreDisplay">
-      Player Score:
-      <span id="playerScoreDisplay">0</span>
-    </div>
 
-    <div class="scoreDisplay">
-      Computer Score:
-      <span id="computerScoreDisplay">0</span>
-    </div>
+      <div id="choicesDisplay">
+        <div>
+          PLAYER:
+          <span id="playerChoice"></span>
+        </div>
+        <div>
+          COMPUTER:
+          <span id="computerChoice"></span>
+        </div>
+      </div>
+      <break></break>
 
-    <div class="scoreSum">
-      RESULT:
-      <span id="scoreSumDisplay">zero fight</span>
-    </div>
-    <div class="reverseAction">
-      <button onclick="undo()"><< UNDO</button>
-      <button onclick="redo()">REDO >></button>
+      <div id="resultDisplay"></div>
+      <div class="scoreDisplay">
+        Player Score:
+        <span id="playerScoreDisplay">0</span>
+      </div>
+
+      <div class="scoreDisplay">
+        Computer Score:
+        <span id="computerScoreDisplay">0</span>
+      </div>
+
+      <div class="scoreSum">
+        RESULT:
+        <span id="scoreSumDisplay">zero fight</span>
+      </div>
+      <div class="reverseAction">
+        <button onclick="undo()"><< UNDO</button>
+        <button onclick="redo()">REDO >></button>
+      </div>
     </div>
 
     <script src="script.js"></script>

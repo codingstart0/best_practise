@@ -14,20 +14,21 @@ body{
 }
 
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 1em;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #ffff;
+    background-color: #bae5c2;
 }
 
 .sidebar {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 250px;
+    right: 0;
+    width: 20em;
     height: 100%;
     background: linear-gradient(-45deg, #18572f, #00c7a6);
+    /* position: fixed; */
     display: flex;
     flex-direction: column;
 }
@@ -35,6 +36,39 @@ body{
 header h2 {
     font-size: 32px;
     color: #ffff;
+    padding-bottom: 5px;
+}
+
+.scrollbox {
+    overflow: auto;
+    padding-right: 100px;
+}
+
+.scrollbox-inner, 
+.scrollbox:hover {
+visibility: visible;
+}
+
+.scrollbox-inner p {
+    font-size: 16px;
+    color: #fff;
+}
+
+footer h2 {
+    font-size: 24px;
+    color: #fff;
+    padding: 15px 0 40px;
+}
+
+.game {
+/* position: relative; */
+/* left: 10em; */
+width: calc(100% - 50em);
+/* height: 100vh; */
+background: #18572f;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
 }
 
 h1{
