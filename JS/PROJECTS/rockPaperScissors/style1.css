@@ -13,7 +13,7 @@ body{
     align-items: center;
 }
 
-::webkit-scrollbar {
+::-webkit-scrollbar {
     width: 5px;
 }
 
