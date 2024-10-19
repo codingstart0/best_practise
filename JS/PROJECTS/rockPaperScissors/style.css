@@ -1,139 +1,157 @@
-*{
-    margin:0;
-    padding: 0;
-    font-family: 'Popppins', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Popppins', sans-serif;
 }
 
-body{
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+body {
+  padding-top: 2em;
+  padding-bottom: 1em;
+
+  background-color: #283434;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 ::-webkit-scrollbar {
-    width: 1em;
+  width: 1em;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #bae5c2;
+  background-color: #bae5c2;
 }
 
 .sidebar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 20em;
-    height: 100%;
-    background: linear-gradient(-45deg, #18572f, #00c7a6);
-    /* position: fixed; */
-    display: flex;
-    flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 20em;
+  height: 100%;
+  background: linear-gradient(-45deg, #18572f, #00c7a6);
+  padding: 1em 0em 1em 1em;
+  /* position: fixed; */
+  display: flex;
+  flex-direction: column;
 }
 
 header h2 {
-    font-size: 32px;
-    color: #ffff;
-    padding-bottom: 5px;
+  font-size: 32px;
+  color: #ffff;
+  padding-bottom: 5px;
 }
 
 .scrollbox {
-    overflow: auto;
-    padding-right: 100px;
+  overflow: auto;
+  padding-right: 1em;
 }
 
-.scrollbox-inner, 
+.scrollbox-inner,
 .scrollbox:hover {
-visibility: visible;
+  visibility: visible;
 }
 
 .scrollbox-inner p {
-    font-size: 16px;
-    color: #fff;
+  font-size: 16px;
+  color: #fff;
 }
 
 footer h2 {
-    font-size: 24px;
-    color: #fff;
-    padding: 15px 0 40px;
+  font-size: 24px;
+  color: #fff;
+  padding: 15px 0 40px;
 }
 
 .game {
-/* position: relative; */
-/* left: 10em; */
-width: calc(100% - 50em);
-/* height: 100vh; */
-background: #18572f;
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
+  /* position: relative; */
+  /* left: 10em; */
+  margin-top: 0.5em;
+  /* padding: 2em; */
+  width: calc(100% - 50em);
+  height: calc(100%);
+  background: #67635d;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-h1{
-    font-size: 3.5rem;
-    color: hsl(0, 0%, 20%);
+.gameName {
+  box-sizing: border-box;
+  color: rgb(232, 232, 225);
+  display: block;
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 3.5em;
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-shrink: 10; */
+  justify-content: space-between;
+ }
+
+.choices {
+  padding: 1em;
 }
-.choices{
-    margin-bottom: 30px;
+.choices button {
+  font-size: 7.5rem;
+  min-width: 180px;
+  margin: 0 10px;
+  border-radius: 280px;
+  background-color: hsl(200, 100%, 50%);
+  cursor: pointer;
+  transition: background-color 0.5s ease;
 }
-.choices button{
-    font-size: 7.5rem;
-    min-width: 180px;
-    margin: 0 10px;
-    border-radius: 280px;
-    background-color: hsl(200, 100%, 50%);
-    cursor: pointer;
-    transition: background-color 0.5s ease;
+.choices button:hover {
+  background-color: hsl(200, 100%, 70%);
 }
-.choices button:hover{
-    background-color: hsl(200, 100%, 70%);
+#choicesDisplay {
+  font-size: 2.5rem;
 }
-#choicesDisplay{
-    font-size: 2.5rem;
+#resultDisplay {
+  font-size: 5rem;
+  margin: 15px 0;
+  padding: 0 0.5em;
 }
-#resultDisplay{
-    font-size: 5rem;
-    margin: 15px 0;
-}
-.scoreDisplay{
-    font-size: 2rem;    
+.scoreDisplay {
+  font-size: 2rem;
 }
 .blueText {
-    color: rgba(197, 181, 72, 0.679);
-    background-color: rgb(48, 82, 61) ;
+  color: rgba(197, 181, 72, 0.679);
+  background-color: rgb(48, 82, 61);
 }
 .greenText {
-    color: #63e18f;
-    background-color: cadetblue;
+  color: #63e18f;
+  background-color: cadetblue;
 }
 .redText {
-    color: #e85050;
-    background-color: black ;
+  color: #e85050;
+  background-color: black;
 }
-#playerScoreDisplay{
-    color: #63e18f;
+#playerScoreDisplay {
+  color: #63e18f;
 }
-#computerScoreDisplay{
-    color: #e85050;
+#computerScoreDisplay {
+  color: #e85050;
 }
-.scoreSum{
-    font-size: 3rem;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+.scoreSum {
+  font-size: 3rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
- .zeroColor{
-    color: magenta;
- }
-.plusColor{
-    color: green;
+.zeroColor {
+  color: magenta;
 }
-.minusColor{
-    color: red;
+.plusColor {
+  color: green;
+}
+.minusColor {
+  color: red;
 }
 
-.reverseAction button{
-    font-size: 1.5em;
-    margin: 1em;
-    padding: 0.5em;
-    }
+.reverseAction button {
+  background-color: #67635d;
+  font-size: 1.5em;
+  margin: 1em;
+  padding: 0.5em;
+}
