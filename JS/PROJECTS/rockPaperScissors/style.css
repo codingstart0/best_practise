@@ -67,7 +67,7 @@ footer h2 {
 
 .game {
   position: relative;
-  right: 10em;
+  right: 12em;
   margin-top: 0.5em;
   display: flex;
   flex-direction: column;
@@ -76,8 +76,8 @@ footer h2 {
 }
 
 .gameName {
-    /* position: relative;
-    right: 10em; */
+  position: relative;
+  right: 3.5em;
   box-sizing: border-box;
   color: rgb(232, 232, 225);
   display: block;
