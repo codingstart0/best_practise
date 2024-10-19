@@ -88,8 +88,8 @@ footer h2 {
   display: flex;
   flex-wrap: wrap;
   /* flex-shrink: 10; */
-  justify-content: space-between;
- }
+  /* justify-content: space-between; */
+}
 
 .choices {
   padding: 1em;
@@ -113,7 +113,10 @@ footer h2 {
   font-size: 5rem;
   margin: 15px 0;
   padding: 0 0.5em;
+  flex-grow: 0;
+  flex-basis: 95px;
 }
+
 .scoreDisplay {
   font-size: 2rem;
 }
