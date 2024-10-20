@@ -103,7 +103,10 @@ footer h2 {
 #choicesDisplay {
   font-size: 2.5rem;
 }
+
 #resultDisplay {
+  border: 2px solid;
+  color: #e8e8e1;
   font-size: 5rem;
   margin: 15px 0;
   padding: 0 0.5em;
@@ -156,7 +159,6 @@ footer h2 {
   letter-spacing: 0.3em;
   font-family: 'Baskerville', 'Caslon';
   color: #e8e8e1;
-  
   margin: 1em 1em;
   padding: 0.5em 2em;
 }
