@@ -40,7 +40,7 @@ body {
 
 header h2 {
   font-size: 32px;
-  color: #ffff;
+  color: #e8e8e1;
   padding-bottom: 5px;
 }
 
@@ -56,12 +56,12 @@ header h2 {
 
 .scrollbox-inner p {
   font-size: 16px;
-  color: #fff;
+  color: #e8e8e1;
 }
 
 footer h2 {
   font-size: 24px;
-  color: #fff;
+  color: #e8e8e1;
   padding: 15px 0 40px;
 }
 
@@ -79,7 +79,7 @@ footer h2 {
   position: relative;
   right: 3.5em;
   box-sizing: border-box;
-  color: rgb(232, 232, 225);
+  color: #e8e8e1;
   display: block;
   font-family: 'Fjalla One', sans-serif;
   font-size: 3.5em;
@@ -114,6 +114,7 @@ footer h2 {
 .scoreDisplay {
   font-size: 2rem;
 }
+
 .blueText {
   color: rgba(197, 181, 72, 0.679);
   background-color: rgb(48, 82, 61);
@@ -147,8 +148,15 @@ footer h2 {
 }
 
 .reverseAction button {
-  background-color: #67635d;
+  cursor: pointer;
+  border: 2px solid #e8e8e1;
+  /* transform: skew(-15deg); */
+  background-color: transparent;
   font-size: 1.5em;
-  margin: 1em;
-  padding: 0.5em;
+  letter-spacing: 0.3em;
+  font-family: 'Baskerville', 'Caslon';
+  color: #e8e8e1;
+  
+  margin: 1em 1em;
+  padding: 0.5em 2em;
 }
