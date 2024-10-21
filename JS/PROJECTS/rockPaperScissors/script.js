@@ -1,168 +1,217 @@
-// declare choice as an array: ["rock", "paper", "scissors"]
-const choices = ['Rock', 'Paper', 'Scissors'];
-let playerScore = 0;
-let computerScore = 0;
+const possibleResults = {
+  draw: 0,
+  userWins: 1,
+  userLoses: 2,
+};
+const choices = {
+  rock: 'ROCK',
+  paper: 'PAPER',
+  scissors: 'SCISSORS',
+};
+const choicesArray = Object.values(choices);
 
-// This function play a five round game that keeps score.
-// And reports a winner or loser at the end.
-// playGame()
+let gameHistory = [];
+let currentStepIndex = -1;
 
-function playGame() {
-  function playRound() {
-    const selectedOption = selectElement.value;
-    const playerSelection = selectedOption;
-    // Add string in web with players choice after player push submit button
-    const playerChoice = document.body.appendChild(document.createElement('p'));
-    playerChoice.textContent = 'You selected: ' + playerSelection;
+function getComputerChoice() {
+  return choicesArray[Math.floor(Math.random() * choicesArray.length)];
+}
 
-    // Generate a new computer selection each time the function is called
-    const computerSelection =
-      choices[Math.floor(Math.random() * choices.length)];
-    // Add string in web with computer choice after player push submit button
-    const computerChoice = document.body.appendChild(
-      document.createElement('p')
-    );
-    computerChoice.textContent = 'Computer selected: ' + computerSelection;
+function showChoices(playerChoice, computerChoice) {
+  const playerChoiceElement = document.getElementById('playerChoice');
+  const computerChoiceElement = document.getElementById('computerChoice');
+  playerChoiceElement.textContent = playerChoice;
+  computerChoiceElement.textContent = computerChoice;
+}
 
-    if (playerSelection === computerSelection) {
-      const winner = document.createElement('h2');
-      const tie = document.createElement('span');
-      tie.textContent = 'TIE ';
-      tie.classList.add('tie-color'); // Add the 'tie-color' class to style the text
-      winner.innerHTML =
-        "It's a " +
-        tie.outerHTML +
-        playerSelection +
-        ' is equal to ' +
-        computerSelection;
-      document.body.appendChild(winner);
-    } else if (
-      (playerSelection === 'Rock') &
-      (computerSelection === 'Scissors')
-    ) {
-      const winner = document.createElement('h2');
-      const win = document.createElement('span');
-      win.textContent = 'WIN ';
-      win.classList.add('win-color'); // Add the 'win-color' class to style the text
-      winner.innerHTML =
-        'You ' +
-        win.outerHTML +
-        playerSelection +
-        ' beats ' +
-        computerSelection;
-      document.body.appendChild(winner);
-      playerScore++;
-    } else if ((playerSelection === 'Rock') & (computerSelection === 'Paper')) {
-      const winner = document.createElement('h2');
-      const lose = document.createElement('span');
-      lose.textContent = 'LOSE ';
-      lose.classList.add('lose-color'); // Add the 'win-color' class to style the text
-      winner.innerHTML =
-        'You ' +
-        lose.outerHTML +
-        computerSelection +
-        ' beats ' +
-        playerSelection;
-      document.body.appendChild(winner);
-      computerScore++;
-    } else if ((playerSelection === 'Paper') & (computerSelection === 'Rock')) {
-      const winner = document.createElement('h2');
-      const win = document.createElement('span');
-      win.textContent = 'WIN ';
-      win.classList.add('win-color'); // Add the 'win-color' class to style the text
-      winner.innerHTML =
-        'You ' +
-        win.outerHTML +
-        playerSelection +
-        ' beats ' +
-        computerSelection;
-      document.body.appendChild(winner);
-      playerScore++;
-    } else if (
-      (playerSelection === 'Paper') &
-      (computerSelection === 'Scissors')
-    ) {
-      const winner = document.createElement('h2');
-      const lose = document.createElement('span');
-      lose.textContent = 'LOSE ';
-      lose.classList.add('lose-color'); // Add the 'win-color' class to style the text
-      winner.innerHTML =
-        'You ' +
-        lose.outerHTML +
-        computerSelection +
-        ' beats ' +
-        playerSelection;
-      document.body.appendChild(winner);
-      computerScore++;
-    } else if (
-      (playerSelection === 'Scissors') &
-      (computerSelection === 'Paper')
-    ) {
-      const winner = document.createElement('h2');
-      const win = document.createElement('span');
-      win.textContent = 'WIN ';
-      win.classList.add('win-color'); // Add the 'win-color' class to style the text
-      winner.innerHTML =
-        'You ' +
-        win.outerHTML +
-        playerSelection +
-        ' beats ' +
-        computerSelection;
-      document.body.appendChild(winner);
-      playerScore++;
-    } else if (
-      (playerSelection === 'Scissors') &
-      (computerSelection === 'Rock')
-    ) {
-      const winner = document.createElement('h2');
-      const lose = document.createElement('span');
-      lose.textContent = 'LOSE ';
-      lose.classList.add('lose-color'); // Add the 'win-color' class to style the text
-      winner.innerHTML =
-        'You ' +
-        lose.outerHTML +
-        computerSelection +
-        ' beats ' +
-        playerSelection;
-      document.body.appendChild(winner);
-      computerScore++;
-    }
-    const result = document.createElement('h1');
-    result.classList.add('result-color');
-    // playerScore.textContent = 'Player Score:';
-    // computerScore.textContent = 'Computer Score:';
-    result.innerHTML =
-      'RESULT ' +
-      'Player Score: ' +
-      playerScore +
-      ' ' +
-      'Computer Score: ' +
-      computerScore;
-      document.body.appendChild(result);
+function showConclusion(result) {
+  const resultDisplay = document.getElementById('resultDisplay');
 
-    console.log('Player Score:', playerScore);
-    console.log('Computer Score:', computerScore);
-  }
-
-  for (let i = 0; i < 5; i++) {
-    playRound();
+  resultDisplay.classList.remove('greenText', 'redText', 'blueText');
+  switch (result) {
+    case possibleResults.draw:
+      resultDisplay.textContent = "IT'S A TIE!";
+      resultDisplay.classList.add('blueText');
+      break;
+    case possibleResults.userWins:
+      resultDisplay.textContent = 'YOU WIN!';
+      resultDisplay.classList.add('greenText');
+      break;
+    case possibleResults.userLoses:
+      resultDisplay.textContent = 'YOU LOSE!';
+      resultDisplay.classList.add('redText');
+      break;
   }
 }
 
-// Player shouldc choice from list ‘Rock’, ‘Paper’ or ‘Scissors’.
-// Create a select element
-const selectElement = document.createElement('select');
-// Add options to the dropdown list
-choices.forEach((choice) => {
-  const option = document.createElement('option');
-  option.value = choice;
-  option.text = choice.charAt(0).toUpperCase() + choice.slice(1); // Capitalize the first letter
-  selectElement.appendChild(option);
-});
-// Add the select elem ent to the document body
-document.body.appendChild(selectElement);
-// Add a button to get the player's selection
-const button = document.createElement('button');
-button.textContent = 'Play';
-button.addEventListener('click', playGame);
-document.body.appendChild(button);
+function showScore(playerScore, computerScore) {
+  playerScoreDisplay.textContent = playerScore;
+  computerScoreDisplay.textContent = computerScore;
+}
+
+function showTotalScore(playerScore, computerScore) {
+  const totalScore = playerScore - computerScore;
+  const scoreSumDisplay = document.getElementById('scoreSumDisplay');
+  scoreSumDisplay.textContent = `${totalScore}`;
+
+  scoreSumDisplay.classList.remove('zeroColor', 'plusColor', 'minusColor');
+  if (totalScore < 0) {
+    scoreSumDisplay.classList.add('minusColor');
+  } else if (totalScore > 0) {
+    scoreSumDisplay.classList.add('plusColor');
+  } else {
+    scoreSumDisplay.classList.add('zeroColor');
+  }
+}
+
+function playRound(playerChoice, computerChoice) {
+  let result = '';
+  let userWins = false;
+
+  if (playerChoice === computerChoice) {
+    result = possibleResults.draw;
+  } else {
+    switch (playerChoice) {
+      case choices.rock:
+        userWins = computerChoice === choices.scissors;
+        break;
+      case choices.paper:
+        userWins = computerChoice === choices.rock;
+        break;
+      case choices.scissors:
+        userWins = computerChoice === choices.paper;
+        break;
+    }
+    result = userWins ? possibleResults.userWins : possibleResults.userLoses;
+  }
+  showChoices(playerChoice, computerChoice);
+  showConclusion(result);
+
+  return result;
+}
+
+function addGameToHistory(playerChoice, computerChoice, score) {
+  let totalPlayerScore = score.playerScore;
+  let totalComputerScore = score.computerScore;
+
+  if (currentStepIndex > -1) {
+    const game = gameHistory[currentStepIndex];
+    totalPlayerScore = game.playerScore + totalPlayerScore;
+    totalComputerScore = game.computerScore + totalComputerScore;
+  }
+
+  currentStepIndex = currentStepIndex + 1;
+  gameHistory[currentStepIndex] = {
+    playerChoice: playerChoice,
+    computerChoice: computerChoice,
+    playerScore: totalPlayerScore,
+    computerScore: totalComputerScore,
+  };
+
+  console.log('currentStepIndex from addGameToHistory: ', currentStepIndex);
+  console.log('addGameToHistory History Lenght: ', gameHistory.length);
+}
+
+function undo() {
+  if (currentStepIndex > 0) {
+    currentStepIndex = currentStepIndex - 1;
+    const game = gameHistory[currentStepIndex];
+    const stepScore = gameHistory[currentStepIndex];
+
+    console.log('undo History Lenght: ', gameHistory.length);
+    console.log('UndoStepIndex: ', currentStepIndex);
+    console.log('Undo step choice & Score: ', stepScore);
+
+    playRound(game.playerChoice, game.computerChoice);
+    showScore(stepScore.playerScore, stepScore.computerScore);
+    showTotalScore(stepScore.playerScore, stepScore.computerScore);
+  }
+}
+
+function redo() {
+  if (currentStepIndex < gameHistory.length - 1) {
+    currentStepIndex = currentStepIndex + 1;
+    const game = gameHistory[currentStepIndex];
+    const stepScore = gameHistory[currentStepIndex];
+
+    console.log('redo History Lenght: ', gameHistory.length);
+    console.log('redoStepIndex: ', currentStepIndex);
+    console.log(gameHistory);
+
+    playRound(game.playerChoice, game.computerChoice);
+    showScore(stepScore.playerScore, stepScore.computerScore);
+    showTotalScore(stepScore.playerScore, stepScore.computerScore);
+  }
+}
+
+function getGameScore(result) {
+  const score = {
+    playerScore: 0,
+    computerScore: 0,
+  };
+
+  switch (result) {
+    case possibleResults.draw:
+      score.playerScore++;
+      score.computerScore++;
+      break;
+    case possibleResults.userWins:
+      score.playerScore++;
+      break;
+    case possibleResults.userLoses:
+      score.computerScore++;
+      break;
+  }
+  return score;
+}
+
+function onPlayerChoice(playerChoice) {
+  const computerChoice = getComputerChoice();
+
+  const result = playRound(playerChoice, computerChoice);
+  const score = getGameScore(result);
+
+  if (currentStepIndex !== gameHistory.length - 1) {
+    gameHistory = gameHistory.slice(0, currentStepIndex + 1);
+    console.log('!!!!!sliced gameHistory:', gameHistory);
+  }
+  addGameToHistory(playerChoice, computerChoice, score);
+
+  const lastGame = gameHistory[currentStepIndex];
+  showScore(lastGame.playerScore, lastGame.computerScore);
+  showTotalScore(lastGame.playerScore, lastGame.computerScore);
+  console.log(gameHistory);
+}
+
+//   // TASK 1
+//   // cia reikia atsargiai, nes jeigu buvo padaryta
+//   // undo - galimai mes norim idet zaidima nuo currentStepIndex + 1
+//   // o ne i esamo array gala, bet tuo paciu reikia ir isvalyti visus
+//   // sekancius array items nuo currentStepIndex
+
+//   // kad ištrinti buvusius žaidimus kai pradedam vėl žaisti po
+//   // undo & redo panaudojimo, taikyti slice arba splice metoda
+//   // array.slice(currentStepIndex, )
+//   addGameToHistory(playerChoice, computerChoice, score);
+
+//   const lastGame = gameHistory[currentStepIndex];
+//   showScore(lastGame.playerScore, lastGame.computerScore);
+//   showTotalScore(lastGame.playerScore, lastGame.computerScore);
+//   console.log(
+//          gameHistory
+//   // 'currentStepIndex: ',
+//     );
+
+// const deleteIndexCount = gameHistory.length - currentStepIndex;
+//     if (currentStepIndex < gameHistory.length - 1) {
+//       gameHistory.splice(currentStepIndex, deleteIndexCount)
+//       console.log(deleteIndexCount)
+//     }
+
+// }
+
+// TASK final
+// 1.  Create side bar for steps index
+//     Add html element
+// 2.  Bolded curent step
+//     Make so that every time this side bar will be redraw again
