@@ -5,7 +5,7 @@
 }
 
 body {
-  padding-top: 2em;
+  padding-top: 1.5em;
   padding-bottom: 1em;
 
   background-color: #283434;
@@ -22,7 +22,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #bae5c2;
+  background-color: #353a3b;
 }
 
 .sidebar {
@@ -31,7 +31,7 @@ body {
   right: 0;
   width: 20em;
   height: 100%;
-  background: linear-gradient(-45deg, #18572f, #00c7a6);
+  background: #444f4c;
   padding: 1em 0em 1em 1em;
   /* position: fixed; */
   display: flex;
@@ -88,24 +88,28 @@ footer h2 {
 .choices {
   padding: 1em;
 }
+
 .choices button {
   font-size: 7.5rem;
   min-width: 180px;
   margin: 0 10px;
   border-radius: 280px;
-  background-color: hsl(200, 100%, 50%);
+  background-color: #444f4c;
   cursor: pointer;
   transition: background-color 0.5s ease;
 }
+
 .choices button:hover {
-  background-color: hsl(200, 100%, 70%);
+  background-color: #30523d;
 }
+
 #choicesDisplay {
   font-size: 2.5rem;
 }
 
 #resultDisplay {
   border: 2px solid;
+  /* how to change color to targeted class when changing with JS */
   color: #e8e8e1;
   font-size: 5rem;
   margin: 15px 0;
@@ -114,13 +118,9 @@ footer h2 {
   flex-basis: 95px;
 }
 
-.scoreDisplay {
-  font-size: 2rem;
-}
-
 .blueText {
   color: rgba(197, 181, 72, 0.679);
-  background-color: rgb(48, 82, 61);
+  background-color: #30523d;
 }
 .greenText {
   color: #63e18f;
@@ -130,6 +130,11 @@ footer h2 {
   color: #e85050;
   background-color: black;
 }
+
+.scoreDisplay {
+  font-size: 2rem;
+}
+
 #playerScoreDisplay {
   color: #63e18f;
 }
