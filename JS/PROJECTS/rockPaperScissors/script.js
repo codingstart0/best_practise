@@ -86,6 +86,7 @@ function playRound(playerChoice, computerChoice) {
   }
   showChoices(playerChoice, computerChoice);
   showConclusion(result);
+  sideBar(currentStepIndex);
 
   return result;
 }
@@ -101,6 +102,8 @@ function addGameToHistory(playerChoice, computerChoice, score) {
   }
 
   currentStepIndex = currentStepIndex + 1;
+
+// How to get this values????? And put them in to side bar???
   gameHistory[currentStepIndex] = {
     playerChoice: playerChoice,
     computerChoice: computerChoice,
@@ -108,10 +111,7 @@ function addGameToHistory(playerChoice, computerChoice, score) {
     computerScore: totalComputerScore,
   };
 
-  
-
-  // Kažin ar reikalingas?!
-  console.log('currentStepIndex from addGameToHistory: ', currentStepIndex);
+  sideBar(currentStepIndex);
 }
 
 function undo() {
@@ -126,7 +126,7 @@ function undo() {
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
     showTotalScore(stepScore.playerScore, stepScore.computerScore);
-    sideBar(currentStepIndex);
+    sideBar();
   }
 }
 
@@ -142,7 +142,7 @@ function redo() {
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
     showTotalScore(stepScore.playerScore, stepScore.computerScore);
-    sideBar(currentStepIndex);
+    sideBar();
   }
 }
 
@@ -184,27 +184,30 @@ function onPlayerChoice(playerChoice) {
   showScore(lastGame.playerScore, lastGame.computerScore);
   showTotalScore(lastGame.playerScore, lastGame.computerScore);
 
-  console.log('gameHistory before undo redo: ', gameHistory);
+  // console.log('gameHistory before undo redo: ', gameHistory);
   console.log(currentStepIndex);
 
   sideBar(currentStepIndex);
 }
 
-
-function sideBar(currentStepIndex,){
+function sideBar() {
   const curentStepIndexSideBar = document.getElementById('curentStepIndexSideBar');
   curentStepIndexSideBar.textContent = currentStepIndex;
 
   const playerChoiceSideBar = document.getElementById('playerChoiceSideBar');
-  playerChoiceSideBar.textContent = gameHistory[currentStepIndex];
+  const currentGame = gameHistory[currentStepIndex] || {};
+  playerChoiceSideBar.textContent = currentGame.playerChoice || 'N/A';
 
+  // playerChoiceSideBar.textContent = '105 coment';
 
+  const computerChoiceSideBar = document.getElementById('computerChoiceSideBar');
+  computerChoiceSideBar.textContent = gameHistory;
 
   const lastStepIndex = document.getElementById('lastStepIndex');
-  lastStepIndex.textContent = `${gameHistory.length -1}`;
+  lastStepIndex.textContent = `${gameHistory.length - 1}`;
 
   console.log('sideBar:', currentStepIndex);
-
+  console.log(gameHistory);
 }
 
 // TASK final
