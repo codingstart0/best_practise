@@ -49,12 +49,12 @@ header h2 {
   padding-right: 1em;
 }
 
-.scrollbox-inner,
+/* .scrollbox-inner,
 .scrollbox:hover {
   visibility: visible;
-}
+} */
 
-.scrollbox-inner p {
+.scrollbox-inner {
   font-size: 16px;
   color: #e8e8e1;
 }

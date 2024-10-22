@@ -181,6 +181,17 @@ function onPlayerChoice(playerChoice) {
 
   console.log('gameHistory before undo redo: ', gameHistory);
   console.log(currentStepIndex);
+
+  sideBar()
+}
+
+
+function sideBar(currentStepIndex){
+
+  const lastStepIndex = document.getElementById('lastStepIndex');
+  lastStepIndex.textContent = `${gameHistory.length -1}`;
+  console.log(currentStepIndex);
+
 }
 
 // TASK final
