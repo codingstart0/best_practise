@@ -183,6 +183,33 @@ function onPlayerChoice(playerChoice) {
   console.log(gameHistory);
 }
 
+//   // TASK 1
+//   // cia reikia atsargiai, nes jeigu buvo padaryta
+//   // undo - galimai mes norim idet zaidima nuo currentStepIndex + 1
+//   // o ne i esamo array gala, bet tuo paciu reikia ir isvalyti visus
+//   // sekancius array items nuo currentStepIndex
+
+//   // kad ištrinti buvusius žaidimus kai pradedam vėl žaisti po
+//   // undo & redo panaudojimo, taikyti slice arba splice metoda
+//   // array.slice(currentStepIndex, )
+//   addGameToHistory(playerChoice, computerChoice, score);
+
+//   const lastGame = gameHistory[currentStepIndex];
+//   showScore(lastGame.playerScore, lastGame.computerScore);
+//   showTotalScore(lastGame.playerScore, lastGame.computerScore);
+//   console.log(
+//          gameHistory
+//   // 'currentStepIndex: ',
+//     );
+
+// const deleteIndexCount = gameHistory.length - currentStepIndex;
+//     if (currentStepIndex < gameHistory.length - 1) {
+//       gameHistory.splice(currentStepIndex, deleteIndexCount)
+//       console.log(deleteIndexCount)
+//     }
+
+// }
+
 // TASK final
 // 1.  Create side bar for steps index
 //     Add html element
