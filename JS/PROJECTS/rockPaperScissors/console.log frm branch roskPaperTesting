@@ -1,0 +1,20 @@
+
+function addGameToHistory(playerChoice, computerChoice, score)
+console.log('currentStepIndex from addGameToHistory: ', currentStepIndex);
+
+function onPlayerChoice(playerChoice)
+console.log(gameHistory);
+console.log('!!!!!sliced gameHistory:', gameHistory);
+
+function undo()
+
+after const
+console.log('UndoStepIndex: ', currentStepIndex);
+console.log('Undo step choice & Score: ', stepScore);
+
+function redo()
+after const
+console.log('redoStepIndex: ', currentStepIndex);
+console.log(gameHistory);
+
+

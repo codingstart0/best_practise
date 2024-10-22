@@ -107,6 +107,8 @@ function addGameToHistory(playerChoice, computerChoice, score) {
     playerScore: totalPlayerScore,
     computerScore: totalComputerScore,
   };
+  // Kažin ar reikalingas?!
+  console.log('currentStepIndex from addGameToHistory: ', currentStepIndex);
 }
 
 function undo() {
@@ -114,6 +116,9 @@ function undo() {
     currentStepIndex = currentStepIndex - 1;
     const game = gameHistory[currentStepIndex];
     const stepScore = gameHistory[currentStepIndex];
+
+    console.log('UndoStepIndex: ', currentStepIndex);
+    console.log('Undo step choice & Score: ', stepScore);
 
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
@@ -126,6 +131,9 @@ function redo() {
     currentStepIndex = currentStepIndex + 1;
     const game = gameHistory[currentStepIndex];
     const stepScore = gameHistory[currentStepIndex];
+
+    console.log('redoStepIndex: ', currentStepIndex);
+    console.log(gameHistory);
 
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
@@ -169,6 +177,10 @@ function onPlayerChoice(playerChoice) {
   const lastGame = gameHistory[currentStepIndex];
   showScore(lastGame.playerScore, lastGame.computerScore);
   showTotalScore(lastGame.playerScore, lastGame.computerScore);
+
+  console.log('gameHistory before undo redo: ', gameHistory);
+  console.log('!!!!!sliced gameHistory:', gameHistory);
+  console.log(currentStepIndex);
 }
 
 // TASK final
