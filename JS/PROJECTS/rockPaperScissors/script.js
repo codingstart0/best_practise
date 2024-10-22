@@ -107,6 +107,9 @@ function addGameToHistory(playerChoice, computerChoice, score) {
     playerScore: totalPlayerScore,
     computerScore: totalComputerScore,
   };
+
+  
+
   // Kažin ar reikalingas?!
   console.log('currentStepIndex from addGameToHistory: ', currentStepIndex);
 }
@@ -188,13 +191,18 @@ function onPlayerChoice(playerChoice) {
 }
 
 
-function sideBar(currentStepIndex){
+function sideBar(currentStepIndex,){
+  const curentStepIndexSideBar = document.getElementById('curentStepIndexSideBar');
+  curentStepIndexSideBar.textContent = currentStepIndex;
+
+  const playerChoiceSideBar = document.getElementById('playerChoiceSideBar');
+  playerChoiceSideBar.textContent = gameHistory[currentStepIndex];
+
+
 
   const lastStepIndex = document.getElementById('lastStepIndex');
   lastStepIndex.textContent = `${gameHistory.length -1}`;
 
-  const curentStepIndexSideBar = document.getElementById('curentStepIndexSideBar');
-  curentStepIndexSideBar.textContent = currentStepIndex;
   console.log('sideBar:', currentStepIndex);
 
 }
