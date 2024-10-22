@@ -170,6 +170,7 @@ function onPlayerChoice(playerChoice) {
 
   if (currentStepIndex !== gameHistory.length - 1) {
     gameHistory = gameHistory.slice(0, currentStepIndex + 1);
+    console.log('!!!!!sliced gameHistory:', gameHistory);
   }
 
   addGameToHistory(playerChoice, computerChoice, score);
@@ -179,7 +180,6 @@ function onPlayerChoice(playerChoice) {
   showTotalScore(lastGame.playerScore, lastGame.computerScore);
 
   console.log('gameHistory before undo redo: ', gameHistory);
-  console.log('!!!!!sliced gameHistory:', gameHistory);
   console.log(currentStepIndex);
 }
 
