@@ -103,7 +103,7 @@ function addGameToHistory(playerChoice, computerChoice, score) {
 
   currentStepIndex = currentStepIndex + 1;
 
-// How to get this values????? And put them in to side bar???
+  // How to get this values????? And put them in to side bar???
   gameHistory[currentStepIndex] = {
     playerChoice: playerChoice,
     computerChoice: computerChoice,
@@ -121,7 +121,7 @@ function undo() {
     const stepScore = gameHistory[currentStepIndex];
 
     console.log('UndoStepIndex: ', currentStepIndex);
-    console.log('Undo step choice & Score: ', stepScore);
+    // console.log('Undo step choice & Score: ', stepScore);
 
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
@@ -136,8 +136,8 @@ function redo() {
     const game = gameHistory[currentStepIndex];
     const stepScore = gameHistory[currentStepIndex];
 
-    console.log('redoStepIndex: ', currentStepIndex);
-    console.log(gameHistory);
+    // console.log('redoStepIndex: ', currentStepIndex);
+    // console.log(gameHistory);
 
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
@@ -185,13 +185,15 @@ function onPlayerChoice(playerChoice) {
   showTotalScore(lastGame.playerScore, lastGame.computerScore);
 
   // console.log('gameHistory before undo redo: ', gameHistory);
-  console.log(currentStepIndex);
 
   sideBar(currentStepIndex);
+  console.log(currentStepIndex);
 }
 
 function sideBar() {
-  const curentStepIndexSideBar = document.getElementById('curentStepIndexSideBar');
+  const curentStepIndexSideBar = document.getElementById(
+    'curentStepIndexSideBar'
+  );
   curentStepIndexSideBar.textContent = currentStepIndex;
 
   const playerChoiceList = document.getElementById('playerChoiceList');
@@ -206,9 +208,12 @@ function sideBar() {
   const lastStepIndex = document.getElementById('lastStepIndex');
   lastStepIndex.textContent = `${gameHistory.length - 1}`;
 
-  console.log('sideBar:', currentStepIndex);
-  console.log(gameHistory);
+  // console.log('sideBar:', currentStepIndex);
+  console.log('gameHistory from sideBar: ', gameHistory);
 }
+
+let list = gameHistory;
+console.log('Listas: ', list);
 
 // TASK final
 // 1.  Create side bar for steps index
