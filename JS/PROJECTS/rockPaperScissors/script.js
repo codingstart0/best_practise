@@ -194,14 +194,14 @@ function sideBar() {
   const curentStepIndexSideBar = document.getElementById('curentStepIndexSideBar');
   curentStepIndexSideBar.textContent = currentStepIndex;
 
-  const playerChoiceSideBar = document.getElementById('playerChoiceSideBar');
+  const playerChoiceList = document.getElementById('playerChoiceList');
   const currentGame = gameHistory[currentStepIndex] || {};
-  playerChoiceSideBar.textContent = currentGame.playerChoice || 'N/A';
+  playerChoiceList.textContent = currentGame.playerChoice || 'N/A';
 
   // playerChoiceSideBar.textContent = '105 coment';
 
-  const computerChoiceSideBar = document.getElementById('computerChoiceSideBar');
-  computerChoiceSideBar.textContent = gameHistory;
+  const computerChoiceList = document.getElementById('computerChoiceList');
+  computerChoiceList.textContent = gameHistory;
 
   const lastStepIndex = document.getElementById('lastStepIndex');
   lastStepIndex.textContent = `${gameHistory.length - 1}`;
