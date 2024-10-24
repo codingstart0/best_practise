@@ -86,6 +86,7 @@ function playRound(playerChoice, computerChoice) {
   }
   showChoices(playerChoice, computerChoice);
   showConclusion(result);
+  sideBar(currentStepIndex);
 
   return result;
 }
@@ -101,6 +102,8 @@ function addGameToHistory(playerChoice, computerChoice, score) {
   }
 
   currentStepIndex = currentStepIndex + 1;
+
+  // How to get this values????? And put them in to side bar???
   gameHistory[currentStepIndex] = {
     playerChoice: playerChoice,
     computerChoice: computerChoice,
@@ -108,8 +111,7 @@ function addGameToHistory(playerChoice, computerChoice, score) {
     computerScore: totalComputerScore,
   };
 
-  console.log('currentStepIndex from addGameToHistory: ', currentStepIndex);
-  console.log('addGameToHistory History Lenght: ', gameHistory.length);
+  sideBar(currentStepIndex);
 }
 
 function undo() {
@@ -118,13 +120,13 @@ function undo() {
     const game = gameHistory[currentStepIndex];
     const stepScore = gameHistory[currentStepIndex];
 
-    console.log('undo History Lenght: ', gameHistory.length);
     console.log('UndoStepIndex: ', currentStepIndex);
-    console.log('Undo step choice & Score: ', stepScore);
+    // console.log('Undo step choice & Score: ', stepScore);
 
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
     showTotalScore(stepScore.playerScore, stepScore.computerScore);
+    sideBar();
   }
 }
 
@@ -134,13 +136,13 @@ function redo() {
     const game = gameHistory[currentStepIndex];
     const stepScore = gameHistory[currentStepIndex];
 
-    console.log('redo History Lenght: ', gameHistory.length);
     console.log('redoStepIndex: ', currentStepIndex);
-    console.log(gameHistory);
+    // console.log(gameHistory);
 
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
     showTotalScore(stepScore.playerScore, stepScore.computerScore);
+    sideBar();
   }
 }
 
@@ -175,43 +177,55 @@ function onPlayerChoice(playerChoice) {
     gameHistory = gameHistory.slice(0, currentStepIndex + 1);
     console.log('!!!!!sliced gameHistory:', gameHistory);
   }
+
   addGameToHistory(playerChoice, computerChoice, score);
 
   const lastGame = gameHistory[currentStepIndex];
-  showScore(lastGame.playerScore, lastGame.computerScore);
-  showTotalScore(lastGame.playerScore, lastGame.computerScore);
-  console.log(gameHistory);
+  if (lastGame) {
+    showScore(lastGame.playerScore, lastGame.computerScore);
+    showTotalScore(lastGame.playerScore, lastGame.computerScore);
+  }
+
+  sideBar(currentStepIndex);
+  console.log(currentStepIndex);
+  console.log('onPlayerChoice: ', gameHistory);
 }
 
-//   // TASK 1
-//   // cia reikia atsargiai, nes jeigu buvo padaryta
-//   // undo - galimai mes norim idet zaidima nuo currentStepIndex + 1
-//   // o ne i esamo array gala, bet tuo paciu reikia ir isvalyti visus
-//   // sekancius array items nuo currentStepIndex
+function sideBar() {
+  const curentStepIndexSideBar = document.getElementById(
+    'curentStepIndexSideBar'
+  );
+  const playerChoiceList = document.getElementById('playerChoiceList');
+  const computerChoiceList = document.getElementById('computerChoiceList');
+  const lastStepIndex = document.getElementById('lastStepIndex');
+  const appendChildElement = document.getElementById('appendChild');
+  if (curentStepIndexSideBar) {
+    curentStepIndexSideBar.textContent = currentStepIndex;
+  }
+  const currentGame = gameHistory[currentStepIndex];
+  if (currentGame) {
+    if (playerChoiceList) {
+      playerChoiceList.textContent = currentGame.playerChoice;
+    }
+    if (computerChoiceList) {
+      computerChoiceList.textContent = currentGame.computerChoice;
+    }
+  } else {
+    if (playerChoiceList) playerChoiceList.textContent = '-';
+    if (computerChoiceList) computerChoiceList.textContent = '-';
+  }
+  if (lastStepIndex) {
+    lastStepIndex.textContent = `${gameHistory.length - 1}`;
+  }
+  appendChildElement.innerHTML = '';
+  gameHistory.forEach((game, index) => {
+    const newDiv = document.createElement('div');
+    newDiv.innerHTML = `<br>Step Index ${index}:<br>Player - ${game.playerChoice}<br> Computer - ${game.computerChoice}`;
+    
+    if (index === currentStepIndex) {
+      newDiv.classList.add('curentStepColor');
+    }
 
-//   // kad ištrinti buvusius žaidimus kai pradedam vėl žaisti po
-//   // undo & redo panaudojimo, taikyti slice arba splice metoda
-//   // array.slice(currentStepIndex, )
-//   addGameToHistory(playerChoice, computerChoice, score);
-
-//   const lastGame = gameHistory[currentStepIndex];
-//   showScore(lastGame.playerScore, lastGame.computerScore);
-//   showTotalScore(lastGame.playerScore, lastGame.computerScore);
-//   console.log(
-//          gameHistory
-//   // 'currentStepIndex: ',
-//     );
-
-// const deleteIndexCount = gameHistory.length - currentStepIndex;
-//     if (currentStepIndex < gameHistory.length - 1) {
-//       gameHistory.splice(currentStepIndex, deleteIndexCount)
-//       console.log(deleteIndexCount)
-//     }
-
-// }
-
-// TASK final
-// 1.  Create side bar for steps index
-//     Add html element
-// 2.  Bolded curent step
-//     Make so that every time this side bar will be redraw again
+    appendChildElement.prepend(newDiv);
+  });
+}
