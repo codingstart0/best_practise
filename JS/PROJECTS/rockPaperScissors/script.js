@@ -102,8 +102,6 @@ function addGameToHistory(playerChoice, computerChoice, score) {
   }
 
   currentStepIndex = currentStepIndex + 1;
-
-  // How to get this values????? And put them in to side bar???
   gameHistory[currentStepIndex] = {
     playerChoice: playerChoice,
     computerChoice: computerChoice,
@@ -120,9 +118,6 @@ function undo() {
     const game = gameHistory[currentStepIndex];
     const stepScore = gameHistory[currentStepIndex];
 
-    console.log('UndoStepIndex: ', currentStepIndex);
-    // console.log('Undo step choice & Score: ', stepScore);
-
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
     showTotalScore(stepScore.playerScore, stepScore.computerScore);
@@ -135,9 +130,6 @@ function redo() {
     currentStepIndex = currentStepIndex + 1;
     const game = gameHistory[currentStepIndex];
     const stepScore = gameHistory[currentStepIndex];
-
-    console.log('redoStepIndex: ', currentStepIndex);
-    // console.log(gameHistory);
 
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
@@ -169,13 +161,11 @@ function getGameScore(result) {
 
 function onPlayerChoice(playerChoice) {
   const computerChoice = getComputerChoice();
-
   const result = playRound(playerChoice, computerChoice);
   const score = getGameScore(result);
 
   if (currentStepIndex !== gameHistory.length - 1) {
     gameHistory = gameHistory.slice(0, currentStepIndex + 1);
-    console.log('!!!!!sliced gameHistory:', gameHistory);
   }
 
   addGameToHistory(playerChoice, computerChoice, score);
@@ -187,8 +177,6 @@ function onPlayerChoice(playerChoice) {
   }
 
   sideBar(currentStepIndex);
-  console.log(currentStepIndex);
-  console.log('onPlayerChoice: ', gameHistory);
 }
 
 function sideBar() {
@@ -217,11 +205,12 @@ function sideBar() {
   if (lastStepIndex) {
     lastStepIndex.textContent = `${gameHistory.length - 1}`;
   }
+  
   appendChildElement.innerHTML = '';
   gameHistory.forEach((game, index) => {
     const newDiv = document.createElement('div');
     newDiv.innerHTML = `<br>Step Index ${index}:<br>Player - ${game.playerChoice}<br> Computer - ${game.computerChoice}`;
-    
+
     if (index === currentStepIndex) {
       newDiv.classList.add('curentStepColor');
     }
