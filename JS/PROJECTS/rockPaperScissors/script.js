@@ -186,7 +186,6 @@ function sideBar() {
   const playerChoiceList = document.getElementById('playerChoiceList');
   const computerChoiceList = document.getElementById('computerChoiceList');
   const lastStepIndex = document.getElementById('lastStepIndex');
-  const appendChildElement = document.getElementById('appendChild');
   if (curentStepIndexSideBar) {
     curentStepIndexSideBar.textContent = currentStepIndex;
   }
@@ -205,7 +204,11 @@ function sideBar() {
   if (lastStepIndex) {
     lastStepIndex.textContent = `${gameHistory.length - 1}`;
   }
-  
+  appendChild();
+}
+
+function appendChild() {
+  const appendChildElement = document.getElementById('appendChild');
   appendChildElement.innerHTML = '';
   gameHistory.forEach((game, index) => {
     const newDiv = document.createElement('div');
