@@ -187,29 +187,83 @@ function onPlayerChoice(playerChoice) {
   }
 
   sideBar(currentStepIndex);
+  // updateSideBar();
   console.log(currentStepIndex);
   console.log('onPlayerChoice: ', gameHistory);
 }
 
 function sideBar() {
-  const curentStepIndexSideBar = document.getElementById(
-    'curentStepIndexSideBar'
-  );
-  curentStepIndexSideBar.textContent = currentStepIndex;
-
-  const curentGame = gameHistory[currentStepIndex] || {};
-
+  const curentStepIndexSideBar = document.getElementById('curentStepIndexSideBar');
   const playerChoiceList = document.getElementById('playerChoiceList');
-  playerChoiceList.textContent =
-    currentgame.playerChoice || '-';
-
   const computerChoiceList = document.getElementById('computerChoiceList');
-  computerChoiceList.textContent =
-    gameHistory[currentStepIndex]?.computerChoice ?? '-';
-
   const lastStepIndex = document.getElementById('lastStepIndex');
-  lastStepIndex.textContent = `${gameHistory.length - 1}`;
+  const appendChildElement = document.getElementById('appendChild');
+  if (curentStepIndexSideBar) {
+    curentStepIndexSideBar.textContent = currentStepIndex;
+  }
+  const currentGame = gameHistory[currentStepIndex];
+  if (currentGame) {
+    if (playerChoiceList) {
+      playerChoiceList.textContent = currentGame.playerChoice;
+    }
+    if (computerChoiceList) {
+      computerChoiceList.textContent = currentGame.computerChoice;
+    }
+    } else {
+    if (playerChoiceList) playerChoiceList.textContent = '-';
+    if (computerChoiceList) computerChoiceList.textContent = '-';
+  }
+  if (lastStepIndex) {
+    lastStepIndex.textContent = `${gameHistory.length - 1}`;
+  }
+  appendChildElement.innerHTML = '';
+  gameHistory.forEach((game, index) => {
+    const newDiv = document.createElement('div');
+    newDiv.textContent = `Step ${index + 1}: Player - ${game.playerChoice}, Computer - ${game.computerChoice}`;
+    if (index === currentStepIndex) {
+      newDiv.style.fontWeight = 'bold';
+    }
+
+    appendChildElement.appendChild(newDiv);
+  });
 }
+
+// function sideBar() {
+//   const curentStepIndexSideBar = document.getElementById(
+//     'curentStepIndexSideBar'
+//   );
+//   curentStepIndexSideBar.textContent = currentStepIndex;
+
+//   const playerChoiceList = document.getElementById('playerChoiceList');
+//   playerChoiceList.textContent =
+//     gameHistory[currentStepIndex]?.playerChoice ?? '-';
+
+//   const computerChoiceList = document.getElementById('computerChoiceList');
+//   computerChoiceList.textContent =
+//     gameHistory[currentStepIndex]?.computerChoice ?? '-';
+
+//   const lastStepIndex = document.getElementById('lastStepIndex');
+//   lastStepIndex.textContent = `${gameHistory.length - 1}`;
+
+//   const appendChildElement = document.getElementById('appendChild');
+//     appendChildElement.innerHTML = '';
+
+//     gameHistory.forEach((game, currentStepIndex) => {
+//       const newDiv = document.createElement('div');
+//       newDiv.textContent = `Curent step index: ${currentStepIndex}: Player - ${game.playerChoice}, Computer - ${game.computerChoice}`;
+//       appendChildElement.appendChild(newDiv);
+//   })
+// }
+// function updateSideBar() {
+//   const appendChildElement = document.getElementById('appendChild');
+//     appendChildElement.innerHTML = '';
+
+//     gameHistory.forEach((game, currentStepIndex) => {
+//       const newDiv = document.createElement('div');
+//       newDiv.textContent = `Curent step index: ${currentStepIndex}: Player - ${game.playerChoice}, Computer - ${game.computerChoice}`;
+//       appendChildElement.appendChild(newDiv);
+//   });
+
 
 // TASK final
 // 1.  Create side bar for steps index
