@@ -136,7 +136,7 @@ function redo() {
     const game = gameHistory[currentStepIndex];
     const stepScore = gameHistory[currentStepIndex];
 
-    // console.log('redoStepIndex: ', currentStepIndex);
+    console.log('redoStepIndex: ', currentStepIndex);
     // console.log(gameHistory);
 
     playRound(game.playerChoice, game.computerChoice);
@@ -187,13 +187,14 @@ function onPlayerChoice(playerChoice) {
   }
 
   sideBar(currentStepIndex);
-  // updateSideBar();
   console.log(currentStepIndex);
   console.log('onPlayerChoice: ', gameHistory);
 }
 
 function sideBar() {
-  const curentStepIndexSideBar = document.getElementById('curentStepIndexSideBar');
+  const curentStepIndexSideBar = document.getElementById(
+    'curentStepIndexSideBar'
+  );
   const playerChoiceList = document.getElementById('playerChoiceList');
   const computerChoiceList = document.getElementById('computerChoiceList');
   const lastStepIndex = document.getElementById('lastStepIndex');
@@ -209,7 +210,7 @@ function sideBar() {
     if (computerChoiceList) {
       computerChoiceList.textContent = currentGame.computerChoice;
     }
-    } else {
+  } else {
     if (playerChoiceList) playerChoiceList.textContent = '-';
     if (computerChoiceList) computerChoiceList.textContent = '-';
   }
@@ -219,12 +220,13 @@ function sideBar() {
   appendChildElement.innerHTML = '';
   gameHistory.forEach((game, index) => {
     const newDiv = document.createElement('div');
-    newDiv.textContent = `Step ${index + 1}: Player - ${game.playerChoice}, Computer - ${game.computerChoice}`;
+    newDiv.innerHTML = `<br>Step Index ${index}:<br>Player - ${game.playerChoice}, Computer - ${game.computerChoice}`;
+    
     if (index === currentStepIndex) {
-      newDiv.style.fontWeight = 'bold';
+      newDiv.classList.add('zeroColor');
     }
 
-    appendChildElement.appendChild(newDiv);
+    appendChildElement.prepend(newDiv);
   });
 }
 

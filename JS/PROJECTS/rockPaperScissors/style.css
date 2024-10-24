@@ -142,13 +142,13 @@ footer h2 {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .zeroColor {
-  color: magenta;
+  color: #896b45;
 }
 .plusColor {
-  color: green;
+  color: #008000;
 }
 .minusColor {
-  color: red;
+  color: #ff0000;
 }
 
 .reverseAction button {
