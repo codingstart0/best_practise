@@ -33,9 +33,9 @@ body {
   height: 100%;
   background: #444f4c;
   padding: 1em 0em 1em 1em;
-  /* position: fixed; */
   display: flex;
   flex-direction: column;
+  overflow: visible;
 }
 
 header h2 {
@@ -45,19 +45,29 @@ header h2 {
 }
 
 .scrollbox {
-  overflow: auto;
+  max-height: 50%;
+  flex-grow: 1;
   padding-right: 1em;
 }
 
 .scrollbox-inner {
   font-size: 16px;
+  max-height: 65%;
   color: #e8e8e1;
 }
 
 footer h2 {
+  /* margin-top: auto; */
+  margin-left: -0.5em;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   font-size: 24px;
   color: #e8e8e1;
+  /* background-color: #ff0000; */
   padding: 15px 0 40px;
+  overflow: auto;
+
 }
 
 .game {
