@@ -181,13 +181,14 @@ function onPlayerChoice(playerChoice) {
   addGameToHistory(playerChoice, computerChoice, score);
 
   const lastGame = gameHistory[currentStepIndex];
-  showScore(lastGame.playerScore, lastGame.computerScore);
-  showTotalScore(lastGame.playerScore, lastGame.computerScore);
-
-  // console.log('gameHistory before undo redo: ', gameHistory);
+  if (lastGame) {
+    showScore(lastGame.playerScore, lastGame.computerScore);
+    showTotalScore(lastGame.playerScore, lastGame.computerScore);
+  }
 
   sideBar(currentStepIndex);
   console.log(currentStepIndex);
+  console.log('onPlayerChoice: ', gameHistory);
 }
 
 function sideBar() {
@@ -196,24 +197,19 @@ function sideBar() {
   );
   curentStepIndexSideBar.textContent = currentStepIndex;
 
-  // const playerChoiceList = document.getElementById('playerChoiceList');
-  // const currentGame = gameHistory[currentStepIndex];
-  // playerChoiceList.textContent = currentGame.playerChoice;
+  const curentGame = gameHistory[currentStepIndex] || {};
 
-  // playerChoiceSideBar.textContent = '105 coment';
+  const playerChoiceList = document.getElementById('playerChoiceList');
+  playerChoiceList.textContent =
+    currentgame.playerChoice || '-';
 
   const computerChoiceList = document.getElementById('computerChoiceList');
-  computerChoiceList.textContent = gameHistory;
+  computerChoiceList.textContent =
+    gameHistory[currentStepIndex]?.computerChoice ?? '-';
 
   const lastStepIndex = document.getElementById('lastStepIndex');
   lastStepIndex.textContent = `${gameHistory.length - 1}`;
-
-  // console.log('sideBar:', currentStepIndex);
-  console.log('gameHistory from sideBar: ', gameHistory);
 }
-
-// let list = gameHistory;
-// console.log('Listas: ', list);
 
 // TASK final
 // 1.  Create side bar for steps index
