@@ -4,46 +4,71 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
-    <link rel="stylesheet" href="style1.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>ROCK PAPER SCISSORS</h1>
-    <div class="choices">
-      <button onclick="onPlayerChoice('ROCK')">✊</button>
-      <button onclick="onPlayerChoice('PAPER')">🫳</button>
-      <button onclick="onPlayerChoice('SCISSORS')">🤞</button>
-    </div>
+    <h1 class="gameName">ROCK PAPER SCISSORS</h1>
 
-    <div id="choicesDisplay">
-      <div>
-        PLAYER:
-        <span id="playerChoice"></span>
+    <div class="game">
+      <div class="choices">
+        <button onclick="onPlayerChoice('ROCK')">🪨</button>
+        <button onclick="onPlayerChoice('PAPER')">📰</button>
+        <button onclick="onPlayerChoice('SCISSORS')">✂</button>
       </div>
-      <div>
-        COMPUTER:
-        <span id="computerChoice"></span>
+
+      <div id="choicesDisplay">
+        <div>
+          PLAYER:
+          <span id="playerChoice"></span>
+        </div>
+        <div>
+          COMPUTER:
+          <span id="computerChoice"></span>
+        </div>
+      </div>
+
+      <div id="resultDisplay">WILL YOU WIN?!</div>
+      <div class="scoreDisplay">
+        Player Score:
+        <span id="playerScoreDisplay">0</span>
+      </div>
+
+      <div class="scoreDisplay">
+        Computer Score:
+        <span id="computerScoreDisplay">0</span>
+      </div>
+
+      <div class="scoreSum">
+        RESULT:
+        <span id="scoreSumDisplay">zero fight</span>
+      </div>
+      <div class="reverseAction">
+        <button onclick="undo()"><< UNDO</button>
+        <button onclick="redo()">REDO >></button>
       </div>
     </div>
-    <div id="resultDisplay"></div>
-    <div class="scoreDisplay">
-      Player Score:
-      <span id="playerScoreDisplay">0</span>
-    </div>
 
-    <div class="scoreDisplay">
-      Computer Score:
-      <span id="computerScoreDisplay">0</span>
-    </div>
+    <nav class="sidebar">
+      <header>
+        <h2>History</h2>
+      </header>
+      <div class="scrollbox">
+        <div id="appendChild" class="scrollbox-inner">
+          <!-- <div class="game-info">
+            <!-- <div>Curent step index: <span id='curentStepIndexSideBar'></span></div>
+            <div>Player Choice: <span id='playerChoiceList'></span></div>
+            <div>Computer Choice: <span id='computerChoiceList'></span></div> -->
+          <!-- </div> -->
+        </div>
+      </div>
+      <footer>
+        <h2>
+          Last step index:
+          <span id="lastStepIndex"></span>
+        </h2>
+      </footer>
+    </nav>
 
-    <div class="scoreSum">
-      RESULT:
-      <span id="scoreSumDisplay">zero fight</span>
-    </div>
-    <div class="reverseAction">
-      <button onclick="undo()"><< UNDO</button>
-      <button onclick="redo()">REDO >></button>
-    </div>
-
-    <script src="script2.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

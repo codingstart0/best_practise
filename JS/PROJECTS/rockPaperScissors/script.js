@@ -86,6 +86,7 @@ function playRound(playerChoice, computerChoice) {
   }
   showChoices(playerChoice, computerChoice);
   showConclusion(result);
+  sideBar(currentStepIndex);
 
   return result;
 }
@@ -107,6 +108,8 @@ function addGameToHistory(playerChoice, computerChoice, score) {
     playerScore: totalPlayerScore,
     computerScore: totalComputerScore,
   };
+
+  sideBar(currentStepIndex);
 }
 
 function undo() {
@@ -118,6 +121,7 @@ function undo() {
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
     showTotalScore(stepScore.playerScore, stepScore.computerScore);
+    sideBar();
   }
 }
 
@@ -130,6 +134,7 @@ function redo() {
     playRound(game.playerChoice, game.computerChoice);
     showScore(stepScore.playerScore, stepScore.computerScore);
     showTotalScore(stepScore.playerScore, stepScore.computerScore);
+    sideBar();
   }
 }
 
@@ -156,7 +161,6 @@ function getGameScore(result) {
 
 function onPlayerChoice(playerChoice) {
   const computerChoice = getComputerChoice();
-
   const result = playRound(playerChoice, computerChoice);
   const score = getGameScore(result);
 
@@ -167,12 +171,53 @@ function onPlayerChoice(playerChoice) {
   addGameToHistory(playerChoice, computerChoice, score);
 
   const lastGame = gameHistory[currentStepIndex];
-  showScore(lastGame.playerScore, lastGame.computerScore);
-  showTotalScore(lastGame.playerScore, lastGame.computerScore);
+  if (lastGame) {
+    showScore(lastGame.playerScore, lastGame.computerScore);
+    showTotalScore(lastGame.playerScore, lastGame.computerScore);
+  }
+
+  sideBar(currentStepIndex);
 }
 
-// TASK final
-// 1.  Create side bar for steps index
-//     Add html element
-// 2.  Bolded curent step
-//     Make so that every time this side bar will be redraw again
+function sideBar() {
+  const curentStepIndexSideBar = document.getElementById(
+    'curentStepIndexSideBar'
+  );
+  const playerChoiceList = document.getElementById('playerChoiceList');
+  const computerChoiceList = document.getElementById('computerChoiceList');
+  const lastStepIndex = document.getElementById('lastStepIndex');
+  if (curentStepIndexSideBar) {
+    curentStepIndexSideBar.textContent = currentStepIndex;
+  }
+  const currentGame = gameHistory[currentStepIndex];
+  if (currentGame) {
+    if (playerChoiceList) {
+      playerChoiceList.textContent = currentGame.playerChoice;
+    }
+    if (computerChoiceList) {
+      computerChoiceList.textContent = currentGame.computerChoice;
+    }
+  } else {
+    if (playerChoiceList) playerChoiceList.textContent = '-';
+    if (computerChoiceList) computerChoiceList.textContent = '-';
+  }
+  if (lastStepIndex) {
+    lastStepIndex.textContent = `${gameHistory.length - 1}`;
+  }
+  appendChild();
+}
+
+function appendChild() {
+  const appendChildElement = document.getElementById('appendChild');
+  appendChildElement.innerHTML = '';
+  gameHistory.forEach((game, index) => {
+    const newDiv = document.createElement('div');
+    newDiv.innerHTML = `<br>Step Index ${index}:<br>Player - ${game.playerChoice}<br> Computer - ${game.computerChoice}`;
+
+    if (index === currentStepIndex) {
+      newDiv.classList.add('curentStepColor');
+    }
+
+    appendChildElement.prepend(newDiv);
+  });
+}

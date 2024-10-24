@@ -1,0 +1,169 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Popppins', sans-serif;
+}
+
+body {
+  padding-top: 1.5em;
+  padding-bottom: 1em;
+
+  background-color: #283434;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+::-webkit-scrollbar {
+  width: 1em;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #353a3b;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 18em;
+  height: 100%;
+  background: #444f4c;
+  padding: 1em 0em 1em 1em;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+header h2 {
+  font-size: 32px;
+  color: #e8e8e1;
+  padding-bottom: 5px;
+}
+
+.scrollbox {
+  height: 88%;
+  overflow: auto;
+  padding-right: 1em;
+  color: #e8e8e1;
+  margin-bottom: 6em;
+}
+
+footer h2 {
+  position: absolute;
+  bottom: 0;
+  font-size: 28px;
+  color: #e8e8e1;
+  background-color: #a9885d;
+  /* padding: 2em 0 1em; */
+  margin: 2.5em 0;
+}
+
+.game {
+  position: relative;
+  right: 11em;
+  margin-top: 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameName {
+  position: relative;
+  right: 3em;
+  box-sizing: border-box;
+  color: #e8e8e1;
+  display: block;
+  font-family: Arial, 'Baskerville', 'Caslon';
+  font-size: 3.5em;
+  letter-spacing: 0.2em;
+}
+
+.choices {
+  padding: 1em;
+}
+
+.choices button {
+  font-size: 7.5rem;
+  min-width: 180px;
+  margin: 0 10px;
+  border-radius: 280px;
+  background-color: #444f4c;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+.choices button:hover {
+  background-color: #30523d;
+}
+
+#choicesDisplay {
+  font-size: 2.5rem;
+}
+
+#resultDisplay {
+  border: 2px solid;
+  color: #e8e8e1;
+  font-size: 5rem;
+  margin: 15px 0;
+  padding: 0 0.5em;
+  flex-grow: 0;
+  flex-basis: 95px;
+}
+
+.blueText {
+  color: rgba(197, 181, 72, 0.679);
+  background-color: #30523d;
+}
+.greenText {
+  color: #63e18f;
+  background-color: cadetblue;
+}
+.redText {
+  color: #e85050;
+  background-color: black;
+}
+
+.scoreDisplay {
+  font-size: 2rem;
+}
+
+#playerScoreDisplay {
+  color: #63e18f;
+}
+#computerScoreDisplay {
+  color: #e85050;
+}
+.scoreSum {
+  font-size: 3rem;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.zeroColor {
+  color: hotpink;
+}
+.plusColor {
+  color: #008000;
+}
+.minusColor {
+  color: #ff0000;
+}
+.curentStepColor {
+  color: #a9885d;
+}
+
+.reverseAction button {
+  cursor: pointer;
+  border: 2px solid #e8e8e1;
+  /* transform: skew(-15deg); */
+  background-color: transparent;
+  font-size: 1.5em;
+  letter-spacing: 0.3em;
+  font-family: 'Baskerville', 'Caslon';
+  color: #e8e8e1;
+  margin: 1em 1em;
+  padding: 0.5em 2em;
+}
