@@ -229,27 +229,3 @@ function sideBar() {
     appendChildElement.prepend(newDiv);
   });
 }
-
-// function sideBar() {
-//   const curentStepIndexSideBar = document.getElementById(
-//     'curentStepIndexSideBar'
-//   );
-//   curentStepIndexSideBar.textContent = currentStepIndex;
-
-//   const playerChoiceList = document.getElementById('playerChoiceList');
-//   playerChoiceList.textContent =
-//     gameHistory[currentStepIndex]?.playerChoice ?? '-';
-
-//   const computerChoiceList = document.getElementById('computerChoiceList');
-//   computerChoiceList.textContent =
-//     gameHistory[currentStepIndex]?.computerChoice ?? '-';
-
-//   const lastStepIndex = document.getElementById('lastStepIndex');
-//   lastStepIndex.textContent = `${gameHistory.length - 1}`;
-// }
-
-// TASK final
-// 1.  Create side bar for steps index
-//     Add html element
-// 2.  Bolded curent step
-//     Make so that every time this side bar will be redraw again
