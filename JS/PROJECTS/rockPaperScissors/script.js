@@ -196,9 +196,9 @@ function sideBar() {
   );
   curentStepIndexSideBar.textContent = currentStepIndex;
 
-  const playerChoiceList = document.getElementById('playerChoiceList');
-  const currentGame = gameHistory[currentStepIndex] || {};
-  playerChoiceList.textContent = currentGame.playerChoice || 'N/A';
+  // const playerChoiceList = document.getElementById('playerChoiceList');
+  // const currentGame = gameHistory[currentStepIndex];
+  // playerChoiceList.textContent = currentGame.playerChoice;
 
   // playerChoiceSideBar.textContent = '105 coment';
 
@@ -212,8 +212,8 @@ function sideBar() {
   console.log('gameHistory from sideBar: ', gameHistory);
 }
 
-let list = gameHistory;
-console.log('Listas: ', list);
+// let list = gameHistory;
+// console.log('Listas: ', list);
 
 // TASK final
 // 1.  Create side bar for steps index
