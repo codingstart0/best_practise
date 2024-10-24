@@ -220,10 +220,10 @@ function sideBar() {
   appendChildElement.innerHTML = '';
   gameHistory.forEach((game, index) => {
     const newDiv = document.createElement('div');
-    newDiv.innerHTML = `<br>Step Index ${index}:<br>Player - ${game.playerChoice}, Computer - ${game.computerChoice}`;
+    newDiv.innerHTML = `<br>Step Index ${index}:<br>Player - ${game.playerChoice}<br> Computer - ${game.computerChoice}`;
     
     if (index === currentStepIndex) {
-      newDiv.classList.add('zeroColor');
+      newDiv.classList.add('curentStepColor');
     }
 
     appendChildElement.prepend(newDiv);
