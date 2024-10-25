@@ -220,12 +220,18 @@ function appendChild() {
 
     appendChildElement.prepend(newDiv);
   });
+  scrollFixed();
 }
 
 function scrollFixed() {
   const fixedPosition = document.getElementById('appendChild');
-  fixedPosition.scrollTo({
-top: 100,
-behavior: "smooth"
-  });
+  const highlightedElement = fixedPosition.querySelector('.curentStepColor');
+  if (highlightedElement) {
+    highlightedElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+    // } else {
+    //   // console.error("Element with ID 'appendChild' not found.");
+  }
 }
