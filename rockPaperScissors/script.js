@@ -221,3 +221,11 @@ function appendChild() {
     appendChildElement.prepend(newDiv);
   });
 }
+
+function scrollFixed() {
+  const fixedPosition = document.getElementById('appendChild');
+  fixedPosition.scrollTo({
+top: 100,
+behavior: "smooth"
+  });
+}
