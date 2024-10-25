@@ -231,7 +231,5 @@ function scrollFixed() {
       behavior: 'smooth',
       block: 'start',
     });
-    // } else {
-    //   // console.error("Element with ID 'appendChild' not found.");
   }
 }
