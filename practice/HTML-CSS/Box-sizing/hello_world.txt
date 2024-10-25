@@ -1,4 +1,0 @@
-pridedu some texto
-more texto
-some texto more
-tikrinam commit message
