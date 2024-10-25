@@ -1,0 +1,526 @@
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<JAVA SCRIPT>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+There is two ways add JS into HTML.
+
+EXTERNAL javaScript body or head tag:
+
+	<!-- add code it to html body tag. It's most useful metod -->
+	<htmnl>
+	  <head></head>
+	   <body>
+	   <script src="script.js"></script>	
+	   </body>
+	</html>
+	
+	//in .js file add console log like this:
+	console.log();
+
+------<<>>>-------
+
+	<!-- add code it to html head -->
+	<htmnl>
+	  <head>
+	  <script defer src="script.js"></script>
+	  </head>
+	   <body></body>
+	</html>
+	
+	//in .js file add console log like this:
+	console.log();
+	
+INTERNAL javaScript:
+	<html>
+	<head></head>
+	<body>
+	  <script>console.log("Hello, World!")</script>
+	</body>
+	</html>
+
+	
+					
+_______________________________ JAVA_SCRIPT data types & STRUCTURE ______________________
+
+Object	????????????????????????????????
+Array 	masyvas.
+matrix	dvimatis ir daugiau masyvas.
+
+
+_______________________________________ Data type _____________________________________ 
+	Where is two groupe of data type: Primitive & Object.
+
+------ Object ---------------------------
+Objects are used to store collections of data and more complex entities.
+
+
+
+--- Primitive types ---------------------
+All this types belowe are called “primitive” because their values can contain only a single thing (be it a string or a number or whatever).
+
+1. Number 	used for all number values (integer and floating point) except for very big integers.
+			Integers 1, 20, 200 etc.
+			Floating 1.222, 666.3366 etc
+			"NaN ** 0" is 1
+			
+			Doubles 1.222222222222, 969.58588888888888
+				let x = 123e5;    // 12300000
+				let y = 123e-5;   // 0.00123
+
+
+2. BigInt	used for arbitrarily large integers. bigInt out of range +/-(2**53-1)
+		// the "n" at the end means it's a BigInt
+		const bigInt = 1234567890123456789012345678901234567890n;
+
+3. String	used to store "text".
+			If you enter number with qoutation marks "5" like this, it'll became "string" type.
+			But you can fix it like this:
+	Number()		let myNumber = "74";
+			myNumber = Number(myNumber) + 3;
+			return will give you result 77.
+			
+			Conversely, the String() function converts its argument to a string.
+	String()		const myNum2 = 123;
+			const myString2 = String(myNum2);
+			console.log(typeof myString2);
+			// 'string'"
+					
+	`back_tic`	Backticks allow us to embed variables and expressions into a string by wrapping them in ${…}, for #example:	
+		alert( `the result is ${1 + 2}` ); // the result is 3
+			
+		Also backticks allow us write strings that span multiple lines like this:
+			const newline = `One day you finally knew
+			what you had to do, and began,`;
+			console.log(newline);
+			// the result is >>>
+			One day you finally knew
+			what you had to do, and began,
+	\n	you can use "back slash n" in the end of the line for the same goal to achive.
+	<br>	additional solution for new line, add <br> in JS code where you want to break the line.
+			
+
+4. Boolean	true and false — usually used for conditional logic.
+	the number 1 is treated as "true",
+	the number 0 as "false".
+   false	"false" "undefined" "null" "0" "NaN" or empty string ('') & ("") returns false.	
+
+
+5. Symbol	used for creating unique identifiers that won't collide.
+
+6. Undefined	The meaning of undefined is “value is not assigned”. Undefined is reserved as a default initial value for unassigned things.
+
+7. Null	It’s a special value which represents “nothing”, “empty” or “value unknown”.
+
+
+
+______________________________________ VARIABLES_______________________________________
+
+var, let, const	3 types of variables
+
+WARNNING!!!!!		There are two limitations on variable names in JavaScript:
+		1. The name must contain only letters, digits, or the symbols "$"and "_".
+		2. The first character must not be a digit.
+		Reserved names which cannot be used: let, class, return, and function.
+				
+
+let message;			This  is "declaration". Thi statement creates (in other words: declares) a variable with keyword "let" and the name “message”.
+message = "This";		"Assignment" example with name "message", assignment operator = and data (inside this variable) "This".
+
+let message = "This";		To be concise, we can combine the variable "declaration" and "assignment" into a single line.
+
+
+
+let				let message = "Hello";
+				alert(message);
+				//"let" is most common use variable		
+		
+				-----------------------
+				let user = 'John'
+				  , age = 25
+				  , message = 'Hello';
+				//multiple variable
+				
+				
+const				use "const" to declare a constant (unchanging) variable.
+
+const myBday = "2020.10.10";	for example date of Birthday, color etc. Because they canot be reassigned later.
+
+
+
+var				var message = 'Hello';
+				//"var" is old type variable
+				
+										
+______________________________________ OPERATORS ________________________________________
+
+An operator is "unary" if it has a single operand.
+An operator is "binary" if it has two operands.
+An operand – is what "operators" are applied to (pritaikyta).
+xmp.	"2 + 5" an "operand" is 2 & 5, a "binary operator" is "+".
+
+		<<<<<<<<<<<<<<<<<<<< Arithmetic operators >>>>>>>>>>>>>>>>>>>>
+
++	Addition
+-	Substraction
+*	Multiplication
+/	Division				
+%	Remainder/Modulo (liekana)
+**	Exponent (kėlimas laipsniu)
+
+Operation precedence (pirmenybė, eiliškumas)
+1. () parenthesis
+2. ** exponents
+3. * multiplication & / division & % modulo
+4. + addition & - subtraction
+
+
+		<<<<<<<<<<<<<<<<<<<<< Increment and decrement operators >>>>>>>>>>>>>>>>>>>>
+
+++	Increment. exp. num++; ++num;(for better experience use this).
+--	Decrement --num;
+
+
+		<<<<<<<<<<<<<<<<<<<< Assignment operators >>>>>>>>>>>>>>>>>>>>
+
+=	Assignment (priskirti) exp. x=y  it assigns the variable on the left "x" the value stated on the right "y".
++=	Addition assignment
+-=	Subtraction assignment
+*=	Multiplication assignment
+/=	Division assignment
+
+
+
+		<<<<<<<<<<<<<<<<<<<< Comparison operators >>>>>>>>>>>>>>>>>>>>
+
+===	"Equality-strict", values are identical to one another. USE THIS ONE!!!!
+	ATENTION!!!!!! == === means the 'equality test', while a single one a = b means an assignment.
+==	"Equality" (not strict).
+
+!==	"Non-equality-Strict", values are not identical to one another.  USE THIS ONE!!!!
+!=	"Non-equality" (not strict).
+
+NOTE!	Strict versions test the equality of both the values and their datatypes.
+	The strict versions tend to result in fewer errors, so we recommend you use them!
+	
+
+<	Less than
+>	Greater than	
+<=	Less than or equal to
+>=	Greater than or equal to
+
+typeof	shows data type. "typeof" is an operator, not a function.
+
+	
+
+		<<<<<<<<<<<<<<<<<<<< Logical operators >>>>>>>>>>>>>>>>>>>>
+		
+Although they are called “logical”, they can be applied to values of any type, not only boolean. Their result can also be of any type.
+		
+||	OR returns the first "true" value. Or the LAST ONE if no truthy value is found.
+	Short-circuit evaluation:
+	It means that 'OR' || processes its arguments until the first truthy value is reached, and then the value is returned immediately	
+	
+&&	AND returns true if both operands are truthy and false otherwise
+	If all operands have been evaluated (i.e. all were truthy), returns the last operand.
+	In other words, AND returns the first 'falsy' value or the last value if none were found.
+
+!	NOT Converts the operand to boolean type: true/false.
+	Returns the inverse value.
+	
+!!	A double NOT !! is sometimes used for converting a value to boolean type.
+
+
+Precedent	The precedence of AND && operator is higher than OR ||
+	The precedence of NOT ! is the highest of all logical operators, so it always executes first, before && or ||
+
+
+?? 	Nullish Coalescing (nulinis sujungimas)
+
+
+		<<<<<<<<<<<<<<<<<<<< Conditional operators >>>>>>>>>>>>>>>>>>>>
+
+?	let result = (condition) ? value1 : value2; 
+	The condition is evaluated: if it’s truthy then value1 is returned, otherwise – value2.
+		
+The ternary operator is a small bit of syntax that tests a condition and returns one value/expression if it is true, and another if it is false
+WARNING!!!!	"ternary operator" works only if you have two choices that are chosen between via a true/false condition. In other word you can used ternary operatos to change "if.. else" statment, but not "if.. else if.. else" statment.
+
+const kintamasis = tiesa
+  ? "Run this text if "kintamsis = tiesa" return true.
+  : "Run this text if "kintamsis = tiesa" return false;
+  
+In ternary operator "?" works like "if" and ":" works like "else".
+
+
+The ternary operator is not just for setting variable values; you can also run functions, or lines of code — anything you like. Here's an exp.:
+	
+	kintamasis.addEventListener("change", () =>
+	  kintamasis.value === "black"
+	    ? update("black", "white")
+	    : update("white", "black"),
+	);
+
+		
+		
+______________________________________________________________ STATMENT __________________________________________________________________________
+------------------------------------------------------- if.. else statment -----------------------------------------------------------------------
+
+if (){}	if(condition) {code to run if condition is true}
+else if (){}	Each extra choice requires an additional block to put in between if () { } and else { }.
+else {}	else {run some other code instead}
+
+------------------------------------------------------- Switch statment -----------------------------------------------------------------------
+
+switch 	 take a single expression/value as an input, and then look through several choices until they find one that matches that value,
+	 executing the corresponding code that goes along with it.	
+	 
+	 switch (expression) {
+	  case choice1:
+	    // run this code
+	    break;
+
+	  case choice2:
+	    // run this code instead
+	    break;
+
+	  // include as many cases as you like
+
+	  default:
+	    // actually, just run this code
+	    break;
+	}		
+
+
+
+______________________________________ FUNCTION or METHOD or it's call OPERATORS (I didn't find out yet) _________________________________________
+--------------------------------------Also I found terms of: events ---------------------------------------------------- 
+
+methods		Functions that are part of objects are called methods.
+
+
+__________________________________________________________ FUNCTION DEFINITION _________________________________________________________
+
+Function declaration	"function favoriteAnimal(animal)"
+Keyword		"function"
+Function name		"favoriteAnimal"
+Parameters		"(animals)". Parameters are the items listed between the parentheses in the function declaration.
+		Parameters are sometimes called arguments, properties, or attributes.
+function code/body	"{ return animal + " is my favorite animal!" }"
+Function arguments	are the actual values we decide to pass to the function. "('Goat')"
+
+
+	EXAMPLE	 function favoriteAnimal(animal) {
+		   return animal + " is my favorite animal!"
+		 }
+
+		 console.log(favoriteAnimal('Goat'))
+
+We are telling the favoriteAnimal function, “Please send 'Goat' to the favoriteAnimal function and use 'Goat' wherever the ‘animal’ placeholder is.”
+
+
+If you're writing a function and want to support optional parameters, you can specify default values by adding = after the name of the parameter, followed by the default value
+
+	EXAMPLE	function hello(name = "Chris") {
+		  console.log(`Hello ${name}!`);
+		}
+
+		hello("Ari"); // Hello Ari!
+		hello(); // Hello Chris! 
+		
+		
+_________________________________________________ FUNCTION DECLARATION & EXPRESSION_______________________________________________________
+
+Function Declaration it's better for readability, as it’s easier to look up function in the code, so it's a first choise.
+But if a Function Declaration does not fit us for some reason, or we need a conditional declaration, then Function Expression should be used.
+
+
+Function Declaration: a function, declared as a separate statement, in the main code flow:
+
+Function Declaration	function sum(a, b) {
+		  return a + b;
+		}
+ATTENTION!!!		Function Declarations haven't a semicolon ; at the end
+
+
+Function Expression: a function, created inside an expression or inside another syntax construct. Here, the function is created on the right side of the “assignment expression” =:
+
+Function Expression	let sum = function(a, b) {
+		return a + b;
+		};
+ATTENTION!!!		Function Expressions have a semicolon ; at the end
+
+
+Arrow function: can be used in the same way as Function Expressions. It's just a shorter way:
+Arrow function		let sum = (a, b) => a + b;
+
+ATTENTION!!!		
+Without curly braces: 	"(...args) => expression" – the right side is an expression: the function evaluates it and returns the result. 
+		Parentheses can be omitted, if there’s only a single argument, e.g. n => n*2.
+With curly braces: 	"(...args) => { body }" – brackets allow us to write multiple statements inside the function.
+		But we need an explicit return to return something.
+
+
+
+__________________________________________________________ FUNCTION NAME _________________________________________________________
+
+Functions are actions. So their name is usually a verb.
+Function starting with…
+"show.."	usually show something. showMessage(..)     // shows a message
+"get…"	return a value. getAge(..)          // returns the age (gets it somehow)
+"calc…"	calculate something. calcSum(..)         // calculates a sum and returns the result
+"create…"	create something. createForm(..)      // creates a form (and usually returns it)
+"check…"	check something and return a boolean. checkPermission(..) // checks a permission, returns true/false
+
+
+
+__________________________________________________________ FUNCTION PARAMETERS _________________________________________________________
+
+no name or anonymous 	function it's a function without name and with parentheses ex. "function ()".
+		It can have a parameter inside the parentheses ex. "function (a, b)".
+
+		
+		You'll often see anonymous functions when a function expects to receive another function as a parameter. 
+		In this case the function parameter is often passed as an anonymous function.
+function expression	This form of creating a function is also known as function expression. 
+		Unlike function declarations, function expressions are not hoisted.
+		
+arrow function		It's a function expression but in a shorter way exp. "(a, b) =>"
+		If the function only takes one parameter, you can omit the parentheses around the parameter ex. "function a"
+
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<----------------- BROWSER'S BUILT-IN function() -------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<----------------- Still not shure  how to call this corectly!!!!!!!!!!!! -------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+alert()		po-up table??? 
+
+tofixed(2)		change the number of decimals
+
+updateBtn()		update button
+
+.replace()		function needs two parameters — the substring to find in the main string, and the substring to replace that string.
+		const myText = "I am a string";
+		const newString = myText.replace("string", "sausage");
+
+array.join()		joins all string in that array. The parameters you define in () will be as a joining/delimiting character.
+		With empty parentheses by default character will be a coma (kablelis).
+
+Math.random()		it always returns a random decimal number between 0 and 1, e.g. 0.5675493843.
+		random number that's greater than or equal to 0 and less than 1; 0 <= Math.random() < 1; 
+
+Math.floor()		always rounds down and returns the largest integer less than or equal to a given number.
+WARRNING!!!!		"Rounding A Random Decimal Number Between 0 And 1 Down Will Always Return 0"
+		console.log(Math.floor(5.95)); // Expected output: 5
+		console.log(Math.floor(5.05)); // Expected output: 5
+		console.log(Math.floor(5)); // Expected output: 5
+		console.log(Math.floor(-5.05)); // Expected output: -6
+
+Math.floor(Math.random()) + 1; 	so adding 1 to it will always return 1.
+Math.floor(Math.random() * 100);	The following would give us a random number between 0 and 99.
+Math.floor(Math.random() * 5) + 1;	give a random number between 1 and 5.
+Math.floor(Math.random()*5) + 3;	give a random number between 3 and 7.
+Math.floor(Math.random()*6) + 5;	give a random number between 5 and 10.
+Math.floor(Math.random() * 100) + 1;	give a random number between 1 and 100.
+
+//This code randomly chooses(parenka) value from array in variable "choices" and define it as variable "selection":
+const choices = ['first', 'second', 'third'];
+const selection = choices[Math.floor(Math.random() * choices.length)]; 
+
+
+HOW IT WORKS!!!	Math.random() atrenka random skaičių [0-1) e.g. "0.666782541511"
+		*3 atrinkta skaičių padaugina iš 3 e.g "0.666782541511 * 3 = 2.000347624533"
+Atention!!!		<dauginant bet kokį skaičių nuo 0 iki 0.99999999 iš trijų neįmanoma gauti skaičiaus didesnio už tris>
+		Math.floor() gautą skaičių apvalina žemyn iki sveiko skaičiaus e.g.  2.000347624533 ~ 2"
+		+1 padidina rezultata vienetu e.g "2 + 1 = 3"
+SHORT VERSION		Math.floor(Math.random()*N) + Nmin;
+		LOWEST NUMBER is "Nmin"
+		HIGHEST NUMBER is "Nmin - 1 + N"
+
+Number()		method  converts a variable (or a value) into a number.
+		for this purpose you can also use unary plus "+ unary".	
+		
+string()		function converts its argument to a string.
+		for ex. >>> const test = String (123);
+		            typeof (test); //gives value "string
+
+string.length()	length method find the string length.
+
+string[index]		thi way you can access a letter from a string.
+		            
+new String()		"string" method with keyword "new" converts 'primitive string' to 'string wrapped object', it called constructor.
+		WARNING: You should rarely find yourself using String as a constructor.
+	
+toUpperCase()		it is going to return the same thing but as an uppercase.
+
+ChartAt()		this method gives value  of targeted character in a string
+		for ex. >>> 	 "cat".charAt(1); // gives value "a"
+		another way >>> "cat"[1]; // gives value "a"	
+		
+		
+_____________________________________________ COMMON APIs _____________________________________________________________________________
+
+The following is a brief list of common APIs in web and XML page scripting using the DOM.
+
+document.querySelector()
+document.querySelectorAll()
+document.createElement()
+Element.innerHTML
+Element.setAttribute()
+Element.getAttribute()
+
+EventTarget.addEventListener()
+.addEventListener()		first parameters define the event it is wrtiten as string (kabutėse) "onclick" "ondblclick" "keydown"		
+			second parameter define a function to run when the event happens.
+
+HTMLElement.style
+Node.appendChild()
+window.onload
+window.scrollTo()
+
+
+//////////////////////////////// Add "p" tag to create string into html file ///////////////////////////////////////////
+
+
+first method		const first = document.createElement('p');
+		first.textContent = 'PIRMAS';
+		document.body.appendChild(first);
+
+second method		const second = document.body.appendChild(document.createElement('p'));
+		second.textContent = 'ANTRAS';
+		
+_____________________________________________ METHOD _____________________________________________________________________________
+
+map()		The map() method takes each item in the array in turn, passing it into the given function.
+
+
+
+_____________________________________________ PSEUDOCODE _____________________________________________________________________________
+
+KEYWORDS		At its core pseudocode is the ability to represent six programming constructs - KEYWORDS.
+
+SEQUENCE		represents linear tasks sequentially performed one after the other.
+
+WHILE 		a loop with a condition at its beginning.
+
+REPEAT-UNTIL		a loop with a condition at the bottom.
+
+FOR		another way of looping.
+
+IF-THEN-ELSE 		a conditional statement changing the flow of the algorithm.
+
+CASE		the generalization form of IF-THEN-ELSE.
+
+EXTRA KEYWORDS:			
+
+CALL		Invoking classes or calling functions
+EXCEPTION, WHEN	Handling exceptions
+
+
+
+
+
+
+
+
+
+
+

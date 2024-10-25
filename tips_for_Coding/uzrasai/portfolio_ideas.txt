@@ -1,0 +1,29 @@
+In this document I will add ideas list for my portfolio bulding websites.
+
+1. Tic Tac Toe
+
+2. Hebraju kalba daznu atveju zodis tariamas is atbulo galo turi prasme ir ta prasme daznai yra priesingas zodis. Kaip pvz juoda-juoda. adouj-balta.
+	Mintis sukurti webpage kuriame ivedus zodi anglu kalba jis butu isverciamas i hebraju kalba. Tam kazkokiu budu panaudoti google translater.
+ 	Tuomet hebraju rasmenimis gauto zodzio reiksme suvesti is atbulo galo. Taip gaunamas new word hebraju rasmenimis. Jis tada verciamas i anglu kalba.
+	
+	Papildomai galima butu prideti to zodzio platesni isaiskinima, bet ne per daug ilga, gal iki max 2 sakiniu. Tam nenaudoti wikipedijos, cia galetu padeti AI.
+
+	Viska reiketu Automatizuoti, taip kad automatiskai  generuotusi video ir keltusi i social media platform.
+ 	STEPS:
+	Padaryti taip kad atejus i psl ir suvedus zodi visas veiksmas butu irasomas, kaip video. Tokiu budu gaunami trumpi video.
+	Tuos video padaryti kaip shortus for YT, TicToc ir t.t.
+	Padaryti kelias skirtingas video versijas. Galima orientuotis i skrtingas auditorijas vyrai, moterys, universalus, specific niche.
+	Galimos nisos 'self improvement', 'motivation', 'healthy life' ir pan.
+	Papildomai robo voice galetu juos perskaityti.
+	Cia galima naudoti, kelis skirtingus balsus tam paciam video, taip gaunami filmukai skirtingoms auditorijoms.
+	Galimi video tik su muzika.	
+	Su AI prideti susijusius video ar foto, kad ziureti butu dar smagiau.
+
+	Viska automatiska sukelti i  social media platform.
+	Tam galima tureti skrtingus acountus toje pacioje platformoje ir video kelti pagal auditorijas.
+	
+	Kazkokiu budu visa tai monetizuoti, tikriausiai ne pati website, bet social media platforms.
+
+	Ideja kilo paziurejus sita video:
+	https://www.youtube.com/watch?v=IzaBiazHWIg
+	15:35 ir 19:20

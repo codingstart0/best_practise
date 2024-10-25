@@ -1,0 +1,230 @@
+Git has three main states that your files can reside in: 
+1. modified - means that you have changed the file but have not committed it to your database yet.
+2. staged - means that you have marked a modified file in its current version to go into your next commit snapshot.
+3. committed - means that the data is safely stored in your local database.
+
+Where is two-step process for making a commit (fiksavimas) in Git, "staging" (git add .) & "commit" (git commit .)
+
+
+git add .		Think of the staging area as a “waiting room” for your changes until you commit them (pilnai issaugosi). 
+			"git add" - comand for staging in terminal
+
+git status		Runnig "git status" your file will shown in GREEN (file in the staging area) or RED (file not staged).
+
+git commit -m		Commit it's mean that your changes is fully commited (uzfiksuotos, issaugotos).
+			"git commit -m vardas.txt" - comand for commiting in terminal.
+
+git push origin main	Command for upload your work to the GitHub repository on your chosen branch, in this case "main".
+
+
+
+
+___________________________ TASK SOLVING STEPS ____________________________
+
+git pull			update repository from git hub with newest version of main branch
+			"git pull "URL-SSH version"
+				
+git checkout -b branch1		create new local git branch and named "branch1"
+
+html, css			do all your works on directions, files etc.
+
+git add .			run this command to staged your changes to git
+
+git commit			leave commit mesage about your made changes
+
+git push origin branch1		push your job to git hub
+
+gitHub			now go to gitHub and make pull request
+
+Thats it!!!!!!!!!!!!!
+
+____________________________________________________________________________
+
+
+
+
+___________________________  STEPS FOR BRANCH _______________________________
+
+"git hub"		copy "code ssh" from github
+
+cd		Open terminal and "cd" to folder where want to store copied folder
+git clone		git clone + "code ssh"
+ll		ckeck new files runing ll command
+cd		"cd new file" go to this cloned folder
+git branch -a		listing all local & remote branches 
+git --remote		shows only remote branche
+git checkout branch#1	change branch from "main" to "branch#1" it's from a remote branche list.
+
+"Do your task"		after you finished a task run git add & commit commands. Can check with "git status".
+git add .
+git commit	
+
+git push origin branch#1 	this comand will push you new files to "github" on chosen branch.
+
+"github"		go back to github open commits and make sure it's on branch#1. Open pull request & merge to "main" branch.
+cd .	
+---------------------------
+git reset --hard "commit"	Use this when you nead specific commit in local git. Attention this comand over write exicting code.
+		So better use it on new branch. In this case "commit" = desired comit number from gitHub. 
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<< NEW git project push to github >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+-------------------This metod when starting new project remote in github ----------------------
+
+Steps How to push new project to github:
+1. Create A New Github Repo That Contains A Readme File.
+2. Use Git To Clone The Github Repo Locally.
+3. Copy Your Project Files Into The Folder Created By The Clone.
+4. Perform A Git Add . And A Git Commit.
+5. Push Your Changes Up To Github.
+
+
+---------------------------This metod when starting new project local in git ------------------
+
+git init
+git add .
+git commit -m "Add existing project files to Git"
+git remote add origin https://github.com/codingstart0/example-website.git
+git push -f origin main		the -f argument will forced push to g
+
+ 
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<BRANCH>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+git branch			"git branch name" command to create new branch
+git checkout			"git checkout name" command to switch branch
+git checkout
+ -b name			"git checkout -b name" this command will create branch "name" and switch to it.
+git branch -a			"git branch -a" this command will list all branches.
+
+git fetch -p			Before fetching, remove any remote-tracking references that no longer exist on the remote.q
+
+git reset soft		
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<TERMINAL>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+git --version			You can check your git version by running.
+
+git clone			this comand + copied URL from GitHub will update repository from github to computer (SSH version). Fits to save new project  from remote to local.
+
+git pull			this comand + copied URL from GitHub will clone repository from github to computer (SSH version). Fits to update excisting project from remote to local.
+
+git pull 
+
+git fetch			??????????????????
+
+git merge			??????????????????
+
+git remote -v			This will display the URL of the repository you created on GitHub, which is the remote for your local copy.
+
+git remote add <name> <url>	this command let you configure a remote repository "git remote add main <url>". Use this for first time pushing to github.
+
+
+
+git init			this command will Initialized empty Git repository in the current directory. In this way you can start NEW git repo.
+	
+git add			add"git add ." this comand will add all files in the current directory to the staging area.
+git add vardas.txt		this command adds your "vardas.txt" file to the staging area in Git.
+git commit			this command will commit (fiksuoti) your change to git. And po-up window for message.
+git commit -m vardas.txt	this command will commit (fiksuoti) your change to git with your message.
+git status			witll show files status is "not staged" (red), "staged" (green).
+
+git log				You should see an entry for your commit history.
+
+git push			upload your work to the GitHub repository on main branch
+git push origin main		upload your work to the GitHub repository on your chosen branch
+git push -f origin main		WARNING!!! Using the "-f" flag will owerwrite all existing repo in github. So you will lost all diferent files.
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+COMMANDS RELATED TO A REMOTE REPOSITORY:
+
+git clone		- git@github.com:USER-NAME/REPOSITORY-NAME.git
+git pull
+
+git push
+git push origin main	- (Both accomplish the same goal in this context)
+
+
+
+COMMANDS RELATED TO CHECKING STATUS OR LOG HISTORY:
+
+git status
+git log
+
+THE BASIC GIT SYNTAX IS command | action | destination.
+
+For example,
+
+git add . is read as < git | add | . >, where the period represents everything in the current directory;
+git commit -m "message" is read as < git | commit -m | "message" > >???????????????? it's not working for adding coment mesage in VScode terminal.
+git status is read as < git | status | (no destination) >.
+
+
+
+
+----------------------------------------------------------------
+
+<<github.com>>
+
+CREATE A NEW REPOSITORY
+
+
+By clicking the button "+" in top right corner > "New repository"
+Give your repository name "git_test" in the repository name input field.
+Optional you can add description
+Marked "Add a README file"
+Marked "Public"
+Create repository by clicing "green button" in a bottom.
+Click green "Code button" in new repository on GitHub. This will copy (clone) this repo to your local machine.
+NOTE: You must click the SSH option.
+
+Go to your TERMINAL
+mkdir "name"
+cd name
+git clone <this alowe to clone your repo from github to computer>
+git clone git@github.com:USER-NAME/REPOSITORY-NAME.git <it should look some like this>
+git remote -v <first go to created folder using "cd". by runing remote comand this will display URL of repo you have created on github.
+
+git status <by runing this comand you checked your created file status on git>
+	   if it's RED that means it's not yet STAGEDgit
+git add "hello_world.txt"  <This command adds your hello_world.txt file to the staging area in Git>
+git status <runing comand again. In the output, notice that your file is now shown in green, which means that this file is now in the staging area>
+git commit -m Add hello_world.txt <this will commit your file>
+git status <once more time, The output should now say: “nothing to commit, working tree clean”, indicating your changes have been committed>
+git log <You should see an entry for your “Add hello_world.txt” commit and also see details on the author who made this and the time of when the commit was made. 
+
+MODIFY A FILE
+
+code < In this example, we will open the directory in Visual Studio Code by using the command "code" inside your repository.
+
+----------------------------------------------------------------
+
+
+----------------------------------------------------------------
+		<<SUMMARY>
+
+Create the repository on GitHub -  theodinproject.com/lessons/foundations-git-basics#notewarning
+Clone repository to computer from GitHub - theodinproject.com/lessons/foundations-git-basics#notewarning
+Stage files on Git - theodinproject.com/lessons/foundations-git-basics#notewarning
+Modify files on VSCode - theodinproject.com/lessons/foundations-git-basics#notewarning
+
+
+
+------------------------------------------------------------------------------------------------
+
+VIEWING YOUR PROJECT ON THE WEB WITH GITHUB
+
+
+GitHub allows you to publish web projects directly from a GitHub repository. Doing this will allow you to access your project from "your-github-username.github.io/your-github-repo-name".
+
+- Make Sure That The Main Html File Of Your Project Is Called Index.Html. If It Is Not, You Will Need To Rename It.
+- Go To Your Github Repo On The Web And Click The "Settings" Button As Shown In The Screenshot Below.
+- Click on Pages on the left side bar.
+- Change the Branch from none to main branch and click Save.
+- your project should be accessible over the web from your-github-username.github.io/your-github-repo-name
+- If your project does not publish after 1 hour, ensure that you have a file called index.html
+- Go to your repo on GitHub and click on Actions, if there are no entries, then go back to the settings, change the Branch from main branch to none and click Save, then change the Branch from none to main branch and click Save.
+
+
+

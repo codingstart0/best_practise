@@ -1,0 +1,133 @@
+body{
+    text-align: center;
+    color: #101110;
+}
+
+h1 {
+    font-size: 80px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(12, 125, 140);
+    }
+
+h2 {
+    font-size: 60px;
+    color: rgb(8, 220, 149);
+    font-style: italic;
+    font-variant-caps: all-small-caps;
+    }
+
+    /* this is a box model */
+    /* 
+        width: create width of you marked item (text, image etc.)
+        margin: create space around marked text, pics ets.
+        border: crerate border around the box and you can style it with "border-style"
+        padding: create space with backgroud color inside the box.
+        TOTAL width is a sum of: width + margin + border + padding.
+
+        Shortcut you can use for any comand (margin, border, padding etc.)
+        forE. "pading: 10px 20px 25px 50px;"
+        it means: "pading: top; right; bottom; left;"
+
+        Using two values: "padding: 100px 50px;"
+        It means First value Top & Bottom; Second value Right & Left;
+
+        Using three values: "padding: 100px 20px 50px;"
+        It means First value Top; Second value Right & Left; Third value Bottom;
+    */
+        .box{
+        background: rgb(45, 75, 99);
+        width: 500px;
+        min-height: 1200px;
+        max-height: 1200px;
+        border: 15px solid black;
+        border-style: double;
+        padding: 0 55px 20px 20px;
+        text-align: justify;
+        display: inline-block;
+        margin: 60px
+                
+    }
+
+ul {
+    list-style: circle;
+    list-style-type: none;
+    color: orangered;
+    padding-left: 40px;
+    float: inline-start;
+    }
+
+ol {
+    list-style: decimal;
+    list-style-type: none;
+    color: rgb(15, 236, 59);
+    padding-top: 10px;
+    }
+
+li{
+    list-style-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/29841/arrow.png);
+    padding: 25px;
+        /* changing box height */
+    background-color: rgb(12, 12, 48);
+    }
+
+ul li ol li{
+    background: hsl(318, 75%, 27%);
+    align-content: top;
+    margin-top: 20px;
+    /* changing gap below box */
+    margin-bottom: 20px;
+    }
+
+ol li{
+    background: #594f66;
+    margin-top: 20px;
+    float: inline-block;
+    margin: 5px
+}
+
+ul li{
+    background: hsl(47, 34%, 73%);
+    margin-top: 20px;
+}
+
+ul li ol li ol li{
+    background: hwb(60 1% 64%);
+    margin-top: 15px;
+    color: hsl(224, 28%, 10%);
+}
+
+ul li ul li ol{
+    background: hsl(318, 75%, 27%);
+    margin-top: 20px;
+}
+
+
+
+/* Description List */
+dl {
+    color: rgb(119, 88, 8);
+    font-size: 20px;
+    font-style: oblique;
+    }
+
+dt {
+    color: rgb(5, 113, 57);
+    }
+
+dd {
+    color: #1cbb91;
+    background-image: url(../img/kitchen-decor.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-blend-mode: saturation 10%;
+
+    
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-style: italic, bold;
+   
+    font-size: larger;
+    margin-top: 6px;
+    margin-bottom: 35px;
+    }
