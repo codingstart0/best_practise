@@ -220,4 +220,16 @@ function appendChild() {
 
     appendChildElement.prepend(newDiv);
   });
+  scrollFixed();
+}
+
+function scrollFixed() {
+  const fixedPosition = document.getElementById('appendChild');
+  const highlightedElement = fixedPosition.querySelector('.curentStepColor');
+  if (highlightedElement) {
+    highlightedElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }
 }
