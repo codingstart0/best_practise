@@ -19,3 +19,12 @@ document.getElementById('add-todo').addEventListener('click', function() {
       input.value = ''; // Clear the input
   }
 });
+
+function toggleComplete(checkbox) {
+  const label = checkbox.nextElementSibling; // Get the label
+  if (checkbox.checked) {
+      label.classList.add('text-decoration-line-through'); // Add a strikethrough class
+  } else {
+      label.classList.remove('text-decoration-line-through'); // Remove strikethrough
+  }
+}
