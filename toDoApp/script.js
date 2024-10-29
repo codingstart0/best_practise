@@ -8,9 +8,12 @@ document.getElementById('add-todo').addEventListener('click', function() {
       const li = document.createElement('li');
       li.className = 'list-group-item d-flex justify-content-between align-items-center';
       li.innerHTML = `
-          ${todoText}
-          <button class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">Remove</button>
-      `;
+      <div class="form-check">
+          <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)">
+          <label class="form-check-label">${todoText}</label>
+      </div>
+      <button class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">Remove</button>
+  `;
 
       document.getElementById('todo-list').appendChild(li);
       input.value = ''; // Clear the input
