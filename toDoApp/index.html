@@ -10,27 +10,38 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body
     class="bg-light d-flex align-items-center justify-content-center min-vh-100"
   >
-    <div class="bg-white p-4 rounded shadow w-100">
-      <h1 class="h4 mb-4">Todo App</h1>
-      <div class="input-group mb-3">
-        <input
-          type="text"
-          id="todo-input"
-          class="form-control"
-          placeholder="Add a new todo"
-        />
-        <button id="add-todo" class="btn btn-primary">Add</button>
-      </div>
-      <ul id="todo-list" class="list-group">
-        <!-- Todo items will go here -->
-      </ul>
-    </div>
+    <div class="container-xs">
+      <div class="bg-white p-4 rounded shadow todo-container">
+        <h1 class="h4 mb-4 text-center">Todo App</h1>
+        <!-- Main Title -->
 
+        <h2 class="h5 mb-3">Todo List</h2>
+        <!-- Subtitle for the Todo List -->
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            id="todo-input"
+            class="form-control"
+            placeholder="Add a new todo"
+          />
+          <button id="add-todo" class="btn btn-primary">Add</button>
+        </div>
+
+        <ul id="todo-list" class="list-group mb-3">
+          <!-- Todo items will go here -->
+        </ul>
+
+        <button id="clear-todos" class="btn btn-secondary">
+          Clear All Todos
+        </button>
+        <!-- Clear All Button -->
+      </div>
+    </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
