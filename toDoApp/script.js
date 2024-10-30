@@ -1,3 +1,7 @@
+const localStorageKeyTodos = 'todos';
+let todos = [];
+let lastIndex = 0;
+
 document.getElementById('add-todo').addEventListener('click', addTodo);
 document.getElementById('todo-input').addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
@@ -6,10 +10,16 @@ document.getElementById('todo-input').addEventListener('keypress', function(even
 });
 
 function loadTodos() {
-    const todos = JSON.parse(localStorage.getItem('todos')) || [];
-    todos.forEach(todo => {
-        addTodoToDOM(todo.text, todo.tasks);
-    });
+    try {
+        todos = JSON.parse(localStorage.getItem(localStorageKeyTodos)) || [];
+        todos.forEach(todo => {
+            addTodoToDOM(todo.text, todo.tasks);
+        });
+    } catch(err) {
+        alert(err.message);
+        localStorage.setItem(localStorageKeyTodos, JSON.stringify([]));
+    }
+
 }
 
 function addTodo() {
@@ -17,10 +27,25 @@ function addTodo() {
     const todoText = input.value;
 
     if (todoText) {
+        addNewTodo(todoText); 
         addTodoToDOM(todoText, []); // Pass an empty array for tasks
-        saveTodoToLocalStorage(todoText, []); // Save empty tasks array
+        saveTodoToLocalStorage(); // Save empty tasks array
         input.value = ''; // Clear the input
     }
+}
+
+function addNewTodo(text) {
+    todos.push({
+        id: lastIndex,
+        text: text,
+        tasks: [],
+    });
+    lastIndex++;
+    
+}
+
+function saveTodoToLocalStorage() {
+    localStorage.setItem(localStorageKeyTodos, JSON.stringify(todos));
 }
 
 function addTodoToDOM(text, tasks) {
