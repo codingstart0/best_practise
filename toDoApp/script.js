@@ -2,14 +2,20 @@ const localStorageKeyTodos = 'todos';
 let todos = [];
 let lastIndex = 0;
 
-document.getElementById('add-todo').addEventListener('click', addTodo);
-document
-  .getElementById('todo-input')
-  .addEventListener('keypress', function (event) {
-    if (event.key === 'Enter') {
-      addTodo();
-    }
-  });
+document.getElementById('new-todo-form').addEventListener('submit', (event) => {
+  event.preventDefault();
+  addTodo();
+});
+// document.getElementById('add-todo').addEventListener('click', addTodo);
+// document
+//   .getElementById('todo-input')
+//   .addEventListener('keypress', function (event) {
+    
+//     if (event.key === 'Enter') {
+//       event.preventDefault();
+//       addTodo();
+//     }
+//   });
 
 function loadTodos() {
   try {
@@ -35,9 +41,12 @@ function addTodo() {
   const existingTodos = getExistingTodos();
 
   if (todoText) {
-    if (existingTodos.map(todo => todo.toUpperCase()).includes(todoText.toUpperCase())) 
-    // if (existingTodos.includes(todoText))
-   {
+    if (
+      existingTodos
+        .map((todo) => todo.toUpperCase())
+        .includes(todoText.toUpperCase())
+    ) {
+      // if (existingTodos.includes(todoText))
       alert('This todo already exists!');
       return; // Stop execution if it exists
     }
@@ -110,15 +119,15 @@ function removeTodo(button) {
   const li = button.closest('li'); // Get the parent todo item
   const text = li.querySelector('label').innerText; // Get the todo text
 
-   // Remove from the todos array
-   todos = todos.filter((todo) => todo.text !== text);
+  // Remove from the todos array
+  todos = todos.filter((todo) => todo.text !== text);
 
-   // Update local storage
-   saveTodoToLocalStorage();
- 
-   // Remove the item from the DOM
-   li.remove();
-  }
+  // Update local storage
+  saveTodoToLocalStorage();
+
+  // Remove the item from the DOM
+  li.remove();
+}
 
 // Load todos on page load
 loadTodos();

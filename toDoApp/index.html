@@ -18,20 +18,22 @@
     <div class="container-xs">
       <div class="bg-white p-4 rounded shadow todo-container">
         <h1 class="h4 mb-4 text-center">Todo App</h1>
-        <!-- Main Title -->
+
+        <form id="new-todo-form">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              id="todo-input"
+              class="form-control"
+              placeholder="Add a new todo"
+            />
+            <button id="add-todo" class="btn btn-primary" type="submit">
+              Add
+            </button>
+          </div>
+        </form>
 
         <h2 class="h5 mb-3">Todo List</h2>
-        <!-- Subtitle for the Todo List -->
-        <div class="input-group mb-3">
-          <input
-            type="text"
-            id="todo-input"
-            class="form-control"
-            placeholder="Add a new todo"
-          />
-          <button id="add-todo" class="btn btn-primary">Add</button>
-        </div>
-
         <ul id="todo-list" class="list-group mb-3">
           <!-- Todo items will go here -->
         </ul>
