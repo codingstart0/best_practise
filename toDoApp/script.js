@@ -35,7 +35,9 @@ function addTodo() {
   const existingTodos = getExistingTodos();
 
   if (todoText) {
-    if (existingTodos.includes(todoText)) {
+    if (existingTodos.map(todo => todo.toUpperCase()).includes(todoText.toUpperCase())) 
+    // if (existingTodos.includes(todoText))
+   {
       alert('This todo already exists!');
       return; // Stop execution if it exists
     }
