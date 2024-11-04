@@ -107,10 +107,16 @@ function toggleComplete(checkbox) {
 function removeTodo(button) {
   const li = button.closest('li'); // Get the parent todo item
   const text = li.querySelector('label').innerText; // Get the todo text
-  li.remove();
 
-  // Remove from local storage logic here if needed
-}
+   // Remove from the todos array
+   todos = todos.filter((todo) => todo.text !== text);
+
+   // Update local storage
+   saveTodoToLocalStorage();
+ 
+   // Remove the item from the DOM
+   li.remove();
+  }
 
 // Load todos on page load
 loadTodos();
