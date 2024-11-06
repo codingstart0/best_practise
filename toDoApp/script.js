@@ -86,6 +86,13 @@ function addTodoToDOM(text, tasks) {
         </div>
     `;
   document.getElementById('todo-list').appendChild(li);
+
+  // Add event listener for Enter key on the new task input
+  li.querySelector('.form-control').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+      addTask(this.nextElementSibling);  // Trigger the addTask function
+    }
+  });
 }
 
 function addTask(button) {
