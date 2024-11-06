@@ -7,7 +7,9 @@ document.getElementById('new-todo-form').addEventListener('submit', (event) => {
   addTodo();
 });
 
-document.getElementById('clear-todos').addEventListener('click', clearCompletedTodos);
+document
+  .getElementById('clear-todos')
+  .addEventListener('click', clearCompletedTodos);
 
 function loadTodos() {
   try {
@@ -21,19 +23,20 @@ function loadTodos() {
   }
 }
 
-function getExistingTodos() {
-  return Array.from(
-    document.querySelectorAll('#todo-list .form-check-label')
-  ).map((label) => label.textContent.trim());
-}
+// function getExistingTodos() {
+//   return Array.from(
+//     document.querySelectorAll('#todo-list .form-check-label')
+//   ).map((label) => label.textContent.trim());
+// }
 
 function addTodo() {
   const input = document.getElementById('todo-input');
   let todoText = input.value.trim();
-  const existingTodos = getExistingTodos();
+  // const existingTodos = getExistingTodos();
 
   if (todoText) {
-    todoText = todoText.charAt(0).toUpperCase() + todoText.slice(1).toLowerCase();
+    todoText =
+      todoText.charAt(0).toUpperCase() + todoText.slice(1).toLowerCase();
 
     if (
       existingTodos
@@ -52,7 +55,7 @@ function addTodo() {
 }
 
 function addNewTodo(text) {
-  const todoId = uuid.v4();  // Generate a new UUID for each todo
+  const todoId = uuid.v4(); // Generate a new UUID for each todo
 
   todos.push({
     text: text,
@@ -80,6 +83,8 @@ function addTodoToDOM(text) {
             </div>
         </div>
     `;
+  const label = li.querySelector('.form-check-label');
+  label.addEventListener('dblclick', () => editTodoLabel(label));
   document.getElementById('todo-list').appendChild(li);
 }
 
@@ -93,6 +98,26 @@ function toggleComplete(checkbox) {
     todo.completed = checkbox.checked;
     saveTodoToLocalStorage();
   }
+}
+
+function editTodoLabel(label) {
+  const originalText = label.innerText;
+  
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.className = 'form-control';
+  input.value = originalText;
+  label.replaceWith(input);
+  input.focus();
+
+  // Save the edited todo on "Enter" key or blur (click outside)
+  input.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      saveEditedTodo(input, originalText);
+    }
+  });
+
+  input.addEventListener('blur', () => saveEditedTodo(input, originalText));
 }
 
 function removeTodo(button) {
