@@ -6,3 +6,4 @@ It is often said that one of the ways to really get better at programming is by 
 
 #TASK
 How to add autofill using JS, then submiting?
+Make shure new tasks also added to localStorage and they not disappered after reload.
