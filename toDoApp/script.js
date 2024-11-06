@@ -120,6 +120,23 @@ function editTodoLabel(label) {
   input.addEventListener('blur', () => saveEditedTodo(input, originalText));
 }
 
+function saveEditedTodo(input, originalText) {
+  const newText = input.value.trim();
+  const label = document.createElement('label');
+  label.className = 'form-check-label';
+  label.innerText = newText || originalText;  // Revert if empty
+  input.replaceWith(label);
+
+  label.addEventListener('dblclick', () => editTodoLabel(label));
+
+  // Update todos array and localStorage
+  const todo = todos.find((todo) => todo.text === originalText);
+  if (todo && newText) {
+    todo.text = newText;
+    saveTodoToLocalStorage();
+  }
+}
+
 function removeTodo(button) {
   const li = button.closest('li'); // Get the parent todo item
   const text = li.querySelector('label').innerText; // Get the todo text
