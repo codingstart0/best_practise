@@ -7,6 +7,8 @@ document.getElementById('new-todo-form').addEventListener('submit', (event) => {
   addTodo();
 });
 
+document.getElementById('clear-todos').addEventListener('click', clearCompletedTodos);
+
 function loadTodos() {
   try {
     todos = JSON.parse(localStorage.getItem(localStorageKeyTodos)) || [];
@@ -117,6 +119,28 @@ function removeTodo(button) {
 
   // Remove the item from the DOM
   li.remove();
+}
+
+function clearCompletedTodos() {
+  // Select all the to-do items in the list
+  const todoItems = document.querySelectorAll('#todo-list .list-group-item');
+
+  // Filter out completed todos from the DOM and todos array
+  todoItems.forEach((item) => {
+    const checkbox = item.querySelector('.form-check-input');
+    const todoText = item.querySelector('.form-check-label').innerText;
+
+    if (checkbox.checked) {
+      // Remove the completed item from the DOM
+      item.remove();
+
+      // Update the todos array by filtering out the completed item
+      todos = todos.filter((todo) => todo.text !== todoText);
+    }
+  });
+
+  // Update localStorage to save the modified todos array
+  saveTodoToLocalStorage();
 }
 
 // Load todos on page load
