@@ -6,6 +6,5 @@ It is often said that one of the ways to really get better at programming is by 
 
 #TASK
 
-1. How to add autofill using JS, then submiting?
-2. Make shure new tasks also added to localStorage and they not disappered after reload.
-3. Add id using UUID (Universally Unique Identifier) to auto increment todos index.
+1. Add id using UUID (Universally Unique Identifier) to auto increment todos index.
+2. Simplified App leaving only todo list without additional task.
