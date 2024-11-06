@@ -55,9 +55,9 @@ function addNewTodo(text) {
   const todoId = uuid.v4();  // Generate a new UUID for each todo
 
   todos.push({
-    id: todoId,
     text: text,
     tasks: [],
+    id: todoId,
   });
   saveTodoToLocalStorage();
 }
@@ -104,14 +104,32 @@ function addTask(button) {
   const taskText = input.value;
 
   if (taskText) {
-    const taskList = button.closest('li').querySelector('.task-list'); // Find the task list
-    const li = document.createElement('li');
-    li.className = 'list-group-item';
-    li.innerText = taskText;
-    taskList.appendChild(li);
+    // Find the todo list item (the parent <li>)
+    const todoItem = button.closest('li');
+    const todoText = todoItem.querySelector('.form-check-label').innerText; // Get the todo's text
+
+    // Find the corresponding todo object in the array
+    const todo = todos.find((todo) => todo.text === todoText);
+
+    if (todo) {
+      // Add the new task to the todo's task array
+      todo.tasks.push(taskText);
+      
+      // Now update localStorage with the updated todos array
+      saveTodoToLocalStorage();
+
+      // Update the task list in the DOM
+      const taskList = todoItem.querySelector('.task-list');
+      const li = document.createElement('li');
+      li.className = 'list-group-item';
+      li.innerText = taskText;
+      taskList.appendChild(li);
+    }
+    
     input.value = ''; // Clear the input
   }
 }
+
 
 function toggleComplete(checkbox) {
   const label = checkbox.nextElementSibling;
