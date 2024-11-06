@@ -23,11 +23,11 @@ function loadTodos() {
   }
 }
 
-// function getExistingTodos() {
-//   return Array.from(
-//     document.querySelectorAll('#todo-list .form-check-label')
-//   ).map((label) => label.textContent.trim());
-// }
+function getExistingTodos() {
+  return Array.from(
+    document.querySelectorAll('#todo-list .form-check-label')
+  ).map((label) => label.textContent.trim());
+}
 
 function addTodo() {
   const input = document.getElementById('todo-input');
