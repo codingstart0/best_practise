@@ -13,7 +13,7 @@ function loadTodos() {
   try {
     todos = JSON.parse(localStorage.getItem(localStorageKeyTodos)) || [];
     todos.forEach((todo) => {
-      addTodoToDOM(todo.text, todo.tasks);
+      addTodoToDOM(todo.text);
     });
   } catch (err) {
     alert(err.message);
@@ -56,7 +56,7 @@ function addNewTodo(text) {
 
   todos.push({
     text: text,
-    tasks: [],
+    completed: false,
     id: todoId,
   });
   saveTodoToLocalStorage();
@@ -66,7 +66,7 @@ function saveTodoToLocalStorage() {
   localStorage.setItem(localStorageKeyTodos, JSON.stringify(todos));
 }
 
-function addTodoToDOM(text, tasks) {
+function addTodoToDOM(text) {
   const li = document.createElement('li');
   li.className = 'list-group-item';
   li.innerHTML = `
@@ -78,62 +78,21 @@ function addTodoToDOM(text, tasks) {
                 </div>
                 <button class="btn btn-danger btn-sm" onclick="removeTodo(this)">Remove</button>
             </div>
-            <ul class="list-group mt-2 task-list">
-                ${tasks
-                  .map((task) => `<li class="list-group-item">${task}</li>`)
-                  .join('')}
-            </ul>
-            <div class="input-group mt-2">
-                <input type="text" class="form-control" placeholder="Add a task">
-                <button class="btn btn-success btn-sm" onclick="addTask(this)">Add Task</button>
-            </div>
         </div>
     `;
   document.getElementById('todo-list').appendChild(li);
-
-  // Add event listener for Enter key on the new task input
-  li.querySelector('.form-control').addEventListener('keypress', function(event) {
-    if (event.key === 'Enter') {
-      addTask(this.nextElementSibling);  // Trigger the addTask function
-    }
-  });
 }
-
-function addTask(button) {
-  const input = button.previousElementSibling; // Get the input field
-  const taskText = input.value;
-
-  if (taskText) {
-    // Find the todo list item (the parent <li>)
-    const todoItem = button.closest('li');
-    const todoText = todoItem.querySelector('.form-check-label').innerText; // Get the todo's text
-
-    // Find the corresponding todo object in the array
-    const todo = todos.find((todo) => todo.text === todoText);
-
-    if (todo) {
-      // Add the new task to the todo's task array
-      todo.tasks.push(taskText);
-      
-      // Now update localStorage with the updated todos array
-      saveTodoToLocalStorage();
-
-      // Update the task list in the DOM
-      const taskList = todoItem.querySelector('.task-list');
-      const li = document.createElement('li');
-      li.className = 'list-group-item';
-      li.innerText = taskText;
-      taskList.appendChild(li);
-    }
-    
-    input.value = ''; // Clear the input
-  }
-}
-
 
 function toggleComplete(checkbox) {
   const label = checkbox.nextElementSibling;
   label.classList.toggle('text-decoration-line-through', checkbox.checked);
+
+  const todoText = label.innerText;
+  const todo = todos.find((todo) => todo.text === todoText);
+  if (todo) {
+    todo.completed = checkbox.checked;
+    saveTodoToLocalStorage();
+  }
 }
 
 function removeTodo(button) {
