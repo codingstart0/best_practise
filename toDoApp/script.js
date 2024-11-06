@@ -29,10 +29,12 @@ function getExistingTodos() {
 
 function addTodo() {
   const input = document.getElementById('todo-input');
-  const todoText = input.value;
+  let todoText = input.value.trim();
   const existingTodos = getExistingTodos();
 
   if (todoText) {
+    todoText = todoText.charAt(0).toUpperCase() + todoText.slice(1).toLowerCase();
+
     if (
       existingTodos
         .map((todo) => todo.toUpperCase())
