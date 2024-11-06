@@ -6,16 +6,6 @@ document.getElementById('new-todo-form').addEventListener('submit', (event) => {
   event.preventDefault();
   addTodo();
 });
-// document.getElementById('add-todo').addEventListener('click', addTodo);
-// document
-//   .getElementById('todo-input')
-//   .addEventListener('keypress', function (event) {
-    
-//     if (event.key === 'Enter') {
-//       event.preventDefault();
-//       addTodo();
-//     }
-//   });
 
 function loadTodos() {
   try {
