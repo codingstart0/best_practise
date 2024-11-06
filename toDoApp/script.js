@@ -52,12 +52,14 @@ function addTodo() {
 }
 
 function addNewTodo(text) {
+  const todoId = uuid.v4();  // Generate a new UUID for each todo
+
   todos.push({
-    id: lastIndex,
+    id: todoId,
     text: text,
     tasks: [],
   });
-  lastIndex++;
+  saveTodoToLocalStorage();
 }
 
 function saveTodoToLocalStorage() {
