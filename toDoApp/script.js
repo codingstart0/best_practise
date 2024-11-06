@@ -32,7 +32,7 @@ function getExistingTodos() {
 function addTodo() {
   const input = document.getElementById('todo-input');
   let todoText = input.value.trim();
-  // const existingTodos = getExistingTodos();
+  const existingTodos = getExistingTodos(); // Get existing todos from the DOM
 
   if (todoText) {
     todoText =
@@ -48,8 +48,8 @@ function addTodo() {
       return; // Stop execution if it exists
     }
     addNewTodo(todoText);
-    addTodoToDOM(todoText, []); // Pass an empty array for tasks
-    saveTodoToLocalStorage(); // Save empty tasks array
+    addTodoToDOM(todoText);
+    saveTodoToLocalStorage();
     input.value = ''; // Clear the input
   }
 }
