@@ -196,5 +196,22 @@ function clearCompletedTodos() {
   saveTodoToLocalStorage();
 }
 
+function hideCompletedTodos() {
+  // Select all the to-do items in the list
+  const todoItems = document.querySelectorAll('#todo-list .list-group-item');
+
+  // Filter out completed todos from the DOM and todos array
+  todoItems.forEach((item) => {
+    const checkbox = item.querySelector('.form-check-input');
+
+    // Hide item if it’s completed
+    if (checkbox.checked) {
+      item.style.display = 'none'; // Hide the item visually
+    } else {
+      item.style.display = 'block'; // Show the item if it's not completed
+    }
+  });
+}
+
 // Load todos on page load
 loadTodos();
