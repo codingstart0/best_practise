@@ -1,1 +1,7 @@
 /* https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js */
+
+.form-check-label {
+  text-overflow: ellipsis;
+  max-width: 200px;
+  overflow: hidden;
+}

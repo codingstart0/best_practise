@@ -47,16 +47,8 @@ function addTodo() {
       alert('This todo already exists!');
       return; // Stop execution if it exists
     }
-
-    // Create the todo object and add it to `todos` array
-    const newTodo = {
-      text: todoText,
-      completed: false,
-      id: uuid.v4(), // Generate a new UUID for each todo
-    };
-    todos.push(newTodo);
-
-    addNewTodo(newTodo);
+    addNewTodo(todoText);
+    addTodoToDOM(todoText);
     saveTodoToLocalStorage();
     input.value = ''; // Clear the input
   }
@@ -77,23 +69,22 @@ function saveTodoToLocalStorage() {
   localStorage.setItem(localStorageKeyTodos, JSON.stringify(todos));
 }
 
-function addTodoToDOM(todo) {
+function addTodoToDOM(text) {
   const li = document.createElement('li');
   li.className = 'list-group-item';
-  li.dataset.id = todo.id; // Store the ID as a data attribute
   li.innerHTML = `
         <div>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)">
-                    <label class="form-check-label">${todo.text}</label>
+                    <label class="form-check-label">${text}</label>
                 </div>
                 <button class="btn btn-danger btn-sm" onclick="removeTodo(this)">Remove</button>
             </div>
         </div>
     `;
-  // const label = li.querySelector('.form-check-label');
-  // label.addEventListener('dblclick', () => editTodoLabel(label));
+  const label = li.querySelector('.form-check-label');
+  label.addEventListener('dblclick', () => editTodoLabel(label));
   document.getElementById('todo-list').appendChild(li);
 }
 
@@ -111,7 +102,7 @@ function toggleComplete(checkbox) {
 
 function editTodoLabel(label) {
   const originalText = label.innerText;
-
+  
   const input = document.createElement('input');
   input.type = 'text';
   input.className = 'form-control';
@@ -119,8 +110,8 @@ function editTodoLabel(label) {
   label.replaceWith(input);
   input.focus();
 
-  // Initialize a flag to prevent multiple saves
-  let isSaving = false;
+    // Initialize a flag to prevent multiple saves
+    let isSaving = false;
 
   // Define the save function once to use in both listeners
   const saveFunction = () => {
@@ -143,7 +134,7 @@ function saveEditedTodo(input, originalText) {
   const newText = input.value.trim();
   const label = document.createElement('label');
   label.className = 'form-check-label';
-  label.innerText = newText || originalText; // Revert if empty
+  label.innerText = newText || originalText;  // Revert if empty
   input.replaceWith(label);
 
   label.addEventListener('onclick', () => editTodoLabel(label));
@@ -158,21 +149,16 @@ function saveEditedTodo(input, originalText) {
 
 function removeTodo(button) {
   const li = button.closest('li'); // Get the parent todo item
-  const checkbox = li.querySelector('.form-check-input'); // Get the checkbox element
-  // const text = li.querySelector('label').innerText; // Get the todo text
-  const todoId = li.dataset.id; // Get the todo ID from the data attribute
+  const text = li.querySelector('label').innerText; // Get the todo text
 
-  // Check if the todo is unchecked
-  if (!checkbox.checked) {
-    const confirmRemoval = confirm(
-      'This todo is not completed. Are you sure you want to remove it?'
-    );
-    if (!confirmRemoval) return; // Exit if user cancels
-  }
+  // Remove from the todos array
+  todos = todos.filter((todo) => todo.text !== text);
 
-  todos = todos.filter((todo) => todo.id !== todoId); // Remove from the todos array
-  saveTodoToLocalStorage(); // Update local storage
-  li.remove(); // Remove the item from the DOM
+  // Update local storage
+  saveTodoToLocalStorage();
+
+  // Remove the item from the DOM
+  li.remove();
 }
 
 function clearCompletedTodos() {
@@ -199,3 +185,6 @@ function clearCompletedTodos() {
 
 // Load todos on page load
 loadTodos();
+
+iiiii
+WWWWW
