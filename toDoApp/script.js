@@ -102,7 +102,7 @@ function toggleComplete(checkbox) {
 
 function editTodoLabel(label) {
   const originalText = label.innerText;
-  
+
   const input = document.createElement('input');
   input.type = 'text';
   input.className = 'form-control';
@@ -110,8 +110,8 @@ function editTodoLabel(label) {
   label.replaceWith(input);
   input.focus();
 
-    // Initialize a flag to prevent multiple saves
-    let isSaving = false;
+  // Initialize a flag to prevent multiple saves
+  let isSaving = false;
 
   // Define the save function once to use in both listeners
   const saveFunction = () => {
@@ -134,7 +134,7 @@ function saveEditedTodo(input, originalText) {
   const newText = input.value.trim();
   const label = document.createElement('label');
   label.className = 'form-check-label';
-  label.innerText = newText || originalText;  // Revert if empty
+  label.innerText = newText || originalText; // Revert if empty
   input.replaceWith(label);
 
   label.addEventListener('onclick', () => editTodoLabel(label));
@@ -150,9 +150,22 @@ function saveEditedTodo(input, originalText) {
 function removeTodo(button) {
   const li = button.closest('li'); // Get the parent todo item
   const text = li.querySelector('label').innerText; // Get the todo text
+  const checkbox = li.querySelector('.form-check-input'); // Get the checkbox element
 
   // Remove from the todos array
   todos = todos.filter((todo) => todo.text !== text);
+
+  if (!checkbox.checked) {
+    const confirmDelete = window.confirm(
+      'This todo is not finished. Do you really want to delete it?'
+    );
+    if (!confirmDelete) {
+      // If the user clicks "Cancel", stop the deletion process
+      todos.push({ text, completed: false }); // Re-add the todo to the array (optional)
+      // saveTodoToLocalStorage(); // Optionally save to local storage if needed
+      return; // Stop execution to prevent deletion
+    }
+  }
 
   // Update local storage
   saveTodoToLocalStorage();
@@ -171,8 +184,6 @@ function clearCompletedTodos() {
     const todoText = item.querySelector('.form-check-label').innerText;
 
     if (checkbox.checked) {
-      warn
-      
       // Remove the completed item from the DOM
       item.remove();
 
