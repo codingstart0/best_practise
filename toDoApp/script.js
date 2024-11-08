@@ -110,14 +110,24 @@ function editTodoLabel(label) {
   label.replaceWith(input);
   input.focus();
 
-  // Save the edited todo on "Enter" key or blur (click outside)
+    // Initialize a flag to prevent multiple saves
+    let isSaving = false;
+
+  // Define the save function once to use in both listeners
+  const saveFunction = () => {
+    if (isSaving) return; // Prevent re-entry
+    isSaving = true; // Mark as executed
+    saveEditedTodo(input, originalText);
+  };
+
+  // Event listeners for Enter key and blur event
   input.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
-      saveEditedTodo(input, originalText);
+      saveFunction();
     }
   });
 
-  input.addEventListener('blur', () => saveEditedTodo(input, originalText));
+  input.addEventListener('blur', saveFunction);
 }
 
 function saveEditedTodo(input, originalText) {
@@ -127,7 +137,7 @@ function saveEditedTodo(input, originalText) {
   label.innerText = newText || originalText;  // Revert if empty
   input.replaceWith(label);
 
-  label.addEventListener('dblclick', () => editTodoLabel(label));
+  label.addEventListener('onclick', () => editTodoLabel(label));
 
   // Update todos array and localStorage
   const todo = todos.find((todo) => todo.text === originalText);
