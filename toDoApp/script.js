@@ -171,6 +171,8 @@ function clearCompletedTodos() {
     const todoText = item.querySelector('.form-check-label').innerText;
 
     if (checkbox.checked) {
+      warn
+      
       // Remove the completed item from the DOM
       item.remove();
 

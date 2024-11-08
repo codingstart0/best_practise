@@ -1,4 +1,13 @@
 /* https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js */
+:root {
+  --bs-primary: #fd0dd1;
+}
+
+.btn-primary {
+  --bs-btn-color: #ffffff;
+  --bs-btn-bg: var(--bs-primary);
+}
+
 
 .form-check-label {
   text-overflow: ellipsis;
@@ -8,5 +17,5 @@
 .form-check-input:focus {
   /* border-color: #86b7fe;
   outline: 0; */
-  box-shadow: 0 0 0 .25rem red;
+  box-shadow: 0 0 0 .25rem var(--bs-primary);
 }
