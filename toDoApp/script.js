@@ -185,6 +185,3 @@ function clearCompletedTodos() {
 
 // Load todos on page load
 loadTodos();
-
-iiiii
-WWWWW
