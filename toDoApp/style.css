@@ -8,6 +8,12 @@
   --bs-btn-bg: var(--bs-primary);
 }
 
+.btn-secondary {
+  margin: 0.3em;
+  display: inline-flex;
+  flex-grow: 1;
+  min-width: 12em;
+}
 
 .form-check-label {
   text-overflow: ellipsis;
@@ -17,5 +23,5 @@
 .form-check-input:focus {
   /* border-color: #86b7fe;
   outline: 0; */
-  box-shadow: 0 0 0 .25rem var(--bs-primary);
+  box-shadow: 0 0 0 0.25rem var(--bs-primary);
 }
