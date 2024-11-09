@@ -10,9 +10,10 @@
 
 .btn-secondary {
   margin: 0.3em;
+  min-width: 13em;
   display: inline-flex;
-  flex-grow: 1;
-  min-width: 12em;
+  justify-content: center;
+  align-items: center;
 }
 
 .form-check-label {
