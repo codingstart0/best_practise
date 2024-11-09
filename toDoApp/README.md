@@ -8,4 +8,4 @@ It is often said that one of the ways to really get better at programming is by 
 
 1. Add id using UUID (Universally Unique Identifier) to auto increment todos index.
 2. Simplified App leaving only todo list without additional task.
-3. Add btn hide done task
+3. Add btn hide done task. Google it how to hide in JS

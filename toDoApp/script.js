@@ -8,8 +8,12 @@ document.getElementById('new-todo-form').addEventListener('submit', (event) => {
 });
 
 document
-  .getElementById('clear-todos')
+  .getElementById('clear-completed-todos')
   .addEventListener('click', clearCompletedTodos);
+
+document
+  .getElementById('hide-todos')
+  .addEventListener('click', hideCompletedTodos);
 
 function loadTodos() {
   try {
@@ -203,6 +207,13 @@ function hideCompletedTodos() {
   // Filter out completed todos from the DOM and todos array
   todoItems.forEach((item) => {
     const checkbox = item.querySelector('.form-check-input');
+
+    // Log checkbox status to verify if it's correctly detecting checked status
+    console.log(
+      `Todo: ${item.querySelector('.form-check-label').innerText}, Completed: ${
+        checkbox.checked
+      }`
+    );
 
     // Hide item if it’s completed
     if (checkbox.checked) {
