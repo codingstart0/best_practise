@@ -18,9 +18,9 @@ document
   .getElementById('clear-completed-todos')
   .addEventListener('click', clearCompletedTodos);
 
-// document
-//   .getElementById('clear-all-todos')
-//   .addEventListener('click', clearAllTodos);
+document
+  .getElementById('clear-all-todos')
+  .addEventListener('click', clearAllTodos);
 
 function loadTodos() {
   try {
@@ -237,6 +237,25 @@ function showAllTodos() {
   todoItems.forEach(item => {
     item.style.display = 'block';
   });
+}
+
+function clearAllTodos() {
+  // Select all todo items and reset their display
+  const todoItems = document.querySelectorAll('#todo-list .list-group-item');
+
+    // Filter out completed todos from the DOM and todos array
+    todoItems.forEach((item) => {
+      const todoText = item.querySelector('.form-check-label').innerText;
+  
+        item.remove();
+  
+        // Update the todos array by filtering out the completed item
+        todos = todos.filter((todo) => todo.text !== todoText);
+      }
+    );
+  
+  // Update localStorage to save the modified todos array
+  saveTodoToLocalStorage();
 }
 
 // Load todos on page load
