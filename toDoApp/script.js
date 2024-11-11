@@ -6,14 +6,21 @@ document.getElementById('new-todo-form').addEventListener('submit', (event) => {
   event.preventDefault();
   addTodo();
 });
+document
+  .getElementById('hide-todos')
+  .addEventListener('click', hideCompletedTodos);
+
+document
+  .getElementById('show-todos')
+  .addEventListener('click', showCompletedTodos);
 
 document
   .getElementById('clear-completed-todos')
   .addEventListener('click', clearCompletedTodos);
 
 document
-  .getElementById('hide-todos')
-  .addEventListener('click', hideCompletedTodos);
+  .getElementById('clear-all-todos')
+  .addEventListener('click', clearAllTodos);
 
 function loadTodos() {
   try {
