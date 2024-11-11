@@ -12,15 +12,15 @@ document
 
 document
   .getElementById('show-todos')
-  .addEventListener('click', showCompletedTodos);
+  .addEventListener('click', showAllTodos);
 
 document
   .getElementById('clear-completed-todos')
   .addEventListener('click', clearCompletedTodos);
 
-document
-  .getElementById('clear-all-todos')
-  .addEventListener('click', clearAllTodos);
+// document
+//   .getElementById('clear-all-todos')
+//   .addEventListener('click', clearAllTodos);
 
 function loadTodos() {
   try {
@@ -228,6 +228,14 @@ function hideCompletedTodos() {
     } else {
       item.style.display = 'block'; // Show the item if it's not completed
     }
+  });
+}
+
+function showAllTodos() {
+  // Select all todo items and reset their display
+  const todoItems = document.querySelectorAll('#todo-list .list-group-item');
+  todoItems.forEach(item => {
+    item.style.display = 'block';
   });
 }
 
