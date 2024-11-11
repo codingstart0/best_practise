@@ -26,3 +26,11 @@
   outline: 0; */
   box-shadow: 0 0 0 0.25rem var(--bs-primary);
 }
+
+.todo-complete .form-check-label {
+  text-decoration: line-through;
+}
+
+.todo-complete .btn {
+  text-decoration: line-through;
+}

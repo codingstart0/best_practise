@@ -2,31 +2,34 @@ const localStorageKeyTodos = 'todos';
 let todos = [];
 let lastIndex = 0;
 
-document.getElementById('new-todo-form').addEventListener('submit', (event) => {
-  event.preventDefault();
-  addTodo();
-});
-document
-  .getElementById('hide-todos')
-  .addEventListener('click', hideCompletedTodos);
+function registerTodoEvents() {
+  document
+    .getElementById('new-todo-form')
+    .addEventListener('submit', (event) => {
+      event.preventDefault();
+      addTodo();
+    });
 
-document
-  .getElementById('show-todos')
-  .addEventListener('click', showAllTodos);
+  document
+    .getElementById('hide-todos')
+    .addEventListener('click', hideCompletedTodos);
 
-document
-  .getElementById('clear-completed-todos')
-  .addEventListener('click', clearCompletedTodos);
+  document.getElementById('show-todos').addEventListener('click', showAllTodos);
 
-document
-  .getElementById('clear-all-todos')
-  .addEventListener('click', clearAllTodos);
+  document
+    .getElementById('clear-completed-todos')
+    .addEventListener('click', clearCompletedTodos);
+
+  document
+    .getElementById('clear-all-todos')
+    .addEventListener('click', clearAllTodos);
+}
 
 function loadTodos() {
   try {
     todos = JSON.parse(localStorage.getItem(localStorageKeyTodos)) || [];
     todos.forEach((todo) => {
-      addTodoToDOM(todo.text);
+      addTodoToDOM(todo);
     });
   } catch (err) {
     alert(err.message);
@@ -34,81 +37,106 @@ function loadTodos() {
   }
 }
 
-function getExistingTodos() {
-  return Array.from(
-    document.querySelectorAll('#todo-list .form-check-label')
-  ).map((label) => label.textContent.trim());
+// function getExistingTodos() {
+//   const labelsArray = Array.from(
+//     document.querySelectorAll('#todo-list .form-check-label')
+//   );
+//   return labelsArray.map((label) => {
+//     return label.textContent.trim();
+//   });
+// }
+
+function getAllTodosText() {
+  return todos.map((todo) => {
+    return todo.text.toUpperCase();
+  });
 }
 
 function addTodo() {
   const input = document.getElementById('todo-input');
   let todoText = input.value.trim();
-  const existingTodos = getExistingTodos(); // Get existing todos from the DOM
+  const existingTodosText = getAllTodosText(); // Get existing todos from the DOM
 
   if (todoText) {
     todoText =
       todoText.charAt(0).toUpperCase() + todoText.slice(1).toLowerCase();
 
-    if (
-      existingTodos
-        .map((todo) => todo.toUpperCase())
-        .includes(todoText.toUpperCase())
-    ) {
+    if (existingTodosText.includes(todoText.toUpperCase())) {
       // if (existingTodos.includes(todoText))
       alert('This todo already exists!');
       return; // Stop execution if it exists
     }
-    addNewTodo(todoText);
-    addTodoToDOM(todoText);
+    const todo = addNewTodo(todoText);
+    addTodoToDOM(todo);
     saveTodoToLocalStorage();
     input.value = ''; // Clear the input
   }
 }
 
+function getTodoById(todoId) {
+  return todos.find(todo => {
+    return  todo.id === todoId;
+  });
+}
+
 function addNewTodo(text) {
   const todoId = uuid.v4(); // Generate a new UUID for each todo
-
-  todos.push({
+  const todo = {
     text: text,
     completed: false,
     id: todoId,
-  });
-  saveTodoToLocalStorage();
+  };
+
+  todos.push(todo);
+
+  return todo;
 }
 
 function saveTodoToLocalStorage() {
   localStorage.setItem(localStorageKeyTodos, JSON.stringify(todos));
 }
 
-function addTodoToDOM(text) {
+function addTodoToDOM(todo) {
   const li = document.createElement('li');
   li.className = 'list-group-item';
   li.innerHTML = `
         <div>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)">
-                    <label class="form-check-label">${text}</label>
+                    <input type="checkbox" class="form-check-input" ${todo.completed ? 'checked="checked"' : ''}>
+                    <label class="form-check-label">${todo.text}</label>
                 </div>
                 <button class="btn btn-danger btn-sm" onclick="removeTodo(this)">Remove</button>
             </div>
         </div>
     `;
+
+  li.onchange = toggleComplete.bind(this, todo.id);
+
   const label = li.querySelector('.form-check-label');
   label.addEventListener('dblclick', () => editTodoLabel(label));
   document.getElementById('todo-list').appendChild(li);
 }
 
-function toggleComplete(checkbox) {
-  const label = checkbox.nextElementSibling;
-  label.classList.toggle('text-decoration-line-through', checkbox.checked);
+function toggleComplete(todoId, event) {
+  const todo = getTodoById(todoId);
+  const checkbox = event.target;
 
-  const todoText = label.innerText;
-  const todo = todos.find((todo) => todo.text === todoText);
-  if (todo) {
+  if (todo && checkbox) {
     todo.completed = checkbox.checked;
     saveTodoToLocalStorage();
   }
+  
+  // Tiesiog deti class todo-complete ant viso <li>
+  // const label = checkbox.nextElementSibling;
+  // label.classList.toggle('text-decoration-line-through', checkbox.checked);
+
+  // const todoText = label.innerText;
+  // const todo = todos.find((todo) => todo.text === todoText);
+  // if (todo) {
+  //   todo.completed = checkbox.checked;
+  //   saveTodoToLocalStorage();
+  // }
 }
 
 function editTodoLabel(label) {
@@ -120,6 +148,7 @@ function editTodoLabel(label) {
   input.value = originalText;
   label.replaceWith(input);
   input.focus();
+  // input.click();
 
   // Initialize a flag to prevent multiple saves
   let isSaving = false;
@@ -129,6 +158,7 @@ function editTodoLabel(label) {
     if (isSaving) return; // Prevent re-entry
     isSaving = true; // Mark as executed
     saveEditedTodo(input, originalText);
+    isSaving = false;
   };
 
   // Event listeners for Enter key and blur event
@@ -234,7 +264,7 @@ function hideCompletedTodos() {
 function showAllTodos() {
   // Select all todo items and reset their display
   const todoItems = document.querySelectorAll('#todo-list .list-group-item');
-  todoItems.forEach(item => {
+  todoItems.forEach((item) => {
     item.style.display = 'block';
   });
 }
@@ -243,20 +273,21 @@ function clearAllTodos() {
   // Select all todo items and reset their display
   const todoItems = document.querySelectorAll('#todo-list .list-group-item');
 
-    // Filter out completed todos from the DOM and todos array
-    todoItems.forEach((item) => {
-      const todoText = item.querySelector('.form-check-label').innerText;
-  
-        item.remove();
-  
-        // Update the todos array by filtering out the completed item
-        todos = todos.filter((todo) => todo.text !== todoText);
-      }
-    );
-  
+  // Filter out completed todos from the DOM and todos array
+  todoItems.forEach((item) => {
+    const todoText = item.querySelector('.form-check-label').innerText;
+
+    item.remove();
+
+    // Update the todos array by filtering out the completed item
+    todos = todos.filter((todo) => todo.text !== todoText);
+  });
+
   // Update localStorage to save the modified todos array
   saveTodoToLocalStorage();
 }
+
+registerTodoEvents();
 
 // Load todos on page load
 loadTodos();
