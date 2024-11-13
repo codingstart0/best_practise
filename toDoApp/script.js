@@ -35,6 +35,8 @@ function loadTodos() {
     alert(err.message);
     localStorage.setItem(localStorageKeyTodos, JSON.stringify([]));
   }
+  console.table(todos)
+
 }
 
 // function getExistingTodos() {
@@ -94,6 +96,7 @@ function addNewTodo(text) {
 
 function saveTodoToLocalStorage() {
   localStorage.setItem(localStorageKeyTodos, JSON.stringify(todos));
+  console.table(todos);
 }
 
 function addTodoToDOM(todo) {
@@ -244,13 +247,6 @@ function hideCompletedTodos() {
   // Filter out completed todos from the DOM and todos array
   todoItems.forEach((item) => {
     const checkbox = item.querySelector('.form-check-input');
-
-    // Log checkbox status to verify if it's correctly detecting checked status
-    console.log(
-      `Todo: ${item.querySelector('.form-check-label').innerText}, Completed: ${
-        checkbox.checked
-      }`
-    );
 
     // Hide item if it’s completed
     if (checkbox.checked) {
