@@ -60,7 +60,7 @@ function addTodo() {
     }
     const todo = addNewTodo(todoText);
     addTodoToDOM(todo);
-    saveTodoToLocalStorage();
+    saveTodoToLocalStorage(todos);
     input.value = ''; // Clear the input
   }
 }
@@ -84,33 +84,93 @@ function addNewTodo(text) {
   return todo;
 }
 
-function saveTodoToLocalStorage() {
-  localStorage.setItem(localStorageKeyTodos, JSON.stringify(todos));
-  console.table(todos);
+function saveTodoToLocalStorage(todoItemsArray) {
+  console.log('SAVING');
+  localStorage.setItem(localStorageKeyTodos, JSON.stringify(todoItemsArray));
+  console.table(todoItemsArray);
 }
 
 function addTodoToDOM(todo) {
   const li = document.createElement('li');
   li.className = 'list-group-item';
   li.innerHTML = `
-        <div>
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" ${
-                      todo.completed ? 'checked="checked"' : ''
-                    }>
-                    <label class="form-check-label">${todo.text}</label>
-                </div>
-                <button class="btn btn-danger btn-sm" onclick="removeTodo(this)">Remove</button>
-            </div>
+    <div class="d-flex justify-content-between align-items-center todo-item" id="todo-id-${
+      todo.id
+    }">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" ${
+              todo.completed ? 'checked="checked"' : ''
+            }>
+            <label class="form-check-label">${todo.text}</label>
         </div>
-    `;
+        <button class="btn btn-danger btn-sm">Remove</button>
+    </div>
+  `;
 
   li.onchange = toggleComplete.bind(this, todo.id);
 
   const label = li.querySelector('.form-check-label');
-  label.addEventListener('dblclick', () => editTodoLabel(label));
+  const removeBtn = li.querySelector('.btn-danger');
+
+  label.addEventListener('click', editTodo.bind(null, todo));
+  removeBtn.addEventListener('click', (event) => {
+    removeTodo(event, todo);
+  });
+
   document.getElementById('todo-list').appendChild(li);
+}
+
+function editTodo(todo, event) {
+  const labelElement = event.target;
+
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.className = 'form-control';
+  input.value = todo.text;
+  labelElement.replaceWith(input);
+  input.focus();
+
+  console.log('focus');
+
+  // Event listeners for Enter key and blur event
+  input.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      input.blur();
+    }
+  });
+
+  input.addEventListener('blur', () => {
+    saveEditedTodo(input, todo);
+  });
+}
+
+function saveEditedTodo(input, todo) {
+  const newText = input.value.trim() ?? todo.text; // Revert if empty
+  const label = document.createElement('label');
+  label.className = 'form-check-label';
+  label.innerText = newText;
+
+  // const updatedTodo = todos.find((_todo) => _todo.id === todo.id);
+
+  const updatedTodos = todos.map((todoItem) => {
+    if (todoItem.id === todo.id) {
+      todoItem.text = newText;
+      input.replaceWith(label);
+      label.addEventListener('click', editTodo.bind(null, todoItem));
+    }
+
+    return todoItem;
+  });
+
+  saveTodoToLocalStorage(updatedTodos);
+
+  // if (updatedTodo && newText) {
+  //   updatedTodo.text = newText;
+  //   saveTodoToLocalStorage(todos);
+
+  //   input.replaceWith(label);
+  //   label.addEventListener('click', editTodo.bind(null, updatedTodo));
+  // }
 }
 
 function toggleComplete(todoId, event) {
@@ -119,82 +179,39 @@ function toggleComplete(todoId, event) {
 
   if (todo && checkbox) {
     todo.completed = checkbox.checked;
-    saveTodoToLocalStorage();
+    saveTodoToLocalStorage(todos);
   }
 }
 
-function editTodoLabel(label) {
-  const originalText = label.innerText;
+function removeTodo(event, todo) {
+  console.log(todo);
+  console.log(event);
+  const button = event.target;
+  const li = button.closest('li'); // Get the parent todo item
+  // const text = li.querySelector('label').innerText; // Get the todo text
+  // const checkbox = li.querySelector('.form-check-input'); // Get the checkbox element
 
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.className = 'form-control';
-  input.value = originalText;
-  label.replaceWith(input);
-  input.focus();
+  console.log('removeTodo', button);
+  // Remove from the todos array
 
-  // Initialize a flag to prevent multiple saves
-  let isSaving = false;
-
-  // Define the save function once to use in both listeners
-  const saveFunction = () => {
-    if (isSaving) return; // Prevent re-entry
-    isSaving = true; // Mark as executed
-    saveEditedTodo(input, originalText);
-    isSaving = false;
+  const removeElementAndSave = () => {
+    const filteredTodos = todos.filter((todoItem) => todoItem.id !== todo.id);
+    saveTodoToLocalStorage(filteredTodos);
+    li.remove();
   };
 
-  // Event listeners for Enter key and blur event
-  input.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-      saveFunction();
-    }
-  });
-
-  input.addEventListener('blur', saveFunction);
-}
-
-function saveEditedTodo(input, originalText) {
-  const newText = input.value.trim();
-  const label = document.createElement('label');
-  label.className = 'form-check-label';
-  label.innerText = newText || originalText; // Revert if empty
-  input.replaceWith(label);
-
-  label.addEventListener('onclick', () => editTodoLabel(label));
-
-  // Update todos array and localStorage
-  const todo = todos.find((todo) => todo.text === originalText);
-  if (todo && newText) {
-    todo.text = newText;
-    saveTodoToLocalStorage();
-  }
-}
-
-function removeTodo(button) {
-  const li = button.closest('li'); // Get the parent todo item
-  const text = li.querySelector('label').innerText; // Get the todo text
-  const checkbox = li.querySelector('.form-check-input'); // Get the checkbox element
-
-  // Remove from the todos array
-  todos = todos.filter((todo) => todo.text !== text);
-
-  if (!checkbox.checked) {
+  if (todo.completed) {
+    removeElementAndSave();
+  } else {
     const confirmDelete = window.confirm(
       'This todo is not finished. Do you really want to delete it?'
     );
-    if (!confirmDelete) {
-      // If the user clicks "Cancel", stop the deletion process
-      todos.push({ text, completed: false }); // Re-add the todo to the array (optional)
-      return; // Stop execution to prevent deletion
+    if (confirmDelete) {
+      removeElementAndSave();
     }
   }
 
-  // Update local storage
-  saveTodoToLocalStorage();
-
   // Remove the item from the DOM
-  li.remove();
 }
 
 function clearCompletedTodos() {
@@ -216,7 +233,7 @@ function clearCompletedTodos() {
   });
 
   // Update localStorage to save the modified todos array
-  saveTodoToLocalStorage();
+  saveTodoToLocalStorage(todos);
 }
 
 function hideCompletedTodos() {
@@ -259,7 +276,7 @@ function clearAllTodos() {
   });
 
   // Update localStorage to save the modified todos array
-  saveTodoToLocalStorage();
+  saveTodoToLocalStorage(todos);
 }
 
 registerTodoEvents();
