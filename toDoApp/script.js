@@ -35,18 +35,8 @@ function loadTodos() {
     alert(err.message);
     localStorage.setItem(localStorageKeyTodos, JSON.stringify([]));
   }
-  console.table(todos)
-
+  console.table(todos);
 }
-
-// function getExistingTodos() {
-//   const labelsArray = Array.from(
-//     document.querySelectorAll('#todo-list .form-check-label')
-//   );
-//   return labelsArray.map((label) => {
-//     return label.textContent.trim();
-//   });
-// }
 
 function getAllTodosText() {
   return todos.map((todo) => {
@@ -76,8 +66,8 @@ function addTodo() {
 }
 
 function getTodoById(todoId) {
-  return todos.find(todo => {
-    return  todo.id === todoId;
+  return todos.find((todo) => {
+    return todo.id === todoId;
   });
 }
 
@@ -106,7 +96,9 @@ function addTodoToDOM(todo) {
         <div>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" ${todo.completed ? 'checked="checked"' : ''}>
+                    <input type="checkbox" class="form-check-input" ${
+                      todo.completed ? 'checked="checked"' : ''
+                    }>
                     <label class="form-check-label">${todo.text}</label>
                 </div>
                 <button class="btn btn-danger btn-sm" onclick="removeTodo(this)">Remove</button>
@@ -129,17 +121,6 @@ function toggleComplete(todoId, event) {
     todo.completed = checkbox.checked;
     saveTodoToLocalStorage();
   }
-  
-  // Tiesiog deti class todo-complete ant viso <li>
-  // const label = checkbox.nextElementSibling;
-  // label.classList.toggle('text-decoration-line-through', checkbox.checked);
-
-  // const todoText = label.innerText;
-  // const todo = todos.find((todo) => todo.text === todoText);
-  // if (todo) {
-  //   todo.completed = checkbox.checked;
-  //   saveTodoToLocalStorage();
-  // }
 }
 
 function editTodoLabel(label) {
@@ -151,7 +132,6 @@ function editTodoLabel(label) {
   input.value = originalText;
   label.replaceWith(input);
   input.focus();
-  // input.click();
 
   // Initialize a flag to prevent multiple saves
   let isSaving = false;
@@ -206,7 +186,6 @@ function removeTodo(button) {
     if (!confirmDelete) {
       // If the user clicks "Cancel", stop the deletion process
       todos.push({ text, completed: false }); // Re-add the todo to the array (optional)
-      // saveTodoToLocalStorage(); // Optionally save to local storage if needed
       return; // Stop execution to prevent deletion
     }
   }

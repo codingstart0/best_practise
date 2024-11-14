@@ -10,3 +10,4 @@ It is often said that one of the ways to really get better at programming is by 
 2. Simplified App leaving only todo list without additional task.
 3. Add btn hide done task. Google it how to hide in JS
 4. Change standart alert mesage to bootstrap component Modal
+5. Change to to ID
