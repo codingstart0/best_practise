@@ -220,10 +220,10 @@ function hideCompletedTodos() {
 }
 
 function showAllTodos() {
-  // Select all todo items and reset their display
-  const todoItems = document.querySelectorAll('#todo-list .list-group-item');
-  todoItems.forEach((item) => {
-    item.style.display = 'block';
+  todos.forEach((todoItem) => {
+  const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
+  // if (todoElement)
+    todoElement.style.display = 'block';
   });
 }
 
