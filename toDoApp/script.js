@@ -2,175 +2,244 @@ const localStorageKeyTodos = 'todos';
 let todos = [];
 let lastIndex = 0;
 
-document.getElementById('new-todo-form').addEventListener('submit', (event) => {
-  event.preventDefault();
-  addTodo();
-});
+function registerTodoEvents() {
+  document
+    .getElementById('new-todo-form')
+    .addEventListener('submit', (event) => {
+      event.preventDefault();
+      addTodo();
+    });
 
-document.getElementById('clear-todos').addEventListener('click', clearCompletedTodos);
+  document
+    .getElementById('hide-todos')
+    .addEventListener('click', hideCompletedTodos);
+
+  document.getElementById('show-todos').addEventListener('click', showAllTodos);
+
+  document
+    .getElementById('clear-completed-todos')
+    .addEventListener('click', clearCompletedTodos);
+
+  document
+    .getElementById('clear-all-todos')
+    .addEventListener('click', clearAllTodos);
+}
 
 function loadTodos() {
   try {
     todos = JSON.parse(localStorage.getItem(localStorageKeyTodos)) || [];
-    todos.forEach((todo) => {
-      addTodoToDOM(todo.text, todo.tasks);
+    todos?.forEach((todo) => {
+      addTodoToDOM(todo);
     });
   } catch (err) {
-    alert(err.message);
+    console.error(err);
     localStorage.setItem(localStorageKeyTodos, JSON.stringify([]));
   }
+  console.table(todos);
 }
 
-function getExistingTodos() {
-  return Array.from(
-    document.querySelectorAll('#todo-list .form-check-label')
-  ).map((label) => label.textContent.trim());
+function getAllTodosText() {
+  return todos.map((todo) => {
+    return todo.text.toUpperCase();
+  });
 }
 
 function addTodo() {
   const input = document.getElementById('todo-input');
   let todoText = input.value.trim();
-  const existingTodos = getExistingTodos();
+  const existingTodosText = getAllTodosText(); // Get existing todos from the DOM
 
   if (todoText) {
-    todoText = todoText.charAt(0).toUpperCase() + todoText.slice(1).toLowerCase();
+    todoText =
+      todoText.charAt(0).toUpperCase() + todoText.slice(1).toLowerCase();
 
-    if (
-      existingTodos
-        .map((todo) => todo.toUpperCase())
-        .includes(todoText.toUpperCase())
-    ) {
-      // if (existingTodos.includes(todoText))
+    if (existingTodosText.includes(todoText.toUpperCase())) {
+      // TODO: pakeisti i modal
       alert('This todo already exists!');
       return; // Stop execution if it exists
     }
-    addNewTodo(todoText);
-    addTodoToDOM(todoText, []); // Pass an empty array for tasks
-    saveTodoToLocalStorage(); // Save empty tasks array
+    const todo = addNewTodo(todoText);
+    addTodoToDOM(todo);
+    saveTodoToLocalStorage(todos);
     input.value = ''; // Clear the input
   }
+}
+
+function getTodoById(todoId) {
+  return todos.find((todo) => {
+    return todo.id === todoId;
+  });
 }
 
 function addNewTodo(text) {
-  const todoId = uuid.v4();  // Generate a new UUID for each todo
-
-  todos.push({
+  const todoId = uuid.v4(); // Generate a new UUID for each todo
+  const todo = {
     text: text,
-    tasks: [],
+    completed: false,
     id: todoId,
-  });
-  saveTodoToLocalStorage();
+  };
+
+  todos.push(todo);
+
+  return todo;
 }
 
-function saveTodoToLocalStorage() {
-  localStorage.setItem(localStorageKeyTodos, JSON.stringify(todos));
+function saveTodoToLocalStorage(todoItemsArray) {
+  localStorage.setItem(
+    localStorageKeyTodos,
+    JSON.stringify(todoItemsArray || [])
+  );
+  console.table(todoItemsArray);
 }
 
-function addTodoToDOM(text, tasks) {
+function addTodoToDOM(todo) {
   const li = document.createElement('li');
-  li.className = 'list-group-item';
+  li.className = 'list-group-item todo-item';
   li.innerHTML = `
-        <div>
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" onchange="toggleComplete(this)">
-                    <label class="form-check-label">${text}</label>
-                </div>
-                <button class="btn btn-danger btn-sm" onclick="removeTodo(this)">Remove</button>
-            </div>
-            <ul class="list-group mt-2 task-list">
-                ${tasks
-                  .map((task) => `<li class="list-group-item">${task}</li>`)
-                  .join('')}
-            </ul>
-            <div class="input-group mt-2">
-                <input type="text" class="form-control" placeholder="Add a task">
-                <button class="btn btn-success btn-sm" onclick="addTask(this)">Add Task</button>
-            </div>
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" ${
+              todo.completed ? 'checked="checked"' : ''
+            }>
+            <label class="form-check-label">${todo.text}</label>
         </div>
-    `;
-  document.getElementById('todo-list').appendChild(li);
+        <button class="btn btn-danger btn-sm">Remove</button>
+    </div>
+  `;
+  // TODO: Label sugeneruoti per atskira fn ir prideti i li struktura
+  li.id = `todo-id-${todo.id}`;
 
-  // Add event listener for Enter key on the new task input
-  li.querySelector('.form-control').addEventListener('keypress', function(event) {
+  li.onchange = toggleComplete.bind(this, todo.id);
+
+  const label = li.querySelector('.form-check-label');
+  const removeBtn = li.querySelector('.btn-danger');
+
+  label.addEventListener('click', editTodo.bind(null, todo));
+  removeBtn.addEventListener('click', (event) => {
+    removeTodo(event, todo);
+  });
+
+  document.getElementById('todo-list').appendChild(li);
+}
+
+function editTodo(todo, event) {
+  const labelElement = event.target;
+
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.className = 'form-control';
+  input.value = todo.text;
+  labelElement.replaceWith(input);
+  input.focus();
+
+  // Event listeners for Enter key and blur event
+  input.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
-      addTask(this.nextElementSibling);  // Trigger the addTask function
+      input.blur();
     }
+  });
+
+  input.addEventListener('blur', () => {
+    saveEditedTodo(input, todo);
   });
 }
 
-function addTask(button) {
-  const input = button.previousElementSibling; // Get the input field
-  const taskText = input.value;
+function saveEditedTodo(input, todo) {
+  const newText = input.value.trim() || todo.text; // Revert if empty
+  const label = document.createElement('label');
+  label.className = 'form-check-label';
+  label.innerText = newText;
 
-  if (taskText) {
-    // Find the todo list item (the parent <li>)
-    const todoItem = button.closest('li');
-    const todoText = todoItem.querySelector('.form-check-label').innerText; // Get the todo's text
-
-    // Find the corresponding todo object in the array
-    const todo = todos.find((todo) => todo.text === todoText);
-
-    if (todo) {
-      // Add the new task to the todo's task array
-      todo.tasks.push(taskText);
-      
-      // Now update localStorage with the updated todos array
-      saveTodoToLocalStorage();
-
-      // Update the task list in the DOM
-      const taskList = todoItem.querySelector('.task-list');
-      const li = document.createElement('li');
-      li.className = 'list-group-item';
-      li.innerText = taskText;
-      taskList.appendChild(li);
+  const updatedTodos = todos.map((todoItem) => {
+    if (todoItem.id === todo.id) {
+      todoItem.text = newText;
+      input.replaceWith(label);
+      label.addEventListener('click', editTodo.bind(null, todoItem));
     }
-    
-    input.value = ''; // Clear the input
+// TODO: perpanaudoti label generavimo fn ir cia
+    return todoItem;
+  });
+
+  saveTodoToLocalStorage(updatedTodos);
+}
+
+function toggleComplete(todoId, event) {
+  const todo = getTodoById(todoId);
+  const checkbox = event.target;
+
+  if (todo && checkbox) {
+    todo.completed = checkbox.checked;
+    saveTodoToLocalStorage(todos);
   }
 }
 
-
-function toggleComplete(checkbox) {
-  const label = checkbox.nextElementSibling;
-  label.classList.toggle('text-decoration-line-through', checkbox.checked);
-}
-
-function removeTodo(button) {
+function removeTodo(event, todo) {
+  const button = event.target;
   const li = button.closest('li'); // Get the parent todo item
-  const text = li.querySelector('label').innerText; // Get the todo text
 
-  // Remove from the todos array
-  todos = todos.filter((todo) => todo.text !== text);
+  const removeElementAndSave = () => {
+    const filteredTodos = todos.filter((todoItem) => todoItem.id !== todo.id);
+    saveTodoToLocalStorage(filteredTodos);
+    li.remove();
+  };
 
-  // Update local storage
-  saveTodoToLocalStorage();
-
-  // Remove the item from the DOM
-  li.remove();
+  if (todo.completed) {
+    removeElementAndSave();
+  } else {
+    // TODO: Pakeisti i modal
+    const confirmDelete = window.confirm(
+      'This todo is not finished. Do you really want to delete it?'
+    );
+    if (confirmDelete) {
+      removeElementAndSave();
+    }
+  }
 }
 
 function clearCompletedTodos() {
-  // Select all the to-do items in the list
-  const todoItems = document.querySelectorAll('#todo-list .list-group-item');
+  const filteredTodos = todos.filter((todoItem) => {
+    if (todoItem.completed) {
+      const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
+      todoElement?.remove();
 
-  // Filter out completed todos from the DOM and todos array
-  todoItems.forEach((item) => {
-    const checkbox = item.querySelector('.form-check-input');
-    const todoText = item.querySelector('.form-check-label').innerText;
-
-    if (checkbox.checked) {
-      // Remove the completed item from the DOM
-      item.remove();
-
-      // Update the todos array by filtering out the completed item
-      todos = todos.filter((todo) => todo.text !== todoText);
+      return false;
     }
+
+    return true;
   });
 
+  todos = filteredTodos;
+
   // Update localStorage to save the modified todos array
-  saveTodoToLocalStorage();
+  saveTodoToLocalStorage(filteredTodos);
 }
+
+function hideCompletedTodos() {
+  todos.forEach((todoItem) => {
+    const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
+    if (todoElement)
+      // Hide or show based on the 'completed' status
+      todoElement.style.display = todoItem.completed ? 'none' : 'block';
+  });
+}
+
+function showAllTodos() {
+  todos.forEach((todoItem) => {
+    const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
+    if (todoElement) todoElement.style.display = 'block';
+  });
+}
+
+function clearAllTodos() {
+  document.querySelectorAll('.todo-item').forEach((element) => {
+    element.remove();
+  });
+  todos = [];
+
+  saveTodoToLocalStorage(todos);
+}
+
+registerTodoEvents();
 
 // Load todos on page load
 loadTodos();
