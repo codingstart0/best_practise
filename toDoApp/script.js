@@ -54,6 +54,7 @@ function addTodo() {
       todoText.charAt(0).toUpperCase() + todoText.slice(1).toLowerCase();
 
     if (existingTodosText.includes(todoText.toUpperCase())) {
+      // TODO: pakeisti i modal
       alert('This todo already exists!');
       return; // Stop execution if it exists
     }
@@ -105,6 +106,7 @@ function addTodoToDOM(todo) {
         <button class="btn btn-danger btn-sm">Remove</button>
     </div>
   `;
+  // TODO: Label sugeneruoti per atskira fn ir prideti i li struktura
   li.id = `todo-id-${todo.id}`;
 
   li.onchange = toggleComplete.bind(this, todo.id);
@@ -130,8 +132,6 @@ function editTodo(todo, event) {
   labelElement.replaceWith(input);
   input.focus();
 
-  console.log('focus');
-
   // Event listeners for Enter key and blur event
   input.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
@@ -150,15 +150,13 @@ function saveEditedTodo(input, todo) {
   label.className = 'form-check-label';
   label.innerText = newText;
 
-  // const updatedTodo = todos.find((_todo) => _todo.id === todo.id);
-
   const updatedTodos = todos.map((todoItem) => {
     if (todoItem.id === todo.id) {
       todoItem.text = newText;
       input.replaceWith(label);
       label.addEventListener('click', editTodo.bind(null, todoItem));
     }
-
+// TODO: perpanaudoti label generavimo fn ir cia
     return todoItem;
   });
 
@@ -188,6 +186,7 @@ function removeTodo(event, todo) {
   if (todo.completed) {
     removeElementAndSave();
   } else {
+    // TODO: Pakeisti i modal
     const confirmDelete = window.confirm(
       'This todo is not finished. Do you really want to delete it?'
     );
@@ -235,7 +234,9 @@ function clearAllTodos() {
   document.querySelectorAll('.todo-item').forEach((element) => {
     element.remove();
   });
-  saveTodoToLocalStorage([]);
+  todos = [];
+
+  saveTodoToLocalStorage(todos);
 }
 
 registerTodoEvents();
