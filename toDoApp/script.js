@@ -28,11 +28,11 @@ function registerTodoEvents() {
 function loadTodos() {
   try {
     todos = JSON.parse(localStorage.getItem(localStorageKeyTodos)) || [];
-    todos.forEach((todo) => {
+    todos?.forEach((todo) => {
       addTodoToDOM(todo);
     });
   } catch (err) {
-    alert(err.message);
+    console.error(err);
     localStorage.setItem(localStorageKeyTodos, JSON.stringify([]));
   }
   console.table(todos);
@@ -84,15 +84,18 @@ function addNewTodo(text) {
 }
 
 function saveTodoToLocalStorage(todoItemsArray) {
-  localStorage.setItem(localStorageKeyTodos, JSON.stringify(todoItemsArray));
+  localStorage.setItem(
+    localStorageKeyTodos,
+    JSON.stringify(todoItemsArray || [])
+  );
   console.table(todoItemsArray);
 }
 
 function addTodoToDOM(todo) {
   const li = document.createElement('li');
-  li.className = 'list-group-item';
+  li.className = 'list-group-item todo-item';
   li.innerHTML = `
-    <div class="d-flex justify-content-between align-items-center todo-item">
+    <div class="d-flex justify-content-between align-items-center">
         <div class="form-check">
             <input type="checkbox" class="form-check-input" ${
               todo.completed ? 'checked="checked"' : ''
@@ -227,29 +230,11 @@ function showAllTodos() {
 }
 
 function clearAllTodos() {
-  const resetedTodo = todos.forEach((todoItem) => {
-    if (todoItem) {
-      const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
-      todoElement.remove();
-    }
+  document.querySelectorAll('.todo-item').forEach((element) => {
+    element.remove();
   });
-  saveTodoToLocalStorage();
+  saveTodoToLocalStorage([]);
 }
-
-// function clearAllTodos() {
-//   todos.forEach((todoItem) => {
-//     const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
-//     if (todoElement) {
-//       todoElement.remove();
-//     }
-
-//     // Clear the todos array
-//     todos.length = 0;
-
-//     // Update localStorage to save the modified todos array
-//     saveTodoToLocalStorage();
-//   });
-// }
 
 registerTodoEvents();
 
