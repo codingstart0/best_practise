@@ -6,6 +6,10 @@ It is often said that one of the ways to really get better at programming is by 
 
 #TASK
 
-1. How to add autofill using JS, then submiting?
-2. Make shure new tasks also added to localStorage and they not disappered after reload.
-3. Add id using UUID (Universally Unique Identifier) to auto increment todos index.
+1. Add id using UUID (Universally Unique Identifier) to auto increment todos index.
+2. Simplified App leaving only todo list without additional task.
+3. Add btn hide done task. Google it how to hide in JS
+4. Change standart alert mesage to bootstrap component Modal
+5. replace .innerText into todo.id that item gets from array by ID, but not from html DOM.
+
+#BUG
