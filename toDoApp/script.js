@@ -209,6 +209,8 @@ function clearCompletedTodos() {
     return true;
   });
 
+  todos = filteredTodos;
+
   // Update localStorage to save the modified todos array
   saveTodoToLocalStorage(filteredTodos);
 }
