@@ -221,28 +221,24 @@ function hideCompletedTodos() {
 
 function showAllTodos() {
   todos.forEach((todoItem) => {
-  const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
-  // if (todoElement)
-    todoElement.style.display = 'block';
+    const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
+    if (todoElement) todoElement.style.display = 'block';
   });
 }
 
 function clearAllTodos() {
-  // Select all todo items and reset their display
-  const todoItems = document.querySelectorAll('#todo-list .list-group-item');
+  todos.forEach((todoItem) => {
+    const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
+    if (todoElement) {
+      todoElement.remove();
+    }
 
-  // Filter out completed todos from the DOM and todos array
-  todoItems.forEach((item) => {
-    const todoText = item.querySelector('.form-check-label').innerText;
+    // Clear the todos array
+    todos = [];
 
-    item.remove();
-
-    // Update the todos array by filtering out the completed item
-    todos = todos.filter((todo) => todo.text !== todoText);
+    // Update localStorage to save the modified todos array
+    saveTodoToLocalStorage();
   });
-
-  // Update localStorage to save the modified todos array
-  saveTodoToLocalStorage(todos);
 }
 
 registerTodoEvents();
