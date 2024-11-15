@@ -227,19 +227,29 @@ function showAllTodos() {
 }
 
 function clearAllTodos() {
-  todos.forEach((todoItem) => {
-    const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
-    if (todoElement) {
+  const resetedTodo = todos.forEach((todoItem) => {
+    if (todoItem) {
+      const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
       todoElement.remove();
     }
-
-    // Clear the todos array
-    todos = [];
-
-    // Update localStorage to save the modified todos array
-    saveTodoToLocalStorage();
   });
+  saveTodoToLocalStorage();
 }
+
+// function clearAllTodos() {
+//   todos.forEach((todoItem) => {
+//     const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
+//     if (todoElement) {
+//       todoElement.remove();
+//     }
+
+//     // Clear the todos array
+//     todos.length = 0;
+
+//     // Update localStorage to save the modified todos array
+//     saveTodoToLocalStorage();
+//   });
+// }
 
 registerTodoEvents();
 

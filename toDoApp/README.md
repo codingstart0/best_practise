@@ -11,3 +11,6 @@ It is often said that one of the ways to really get better at programming is by 
 3. Add btn hide done task. Google it how to hide in JS
 4. Change standart alert mesage to bootstrap component Modal
 5. replace .innerText into todo.id that item gets from array by ID, but not from html DOM.
+
+#BUG
+REMOVE btn! removeTodo removes only from DOM, but not from local storage
