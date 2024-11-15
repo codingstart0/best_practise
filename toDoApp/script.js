@@ -54,7 +54,6 @@ function addTodo() {
       todoText.charAt(0).toUpperCase() + todoText.slice(1).toLowerCase();
 
     if (existingTodosText.includes(todoText.toUpperCase())) {
-      // if (existingTodos.includes(todoText))
       alert('This todo already exists!');
       return; // Stop execution if it exists
     }
@@ -85,7 +84,6 @@ function addNewTodo(text) {
 }
 
 function saveTodoToLocalStorage(todoItemsArray) {
-  console.log('SAVING');
   localStorage.setItem(localStorageKeyTodos, JSON.stringify(todoItemsArray));
   console.table(todoItemsArray);
 }
@@ -94,9 +92,7 @@ function addTodoToDOM(todo) {
   const li = document.createElement('li');
   li.className = 'list-group-item';
   li.innerHTML = `
-    <div class="d-flex justify-content-between align-items-center todo-item" id="todo-id-${
-      todo.id
-    }">
+    <div class="d-flex justify-content-between align-items-center todo-item">
         <div class="form-check">
             <input type="checkbox" class="form-check-input" ${
               todo.completed ? 'checked="checked"' : ''
@@ -106,6 +102,7 @@ function addTodoToDOM(todo) {
         <button class="btn btn-danger btn-sm">Remove</button>
     </div>
   `;
+  li.id = `todo-id-${todo.id}`;
 
   li.onchange = toggleComplete.bind(this, todo.id);
 
@@ -145,7 +142,7 @@ function editTodo(todo, event) {
 }
 
 function saveEditedTodo(input, todo) {
-  const newText = input.value.trim() ?? todo.text; // Revert if empty
+  const newText = input.value.trim() || todo.text; // Revert if empty
   const label = document.createElement('label');
   label.className = 'form-check-label';
   label.innerText = newText;
@@ -163,14 +160,6 @@ function saveEditedTodo(input, todo) {
   });
 
   saveTodoToLocalStorage(updatedTodos);
-
-  // if (updatedTodo && newText) {
-  //   updatedTodo.text = newText;
-  //   saveTodoToLocalStorage(todos);
-
-  //   input.replaceWith(label);
-  //   label.addEventListener('click', editTodo.bind(null, updatedTodo));
-  // }
 }
 
 function toggleComplete(todoId, event) {
@@ -184,15 +173,8 @@ function toggleComplete(todoId, event) {
 }
 
 function removeTodo(event, todo) {
-  console.log(todo);
-  console.log(event);
   const button = event.target;
   const li = button.closest('li'); // Get the parent todo item
-  // const text = li.querySelector('label').innerText; // Get the todo text
-  // const checkbox = li.querySelector('.form-check-input'); // Get the checkbox element
-
-  console.log('removeTodo', button);
-  // Remove from the todos array
 
   const removeElementAndSave = () => {
     const filteredTodos = todos.filter((todoItem) => todoItem.id !== todo.id);
@@ -210,46 +192,30 @@ function removeTodo(event, todo) {
       removeElementAndSave();
     }
   }
-
-  // Remove the item from the DOM
 }
 
 function clearCompletedTodos() {
-  // Select all the to-do items in the list
-  const todoItems = document.querySelectorAll('#todo-list .list-group-item');
+  const filteredTodos = todos.filter((todoItem) => {
+    if (todoItem.completed) {
+      const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
+      todoElement?.remove();
 
-  // Filter out completed todos from the DOM and todos array
-  todoItems.forEach((item) => {
-    const checkbox = item.querySelector('.form-check-input');
-    const todoText = item.querySelector('.form-check-label').innerText;
-
-    if (checkbox.checked) {
-      // Remove the completed item from the DOM
-      item.remove();
-
-      // Update the todos array by filtering out the completed item
-      todos = todos.filter((todo) => todo.text !== todoText);
+      return false;
     }
+
+    return true;
   });
 
   // Update localStorage to save the modified todos array
-  saveTodoToLocalStorage(todos);
+  saveTodoToLocalStorage(filteredTodos);
 }
 
 function hideCompletedTodos() {
-  // Select all the to-do items in the list
-  const todoItems = document.querySelectorAll('#todo-list .list-group-item');
-
-  // Filter out completed todos from the DOM and todos array
-  todoItems.forEach((item) => {
-    const checkbox = item.querySelector('.form-check-input');
-
-    // Hide item if it’s completed
-    if (checkbox.checked) {
-      item.style.display = 'none'; // Hide the item visually
-    } else {
-      item.style.display = 'block'; // Show the item if it's not completed
-    }
+  todos.forEach((todoItem) => {
+    const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
+    if (todoElement)
+      // Hide or show based on the 'completed' status
+      todoElement.style.display = todoItem.completed ? 'none' : 'block';
   });
 }
 
