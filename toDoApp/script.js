@@ -92,6 +92,14 @@ function saveTodoToLocalStorage(todoItemsArray) {
   console.table(todoItemsArray);
 }
 
+function createTodoLabel(todo) {
+  const label = document.createElement('label');
+  label.className = 'form-check-label';
+  label.innerText = todo.text;
+  label.addEventListener('click', editTodo.bind(null, todo));
+  return label;
+}
+
 function addTodoToDOM(todo) {
   const li = document.createElement('li');
   li.className = 'list-group-item todo-item';
