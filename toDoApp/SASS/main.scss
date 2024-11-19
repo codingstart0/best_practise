@@ -1,5 +1,10 @@
 // custom variables
 $primary: #c29938;
 
+.todo-complete .btn {
+  text-decoration: line-through;
+}
+
 // import bootstrap
 @import '../node_modules/bootstrap/scss/bootstrap';
+
