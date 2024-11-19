@@ -1,6 +1,23 @@
 // custom variables
 $primary: #c29938;
-$secondary: rgb(25, 7, 30);
+$secondary: #373739;
+// $danger: #e45c07;
+
+// import bootstrap
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+.btn-danger {
+  @include button-variant(
+    #e05214,
+    // Background color
+    #383a41,
+    // Border color
+    #ffffff,
+    // Text color
+    #d10909,
+    // Hover background
+  );
+}
 
 .btn-secondary {
   margin: 0.3em;
@@ -9,7 +26,3 @@ $secondary: rgb(25, 7, 30);
   justify-content: center;
   align-items: center;
 }
-
-// import bootstrap
-@import '../node_modules/bootstrap/scss/bootstrap';
-
