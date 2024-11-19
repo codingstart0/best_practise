@@ -1,8 +1,13 @@
 // custom variables
 $primary: #c29938;
+$secondary: rgb(25, 7, 30);
 
-.todo-complete .btn {
-  text-decoration: line-through;
+.btn-secondary {
+  margin: 0.3em;
+  min-width: 13em;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
 // import bootstrap
