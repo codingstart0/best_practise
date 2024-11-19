@@ -103,26 +103,31 @@ function createTodoLabel(todo) {
 function addTodoToDOM(todo) {
   const li = document.createElement('li');
   li.className = 'list-group-item todo-item';
+  li.id = `todo-id-${todo.id}`;
   li.innerHTML = `
     <div class="d-flex justify-content-between align-items-center">
         <div class="form-check">
             <input type="checkbox" class="form-check-input" ${
               todo.completed ? 'checked="checked"' : ''
             }>
-            <label class="form-check-label">${todo.text}</label>
         </div>
         <button class="btn btn-danger btn-sm">Remove</button>
     </div>
   `;
   // TODO: Label sugeneruoti per atskira fn ir prideti i li struktura
-  li.id = `todo-id-${todo.id}`;
+  // li.id = `todo-id-${todo.id}`;
 
-  li.onchange = toggleComplete.bind(this, todo.id);
+  // li.onchange = toggleComplete.bind(this, todo.id);
 
-  const label = li.querySelector('.form-check-label');
+  const formCheckDiv = li.querySelector('.form-check');
+  const label = createTodoLabel(todo); // Use the function
+  formCheckDiv.appendChild(label);
+
+
   const removeBtn = li.querySelector('.btn-danger');
 
   label.addEventListener('click', editTodo.bind(null, todo));
+  
   removeBtn.addEventListener('click', (event) => {
     removeTodo(event, todo);
   });
@@ -164,7 +169,7 @@ function saveEditedTodo(input, todo) {
       input.replaceWith(label);
       label.addEventListener('click', editTodo.bind(null, todoItem));
     }
-// TODO: perpanaudoti label generavimo fn ir cia
+    // TODO: perpanaudoti label generavimo fn ir cia
     return todoItem;
   });
 
