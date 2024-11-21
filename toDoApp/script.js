@@ -123,10 +123,7 @@ function addTodoToDOM(todo) {
   formCheckDiv.appendChild(label);
 
   li.onchange = toggleComplete.bind(this, todo.id);
-
-  const label = li.querySelector('.form-check-label');
   const removeBtn = li.querySelector('.btn-danger');
-
   removeBtn.addEventListener('click', (event) => {
     removeTodo(event, todo);
   });
