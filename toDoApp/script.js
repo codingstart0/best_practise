@@ -30,11 +30,8 @@ function isTodoValid(todoText) {
   const trimmedText = todoText.trim();
   const existingTodosText = getAllTodosText(); // Uses existing helper
 
-    // Return true if text is non-empty and does not already exist
-    return (
-      trimmedText &&
-      !existingTodosText.includes(trimmedText.toUpperCase())
-    );
+  // Return true if text is non-empty and does not already exist
+  return trimmedText && !existingTodosText.includes(trimmedText.toUpperCase());
 }
 
 function loadTodos() {
@@ -59,22 +56,21 @@ function getAllTodosText() {
 function addTodo() {
   const input = document.getElementById('todo-input');
   let todoText = input.value.trim();
-  const existingTodosText = getAllTodosText(); // Get existing todos from the DOM
 
-  if (todoText) {
-    todoText =
-      todoText.charAt(0).toUpperCase() + todoText.slice(1).toLowerCase();
-
-    if (existingTodosText.includes(todoText.toUpperCase())) {
-      // TODO: pakeisti i modal
-      alert('This todo already exists!');
-      return; // Stop execution if it exists
-    }
-    const todo = addNewTodo(todoText);
-    addTodoToDOM(todo);
-    saveTodoToLocalStorage(todos);
-    input.value = ''; // Clear the input
+  if (!isTodoValid(todoText)) {
+    // TODO: replace alert with modal
+    alert('Invalid todo: empty or already exists!');
+    return;
   }
+
+  const formattedText =
+    todoText.charAt(0).toUpperCase() + todoText.slice(1).toLowerCase();
+  const todo = addNewTodo(formattedText);
+
+  addTodoToDOM(todo);
+  saveTodoToLocalStorage(todos);
+
+  input.value = ''; // Clear the input
 }
 
 function getTodoById(todoId) {
