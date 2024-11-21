@@ -112,7 +112,7 @@ function addTodoToDOM(todo) {
             <input type="checkbox" class="form-check-input" ${
               todo.completed ? 'checked="checked"' : ''
             }>
-            <label class="form-check-label">${todo.text}</label>
+           
         </div>
         <button class="btn btn-danger btn-sm">Remove</button>
     </div>
@@ -155,21 +155,19 @@ function editTodo(todo, event) {
 
 function saveEditedTodo(input, todo) {
   const newText = input.value.trim() || todo.text; // Revert if empty
-  const label = document.createElement('label');
-  label.className = 'form-check-label';
-  label.innerText = newText;
+  todo.text = newText; // Update the todo's text
+  const label = createTodoLabel(todo); // Use the function
+  input.replaceWith(label);
 
-  const updatedTodos = todos.map((todoItem) => {
+  todos = todos.map((todoItem) => {
     if (todoItem.id === todo.id) {
       todoItem.text = newText;
-      input.replaceWith(label);
-      label.addEventListener('click', editTodo.bind(null, todoItem));
+      // TODO: perpanaudoti label generavimo fn ir cia
     }
-    // TODO: perpanaudoti label generavimo fn ir cia
     return todoItem;
   });
 
-  saveTodoToLocalStorage(updatedTodos);
+  saveTodoToLocalStorage(todos);
 }
 
 function toggleComplete(todoId, event) {
