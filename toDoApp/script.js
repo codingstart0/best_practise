@@ -25,6 +25,18 @@ function registerTodoEvents() {
     .addEventListener('click', clearAllTodos);
 }
 
+// Helper function to validate a todo
+function isTodoValid(todoText) {
+  const trimmedText = todoText.trim();
+  const existingTodosText = getAllTodosText(); // Uses existing helper
+
+    // Return true if text is non-empty and does not already exist
+    return (
+      trimmedText &&
+      !existingTodosText.includes(trimmedText.toUpperCase())
+    );
+}
+
 function loadTodos() {
   try {
     todos = JSON.parse(localStorage.getItem(localStorageKeyTodos)) || [];
@@ -103,7 +115,6 @@ function createTodoLabel(todo) {
 function addTodoToDOM(todo) {
   const li = document.createElement('li');
   li.className = 'list-group-item todo-item';
-  // TODO: Label sugeneruoti per atskira fn ir prideti i li struktura
   li.id = `todo-id-${todo.id}`;
 
   li.innerHTML = `
@@ -112,12 +123,12 @@ function addTodoToDOM(todo) {
             <input type="checkbox" class="form-check-input" ${
               todo.completed ? 'checked="checked"' : ''
             }>
-           
         </div>
         <button class="btn btn-danger btn-sm">Remove</button>
     </div>
   `;
 
+  // TODO: Label sugeneruoti per atskira fn ir prideti i li struktura
   const formCheckDiv = li.querySelector('.form-check');
   const label = createTodoLabel(todo); // Use the function
   formCheckDiv.appendChild(label);
@@ -156,13 +167,14 @@ function editTodo(todo, event) {
 function saveEditedTodo(input, todo) {
   const newText = input.value.trim() || todo.text; // Revert if empty
   todo.text = newText; // Update the todo's text
+
+  // TODO: perpanaudoti label generavimo fn ir cia
   const label = createTodoLabel(todo); // Use the function
   input.replaceWith(label);
 
   todos = todos.map((todoItem) => {
     if (todoItem.id === todo.id) {
       todoItem.text = newText;
-      // TODO: perpanaudoti label generavimo fn ir cia
     }
     return todoItem;
   });
@@ -204,21 +216,15 @@ function removeTodo(event, todo) {
 }
 
 function clearCompletedTodos() {
-  const filteredTodos = todos.filter((todoItem) => {
+  todos = todos.filter((todoItem) => {
+    const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
     if (todoItem.completed) {
-      const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
       todoElement?.remove();
-
       return false;
     }
-
     return true;
   });
-
-  todos = filteredTodos;
-
-  // Update localStorage to save the modified todos array
-  saveTodoToLocalStorage(filteredTodos);
+  saveTodoToLocalStorage(todos);
 }
 
 function hideCompletedTodos() {
