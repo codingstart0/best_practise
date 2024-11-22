@@ -25,15 +25,6 @@ function registerTodoEvents() {
     .addEventListener('click', clearAllTodos);
 }
 
-// Helper function to validate a todo
-function isTodoValid(todoText) {
-  const trimmedText = todoText.trim();
-  const existingTodosText = getAllTodosText(); // Uses existing helper
-
-  // Return true if text is non-empty and does not already exist
-  return trimmedText && !existingTodosText.includes(trimmedText.toUpperCase());
-}
-
 function loadTodos() {
   try {
     todos = JSON.parse(localStorage.getItem(localStorageKeyTodos)) || [];
@@ -56,21 +47,22 @@ function getAllTodosText() {
 function addTodo() {
   const input = document.getElementById('todo-input');
   let todoText = input.value.trim();
+  const existingTodosText = getAllTodosText(); // Get existing todos from the DOM
 
-  if (!isTodoValid(todoText)) {
-    // TODO: replace alert with modal
-    alert('Invalid todo: empty or already exists!');
-    return;
+  if (todoText) {
+    todoText =
+      todoText.charAt(0).toUpperCase() + todoText.slice(1).toLowerCase();
+
+    if (existingTodosText.includes(todoText.toUpperCase())) {
+      // TODO: pakeisti i modal
+      alert('This todo already exists!');
+      return; // Stop execution if it exists
+    }
+    const todo = addNewTodo(todoText);
+    addTodoToDOM(todo);
+    saveTodoToLocalStorage(todos);
+    input.value = ''; // Clear the input
   }
-
-  const formattedText =
-    todoText.charAt(0).toUpperCase() + todoText.slice(1).toLowerCase();
-  const todo = addNewTodo(formattedText);
-
-  addTodoToDOM(todo);
-  saveTodoToLocalStorage(todos);
-
-  input.value = ''; // Clear the input
 }
 
 function getTodoById(todoId) {
@@ -105,6 +97,7 @@ function createTodoLabel(todo) {
   label.className = 'form-check-label';
   label.innerText = todo.text;
   label.addEventListener('click', editTodo.bind(null, todo));
+
   return label;
 }
 
@@ -124,7 +117,6 @@ function addTodoToDOM(todo) {
     </div>
   `;
 
-  // TODO: Label sugeneruoti per atskira fn ir prideti i li struktura
   const formCheckDiv = li.querySelector('.form-check');
   const label = createTodoLabel(todo); // Use the function
   formCheckDiv.appendChild(label);
