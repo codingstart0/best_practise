@@ -118,10 +118,13 @@ function addTodoToDOM(todo) {
   `;
 
   const formCheckDiv = li.querySelector('.form-check');
+  const checkbox = formCheckDiv.querySelector('input[type="checkbox"]');
   const label = createTodoLabel(todo); // Use the function
   formCheckDiv.appendChild(label);
 
-  li.onchange = toggleComplete.bind(this, todo.id);
+   // Bind onchange to the checkbox, not the li
+   checkbox.onchange = toggleComplete.bind(this, todo.id);
+
   const removeBtn = li.querySelector('.btn-danger');
   removeBtn.addEventListener('click', (event) => {
     removeTodo(event, todo);
