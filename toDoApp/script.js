@@ -39,7 +39,9 @@ function loadTodos() {
 }
 
 function getAllTodosText() {
+
   return todos.map((todo) => {
+
     return todo.text.toUpperCase();
   });
 }
@@ -56,6 +58,7 @@ function addTodo() {
     if (existingTodosText.includes(todoText.toUpperCase())) {
       // TODO: pakeisti i modal
       alert('This todo already exists!');
+
       return; // Stop execution if it exists
     }
     const todo = addNewTodo(todoText);
@@ -66,7 +69,9 @@ function addTodo() {
 }
 
 function getTodoById(todoId) {
+  
   return todos.find((todo) => {
+
     return todo.id === todoId;
   });
 }
@@ -159,7 +164,6 @@ function saveEditedTodo(input, todo) {
   const newText = input.value.trim() || todo.text; // Revert if empty
   todo.text = newText; // Update the todo's text
 
-  // TODO: perpanaudoti label generavimo fn ir cia
   const label = createTodoLabel(todo); // Use the function
   input.replaceWith(label);
 
@@ -167,6 +171,7 @@ function saveEditedTodo(input, todo) {
     if (todoItem.id === todo.id) {
       todoItem.text = newText;
     }
+
     return todoItem;
   });
 
@@ -211,8 +216,10 @@ function clearCompletedTodos() {
     const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
     if (todoItem.completed) {
       todoElement?.remove();
+
       return false;
     }
+    
     return true;
   });
   saveTodoToLocalStorage(todos);
