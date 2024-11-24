@@ -39,9 +39,7 @@ function loadTodos() {
 }
 
 function getAllTodosText() {
-
   return todos.map((todo) => {
-
     return todo.text.toUpperCase();
   });
 }
@@ -69,9 +67,7 @@ function addTodo() {
 }
 
 function getTodoById(todoId) {
-  
   return todos.find((todo) => {
-
     return todo.id === todoId;
   });
 }
@@ -127,8 +123,8 @@ function addTodoToDOM(todo) {
   const label = createTodoLabel(todo); // Use the function
   formCheckDiv.appendChild(label);
 
-   // Bind onchange to the checkbox, not the li
-   checkbox.onchange = toggleComplete.bind(this, todo.id);
+  // Bind onchange to the checkbox, not the li
+  checkbox.onchange = toggleComplete.bind(this, todo.id);
 
   const removeBtn = li.querySelector('.btn-danger');
   removeBtn.addEventListener('click', (event) => {
@@ -160,23 +156,82 @@ function editTodo(todo, event) {
   });
 }
 
+// Old version function
+// function saveEditedTodo(input, todo) {
+//   const newText = input.value.trim() || todo.text; // Revert if empty
+//   const label = document.createElement('label');
+
+//   //Nzn ar šitie vis dar reikalingi?
+//   label.className = 'form-check-label';
+//   label.innerText = newText;
+
+//   const updatedTodos = todos.map((todoItem) => {
+//     if (todoItem.id === todo.id) {
+//       todoItem.text = newText;
+//       input.replaceWith(label);
+//       label.addEventListener('click', editTodo.bind(null, todoItem));
+//     }
+//     // TODO: perpanaudoti label generavimo fn ir cia
+//     return todoItem;
+//   });
+
+//   saveTodoToLocalStorage(updatedTodos);
+// }
+
+//Updated New version
 function saveEditedTodo(input, todo) {
   const newText = input.value.trim() || todo.text; // Revert if empty
-  todo.text = newText; // Update the todo's text
+  const label = createTodoLabel({ ...todo, text: newText }); // Use the function with updated text
 
-  const label = createTodoLabel(todo); // Use the function
-  input.replaceWith(label);
-
-  todos = todos.map((todoItem) => {
+  const updatedTodos = todos.map((todoItem) => {
     if (todoItem.id === todo.id) {
-      todoItem.text = newText;
+      // Return a new object to ensure immutability
+      return { ...todoItem, text: newText };
     }
-
     return todoItem;
   });
 
-  saveTodoToLocalStorage(todos);
+  todos = updatedTodos; // Update the todos array globally
+  input.replaceWith(label); // Replace the input with the updated label
+  saveTodoToLocalStorage(updatedTodos); // Save the updated todos array
 }
+
+
+//Updated New simplified version
+// function saveEditedTodo(input, todo) {
+//   const newText = input.value.trim() || todo.text; // Revert if empty
+//   const label = createTodoLabel({ ...todo, text: newText }); // Updated label with new text
+
+//   const updatedTodos = todos.map((todoItem) => {
+//     if (todoItem.id === todo.id) {
+//       todoItem.text = newText;
+//       input.replaceWith(label);
+//     }
+
+//     return todoItem;
+//   });
+
+//   saveTodoToLocalStorage(updatedTodos);
+//   todos = updatedTodos;
+// }
+
+// New version
+// function saveEditedTodo(input, todo) {
+//   const newText = input.value.trim() || todo.text; // Revert if empty
+//   todo.text = newText; // Update the todo's text
+//   const label = createTodoLabel(todo); // Use the function
+//   input.replaceWith(label);
+
+//   todos = todos.map((todoItem) => {
+//     if (todoItem.id === todo.id) {
+//       todoItem.text = newText;
+//     }
+
+//     return todoItem;
+//   });
+
+//   saveTodoToLocalStorage(todos);
+// }
 
 function toggleComplete(todoId, event) {
   const todo = getTodoById(todoId);
@@ -219,7 +274,7 @@ function clearCompletedTodos() {
 
       return false;
     }
-    
+
     return true;
   });
   saveTodoToLocalStorage(todos);
