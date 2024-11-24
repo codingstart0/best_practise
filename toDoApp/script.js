@@ -39,7 +39,9 @@ function loadTodos() {
 }
 
 function getAllTodosText() {
+
   return todos.map((todo) => {
+
     return todo.text.toUpperCase();
   });
 }
@@ -67,7 +69,9 @@ function addTodo() {
 }
 
 function getTodoById(todoId) {
+
   return todos.find((todo) => {
+
     return todo.id === todoId;
   });
 }
@@ -162,9 +166,11 @@ function saveEditedTodo(input, todo) {
 
   const updatedTodos = todos.map((todoItem) => {
     if (todoItem.id === todo.id) {
+
       // Return a new object to ensure immutability
       return { ...todoItem, text: newText };
     }
+    
     return todoItem;
   });
 
