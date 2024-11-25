@@ -52,7 +52,6 @@ function showModal(title, message, onConfirm, onCancel) {
   };
 }
 
-
 function registerTodoEvents() {
   document
     .getElementById('new-todo-form')
@@ -90,9 +89,7 @@ function loadTodos() {
 }
 
 function getAllTodosText() {
-
   return todos.map((todo) => {
-
     return todo.text.toUpperCase();
   });
 }
@@ -111,8 +108,8 @@ function addTodo() {
         title: 'Duplicate Todo',
         message: 'This todo already exists!',
         actions: [
-          { label: 'OK', callback: () => {} } // Do nothing on "OK"
-        ]
+          { label: 'OK', callback: () => {} }, // Do nothing on "OK"
+        ],
       });
       return; // Stop execution
     }
@@ -124,9 +121,7 @@ function addTodo() {
 }
 
 function getTodoById(todoId) {
-
   return todos.find((todo) => {
-
     return todo.id === todoId;
   });
 }
@@ -140,7 +135,7 @@ function addNewTodo(text) {
   };
 
   todos.push(todo);
-  
+
   return todo;
 }
 
@@ -221,7 +216,6 @@ function saveEditedTodo(input, todo) {
 
   const updatedTodos = todos.map((todoItem) => {
     if (todoItem.id === todo.id) {
-
       // Return a new object to ensure immutability
       return { ...todoItem, text: newText };
     }
@@ -257,13 +251,18 @@ function removeTodo(event, todo) {
   if (todo.completed) {
     removeElementAndSave();
   } else {
-    // TODO: Pakeisti i modal
-    const confirmDelete = window.confirm(
-      'This todo is not finished. Do you really want to delete it?'
-    );
-    if (confirmDelete) {
-      removeElementAndSave();
-    }
+    showModal({
+      title: 'Confirm Delete',
+      message: 'This todo is not finished. Do you really want to delete it?',
+      actions: [
+        { label: 'Cancel', callback: () => {} }, // Do nothing on "Cancel"
+        {
+          label: 'Delete',
+          callback: removeElementAndSave,
+          className: 'btn btn-danger',
+        }, // Call the delete function
+      ],
+    });
   }
 }
 
