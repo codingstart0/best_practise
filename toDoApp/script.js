@@ -104,14 +104,10 @@ function addTodo() {
       todoText.charAt(0).toUpperCase() + todoText.slice(1).toLowerCase();
 
     if (existingTodosText.includes(todoText.toUpperCase())) {
-      showModal({
-        title: 'Duplicate Todo',
-        message: 'This todo already exists!',
-        actions: [
-          { label: 'OK', callback: () => {} }, // Do nothing on "OK"
-        ],
+      showModal('Duplicate Todo', 'This todo already exists!', () => {
+        console.log('Acknowledged');
       });
-      return; // Stop execution
+      return;
     }
     const todo = addNewTodo(todoText);
     addTodoToDOM(todo);
