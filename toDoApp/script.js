@@ -107,10 +107,14 @@ function addTodo() {
       todoText.charAt(0).toUpperCase() + todoText.slice(1).toLowerCase();
 
     if (existingTodosText.includes(todoText.toUpperCase())) {
-      // TODO: pakeisti i modal
-      alert('This todo already exists!');
-
-      return; // Stop execution if it exists
+      showModal({
+        title: 'Duplicate Todo',
+        message: 'This todo already exists!',
+        actions: [
+          { label: 'OK', callback: () => {} } // Do nothing on "OK"
+        ]
+      });
+      return; // Stop execution
     }
     const todo = addNewTodo(todoText);
     addTodoToDOM(todo);
