@@ -35,15 +35,6 @@
   text-decoration: line-through;
 }
 
-.test-modal {
-  width: 50vw;
-  height: 50vh;
-  position: fixed;
-  background-color: white;
-  box-shadow: 10px 0 20px rgba(0, 0, 0, 10);
-  z-index: 1000;
-}
-
 .modal {
   display: none; /* Hidden by default */
   position: fixed;
