@@ -247,18 +247,13 @@ function removeTodo(event, todo) {
   if (todo.completed) {
     removeElementAndSave();
   } else {
-    showModal({
-      title: 'Confirm Delete',
-      message: 'This todo is not finished. Do you really want to delete it?',
-      actions: [
-        { label: 'Cancel', callback: () => {} }, // Do nothing on "Cancel"
-        {
-          label: 'Delete',
-          callback: removeElementAndSave,
-          className: 'btn btn-danger',
-        }, // Call the delete function
-      ],
-    });
+    showModal(
+      'Confirm Delete',
+      'This todo is not finished. Do you really want to delete it?',
+      () => {
+        removeElementAndSave();
+      }
+    );
   }
 }
 
