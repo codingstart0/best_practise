@@ -2,15 +2,13 @@ const localStorageKeyTodos = 'todos';
 let todos = [];
 let lastIndex = 0;
 
-function showModal(title, message, onConfirm, onCancel) {
+function showModal(message, onConfirm, onCancel) {
   const modal = document.getElementById('modal');
-  const modalTitle = document.getElementById('modal-title');
   const modalMessage = document.getElementById('modal-message');
   const modalActions = document.getElementById('modal-actions');
   const closeModalButton = document.querySelector('.close');
 
   // Set title and message
-  modalTitle.textContent = title;
   modalMessage.textContent = message;
 
   // Clear previous actions
@@ -19,9 +17,9 @@ function showModal(title, message, onConfirm, onCancel) {
   // Confirm button
   const confirmButton = document.createElement('button');
   confirmButton.textContent = 'Confirm';
-  confirmButton.className = 'btn btn-primary';
+  confirmButton.className = 'btn btn-secondary';
   confirmButton.addEventListener('click', () => {
-    if (onConfirm) onConfirm();
+    onConfirm();
     modal.style.display = 'none';
   });
   modalActions.appendChild(confirmButton);
@@ -104,9 +102,7 @@ function addTodo() {
       todoText.charAt(0).toUpperCase() + todoText.slice(1).toLowerCase();
 
     if (existingTodosText.includes(todoText.toUpperCase())) {
-      showModal('Duplicate Todo', 'This todo already exists!', () => {
-        console.log('Acknowledged');
-      });
+      showModal('This Todo already exists!');
       return;
     }
     const todo = addNewTodo(todoText);
