@@ -2,6 +2,57 @@ const localStorageKeyTodos = 'todos';
 let todos = [];
 let lastIndex = 0;
 
+function showModal(title, message, onConfirm, onCancel) {
+  const modal = document.getElementById('modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalMessage = document.getElementById('modal-message');
+  const modalActions = document.getElementById('modal-actions');
+  const closeModalButton = document.querySelector('.close');
+
+  // Set title and message
+  modalTitle.textContent = title;
+  modalMessage.textContent = message;
+
+  // Clear previous actions
+  modalActions.innerHTML = '';
+
+  // Confirm button
+  const confirmButton = document.createElement('button');
+  confirmButton.textContent = 'Confirm';
+  confirmButton.className = 'btn btn-primary';
+  confirmButton.addEventListener('click', () => {
+    if (onConfirm) onConfirm();
+    modal.style.display = 'none';
+  });
+  modalActions.appendChild(confirmButton);
+
+  // Cancel button
+  if (onCancel) {
+    const cancelButton = document.createElement('button');
+    cancelButton.textContent = 'Cancel';
+    cancelButton.className = 'btn btn-secondary';
+    cancelButton.addEventListener('click', () => {
+      onCancel();
+      modal.style.display = 'none';
+    });
+    modalActions.appendChild(cancelButton);
+  }
+
+  // Show modal
+  modal.style.display = 'block';
+
+  // Close modal when clicking the close button
+  closeModalButton.onclick = () => (modal.style.display = 'none');
+
+  // Close modal when clicking outside the modal content
+  window.onclick = (event) => {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  };
+}
+
+
 function registerTodoEvents() {
   document
     .getElementById('new-todo-form')
