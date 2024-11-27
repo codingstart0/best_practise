@@ -92,6 +92,17 @@ function getAllTodosText() {
   });
 }
 
+// Confirm button
+function confirmButton() {
+  document.createElement('button');
+  confirmButton.textContent = 'Confirm';
+  confirmButton.className = 'btn btn-secondary';
+  confirmButton.addEventListener('click', () => {
+    onConfirm();
+    modal.style.display = 'none';
+  });
+}
+
 function addTodo() {
   const input = document.getElementById('todo-input');
   let todoText = input.value.trim();
