@@ -12,29 +12,23 @@ function showModal({ message, actions }) {
   modalActions.innerHTML = '';
 
   // Add new actions
-  actions.forEach(({ label, callback, className }) => {
+  actions.forEach(({ label, callback }) => {
     const button = document.createElement('button');
     button.textContent = label;
-    button.className = className || 'btn btn-primary';
-    button.addEventListener('click', () => {
-      callback();
-      modal.style.display = 'none';
-    });
+    button.className = 'btn btn-primary';
+    button.onclick = () => {
+      callback(); // Call the provided callback
+      modal.classList.add('d-none'); // Hide the modal
+    };
     modalActions.appendChild(button);
   });
 
-  // Show modal
-  modal.style.display = 'block';
+  // Show the modal
+  modal.classList.remove('d-none');
+  modal.classList.add('d-block'); // Ensure proper display mode
 
   // Close modal when clicking the close button
-  closeModalButton.onclick = () => (modal.style.display = 'none');
-
-  // Close modal when clicking outside the modal content
-  window.onclick = (event) => {
-    if (event.target === modal) {
-      modal.style.display = 'none';
-    }
-  };
+  closeModalButton.onclick = () => modal.classList.add('d-none');
 }
 
 function registerTodoEvents() {
@@ -70,7 +64,6 @@ function loadTodos() {
     console.error(err);
     localStorage.setItem(localStorageKeyTodos, JSON.stringify([]));
   }
-  console.table(todos);
 }
 
 function getAllTodosText() {
@@ -89,8 +82,12 @@ function addTodo() {
       todoText.charAt(0).toUpperCase() + todoText.slice(1).toLowerCase();
 
     if (existingTodosText.includes(todoText.toUpperCase())) {
-      // TODO: pakeisti i modal
-      alert('This todo already exists!');
+      showModal({
+        message: 'This todo already exists!',
+        actions: [
+          { label: 'OK', callback: () => {} }, // Do nothing on "OK"
+        ],
+      });
 
       return; // Stop execution if it exists
     }
@@ -128,7 +125,6 @@ function saveTodoToLocalStorage(todoItemsArray) {
     localStorageKeyTodos,
     JSON.stringify(todoItemsArray || [])
   );
-  console.table(todoItemsArray);
 }
 
 function createTodoLabel(todo) {
