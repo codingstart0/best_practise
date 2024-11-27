@@ -39,9 +39,7 @@ function loadTodos() {
 }
 
 function getAllTodosText() {
-
   return todos.map((todo) => {
-
     return todo.text.toUpperCase();
   });
 }
@@ -62,6 +60,7 @@ function addTodo() {
       return; // Stop execution if it exists
     }
     const todo = addNewTodo(todoText);
+    todos.push(todo);
     addTodoToDOM(todo);
     saveTodoToLocalStorage(todos);
     input.value = ''; // Clear the input
@@ -69,11 +68,13 @@ function addTodo() {
 }
 
 function getTodoById(todoId) {
-
   return todos.find((todo) => {
-
     return todo.id === todoId;
   });
+}
+
+function getTodoElementById(todoId) {
+  return document.getElementById(`todo-id-${todoId}`);
 }
 
 function addNewTodo(text) {
@@ -84,8 +85,6 @@ function addNewTodo(text) {
     id: todoId,
   };
 
-  todos.push(todo);
-  
   return todo;
 }
 
@@ -99,9 +98,11 @@ function saveTodoToLocalStorage(todoItemsArray) {
 
 function createTodoLabel(todo) {
   const label = document.createElement('label');
-  label.className = 'form-check-label';
+  label.className = 'todo-label';
   label.innerText = todo.text;
-  label.addEventListener('click', editTodo.bind(null, todo));
+  label.addEventListener('click', (event) => {
+    editTodo(todo, event);
+  });
 
   return label;
 }
@@ -113,22 +114,29 @@ function addTodoToDOM(todo) {
 
   li.innerHTML = `
     <div class="d-flex justify-content-between align-items-center">
-        <div class="form-check">
+        <div class="todo-checkbox-and-label-wrapper">
             <input type="checkbox" class="form-check-input" ${
               todo.completed ? 'checked="checked"' : ''
-            }>
+            } />
         </div>
         <button class="btn btn-danger btn-sm">Remove</button>
     </div>
   `;
 
-  const formCheckDiv = li.querySelector('.form-check');
-  const checkbox = formCheckDiv.querySelector('input[type="checkbox"]');
+  const todoCheckboxAndLabelWrapperElement = li.querySelector(
+    '.todo-checkbox-and-label-wrapper'
+  );
+  const checkbox = todoCheckboxAndLabelWrapperElement.querySelector(
+    'input[type="checkbox"]'
+  );
   const label = createTodoLabel(todo); // Use the function
-  formCheckDiv.appendChild(label);
+
+  todoCheckboxAndLabelWrapperElement.appendChild(label);
 
   // Bind onchange to the checkbox, not the li
-  checkbox.onchange = toggleComplete.bind(this, todo.id);
+  checkbox.addEventListener('change', (event) => {
+    toggleComplete(todo.id, event);
+  });
 
   const removeBtn = li.querySelector('.btn-danger');
   removeBtn.addEventListener('click', (event) => {
@@ -148,15 +156,15 @@ function editTodo(todo, event) {
   labelElement.replaceWith(input);
   input.focus();
 
+  input.addEventListener('blur', () => {
+    saveEditedTodo(input, todo);
+  });
+
   // Event listeners for Enter key and blur event
   input.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
       input.blur();
     }
-  });
-
-  input.addEventListener('blur', () => {
-    saveEditedTodo(input, todo);
   });
 }
 
@@ -166,7 +174,6 @@ function saveEditedTodo(input, todo) {
 
   const updatedTodos = todos.map((todoItem) => {
     if (todoItem.id === todo.id) {
-
       // Return a new object to ensure immutability
       return { ...todoItem, text: newText };
     }
@@ -174,8 +181,8 @@ function saveEditedTodo(input, todo) {
     return todoItem;
   });
 
-  todos = updatedTodos; // Update the todos array globally
   input.replaceWith(label); // Replace the input with the updated label
+  todos = updatedTodos; // Update the todos array globally
   saveTodoToLocalStorage(updatedTodos); // Save the updated todos array
 }
 
@@ -189,66 +196,75 @@ function toggleComplete(todoId, event) {
   }
 }
 
-function removeTodo(event, todo) {
-  const button = event.target;
-  const li = button.closest('li'); // Get the parent todo item
+function removeTodoItem(todoId) {
+  const updatedTodos = todos.filter((todoItem) => todoItem.id !== todoId);
+  todos = updatedTodos;
+  saveTodoToLocalStorage(updatedTodos);
+}
 
-  const removeElementAndSave = () => {
-    todos = todos.filter((todoItem) => todoItem.id !== todo.id); // Update in-memory todos
-    saveTodoToLocalStorage(todos); // Save updated todos to local storage
-    li.remove();
+function removeTodoElement(todoId) {
+  const todoElement = getTodoElementById(todoId);
+
+  if (todoElement) {
+    todoElement.remove();
+  }
+}
+
+function removeTodo(event, todo) {
+  const removeTodoItemAndElement = () => {
+    removeTodoItem(todo.id);
+    removeTodoElement(todo.id);
   };
 
   if (todo.completed) {
-    removeElementAndSave();
+    removeTodoItemAndElement();
   } else {
     // TODO: Pakeisti i modal
     const confirmDelete = window.confirm(
       'This todo is not finished. Do you really want to delete it?'
     );
     if (confirmDelete) {
-      removeElementAndSave();
+      removeTodoItemAndElement();
     }
   }
 }
 
 function clearCompletedTodos() {
-  todos = todos.filter((todoItem) => {
-    const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
-    if (todoItem.completed) {
-      todoElement?.remove();
-
-      return false;
+  todos.forEach((todo) => {
+    if (todo.completed) {
+      removeTodoElement(todo.id);
+      removeTodoItem(todo.id);
     }
-
-    return true;
   });
-  saveTodoToLocalStorage(todos);
 }
 
 function hideCompletedTodos() {
   todos.forEach((todoItem) => {
-    const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
+    const todoElement = getTodoElementById(todoItem.id);
     if (todoElement)
-      // Hide or show based on the 'completed' status
-      todoElement.style.display = todoItem.completed ? 'none' : 'block';
+      if (todoItem.completed) {
+        // Hide or show based on the 'completed' status
+        todoElement.classList.add('d-none');
+      } else {
+        todoElement.classList.remove('d-none');
+      }
   });
 }
 
 function showAllTodos() {
   todos.forEach((todoItem) => {
-    const todoElement = document.getElementById(`todo-id-${todoItem.id}`);
-    if (todoElement) todoElement.style.display = 'block';
+    const todoElement = getTodoElementById(todoItem.id);
+    if (todoElement) {
+      todoElement.classList.remove('d-none');
+    }
   });
 }
 
 function clearAllTodos() {
-  document.querySelectorAll('.todo-item').forEach((element) => {
-    element.remove();
+  todos.forEach((todo) => {
+    removeTodoElement(todo.id);
+    removeTodoItem(todo.id);
   });
-  todos = [];
-
-  saveTodoToLocalStorage(todos);
 }
 
 registerTodoEvents();
