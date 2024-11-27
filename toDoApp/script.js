@@ -2,6 +2,41 @@ const localStorageKeyTodos = 'todos';
 let todos = [];
 let lastIndex = 0;
 
+function showModal({ message, actions }) {
+  const modal = document.getElementById('modal');
+  const modalMessage = document.getElementById('modal-message');
+  const modalActions = document.getElementById('modal-actions');
+  const closeModalButton = document.querySelector('.close');
+
+  modalMessage.textContent = message;
+  modalActions.innerHTML = '';
+
+  // Add new actions
+  actions.forEach(({ label, callback, className }) => {
+    const button = document.createElement('button');
+    button.textContent = label;
+    button.className = className || 'btn btn-primary';
+    button.addEventListener('click', () => {
+      callback();
+      modal.style.display = 'none';
+    });
+    modalActions.appendChild(button);
+  });
+
+  // Show modal
+  modal.style.display = 'block';
+
+  // Close modal when clicking the close button
+  closeModalButton.onclick = () => (modal.style.display = 'none');
+
+  // Close modal when clicking outside the modal content
+  window.onclick = (event) => {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  };
+}
+
 function registerTodoEvents() {
   document
     .getElementById('new-todo-form')
