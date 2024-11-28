@@ -2,33 +2,46 @@ const localStorageKeyTodos = 'todos';
 let todos = [];
 let lastIndex = 0;
 
-function showModal({ message, actions }) {
-  const modal = document.getElementById('modal');
+function showModal(modalOptions) {
+  const modalElement = document.getElementById('modal');
+  const modalTitle = document.getElementById('modal-title');
   const modalMessage = document.getElementById('modal-message');
   const modalActions = document.getElementById('modal-actions');
-  const closeModalButton = document.querySelector('.close');
 
-  modalMessage.textContent = message;
-  modalActions.innerHTML = '';
-
-  // Add new actions
-  actions.forEach(({ label, callback }) => {
-    const button = document.createElement('button');
-    button.textContent = label;
-    button.className = 'btn btn-primary';
-    button.onclick = () => {
-      callback(); // Call the provided callback
-      modal.classList.add('d-none'); // Hide the modal
-    };
-    modalActions.appendChild(button);
+  const modal = new bootstrap.Modal(modalElement, {
+    backdrop: 'static',
   });
 
-  // Show the modal
-  modal.classList.remove('d-none');
-  modal.classList.add('d-block'); // Ensure proper display mode
+  const { title = '', message, actions } = modalOptions;
 
-  // Close modal when clicking the close button
-  closeModalButton.onclick = () => modal.classList.add('d-none');
+  modalTitle.textContent = title;
+  modalMessage.innerHTML = message;
+  modalActions.innerHTML = '';
+
+  if (actions) {
+    actions.forEach(({ label, callback, btnStyle = '' }) => {
+      const button = document.createElement('button');
+      button.textContent = label;
+      button.className = `btn ${btnStyle}`;
+      button.onclick = () => {
+        if (callback) {
+          callback();
+        }
+        modal.hide();
+      };
+      modalActions.appendChild(button);
+    });
+  } else {
+    const button = document.createElement('button');
+    button.textContent = 'Close';
+    button.className = 'btn';
+    button.onclick = () => {
+      modal.hide();
+    };
+    modalActions.appendChild(button);
+  }
+
+  modal.show();
 }
 
 function registerTodoEvents() {
@@ -83,19 +96,17 @@ function addTodo() {
 
     if (existingTodosText.includes(todoText.toUpperCase())) {
       showModal({
+        title: 'Warning',
         message: 'This todo already exists!',
-        actions: [
-          { label: 'OK', callback: () => {} }, // Do nothing on "OK"
-        ],
       });
 
-      return; // Stop execution if it exists
+      return;
     }
     const todo = addNewTodo(todoText);
     todos.push(todo);
     addTodoToDOM(todo);
     saveTodoToLocalStorage(todos);
-    input.value = ''; // Clear the input
+    input.value = '';
   }
 }
 
@@ -170,8 +181,8 @@ function addTodoToDOM(todo) {
   });
 
   const removeBtn = li.querySelector('.btn-danger');
-  removeBtn.addEventListener('click', (event) => {
-    removeTodo(event, todo);
+  removeBtn.addEventListener('click', () => {
+    removeTodo(todo);
   });
 
   document.getElementById('todo-list').appendChild(li);
@@ -241,8 +252,7 @@ function removeTodoElement(todoId) {
   }
 }
 
-// TODO: BUG If the event removing from parameters it's not warking. Deletion not executing, modal shows even on completed todos.
-function removeTodo(event, todo) {
+function removeTodo(todo) {
   const removeTodoItemAndElement = () => {
     removeTodoItem(todo.id);
     removeTodoElement(todo.id);
@@ -252,14 +262,14 @@ function removeTodo(event, todo) {
     removeTodoItemAndElement();
   } else {
     showModal({
-      message: 'This todo is not finished. Do you really want to delete it?',
+      title: 'Please confirm',
+      message: `Todo <strong>${todo.text}</strong> is not completed. Do you really want to delete it?`,
       actions: [
-        { label: 'Cancel', callback: () => {} }, // Do nothing on "Cancel"
+        { label: 'Cancel' },
         {
           label: 'Delete',
-          callback: () => {
-            removeTodoItemAndElement();
-          },
+          btnStyle: 'btn-danger',
+          callback: removeTodoItemAndElement,
         },
       ],
     });
@@ -280,7 +290,6 @@ function hideCompletedTodos() {
     const todoElement = getTodoElementById(todoItem.id);
     if (todoElement)
       if (todoItem.completed) {
-        // Hide or show based on the 'completed' status
         todoElement.classList.add('d-none');
       } else {
         todoElement.classList.remove('d-none');
