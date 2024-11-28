@@ -146,6 +146,9 @@ function createTodoLabel(todo) {
     editTodo(todo, event);
   });
 
+  if (todo.completed) {
+    label.classList.add('completed');
+  }
   return label;
 }
 
@@ -235,6 +238,15 @@ function toggleComplete(todoId, event) {
   if (todo && checkbox) {
     todo.completed = checkbox.checked;
     saveTodoToLocalStorage(todos);
+
+    const todoElement = getTodoElementById(todoId);
+    const label = todoElement.querySelector('.todo-label'); // Locate the label within the todo item
+
+    if (todo.completed) {
+      label.classList.add('completed'); // Add line-through
+    } else {
+      label.classList.remove('completed'); // Remove line-through
+    }
   }
 }
 
