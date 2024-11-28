@@ -2,6 +2,48 @@ const localStorageKeyTodos = 'todos';
 let todos = [];
 let lastIndex = 0;
 
+function showModal(modalOptions) {
+  const modalElement = document.getElementById('modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalMessage = document.getElementById('modal-message');
+  const modalActions = document.getElementById('modal-actions');
+
+  const modal = new bootstrap.Modal(modalElement, {
+    backdrop: 'static',
+  });
+
+  const { title = '', message, actions } = modalOptions;
+
+  modalTitle.textContent = title;
+  modalMessage.innerHTML = message;
+  modalActions.innerHTML = '';
+
+  if (actions) {
+    actions.forEach(({ label, callback, btnStyle = '' }) => {
+      const button = document.createElement('button');
+      button.textContent = label;
+      button.className = `btn ${btnStyle}`;
+      button.onclick = () => {
+        if (callback) {
+          callback();
+        }
+        modal.hide();
+      };
+      modalActions.appendChild(button);
+    });
+  } else {
+    const button = document.createElement('button');
+    button.textContent = 'Close';
+    button.className = 'btn';
+    button.onclick = () => {
+      modal.hide();
+    };
+    modalActions.appendChild(button);
+  }
+
+  modal.show();
+}
+
 function registerTodoEvents() {
   document
     .getElementById('new-todo-form')
@@ -35,7 +77,6 @@ function loadTodos() {
     console.error(err);
     localStorage.setItem(localStorageKeyTodos, JSON.stringify([]));
   }
-  console.table(todos);
 }
 
 function getAllTodosText() {
@@ -54,16 +95,18 @@ function addTodo() {
       todoText.charAt(0).toUpperCase() + todoText.slice(1).toLowerCase();
 
     if (existingTodosText.includes(todoText.toUpperCase())) {
-      // TODO: pakeisti i modal
-      alert('This todo already exists!');
+      showModal({
+        title: 'Warning',
+        message: 'This todo already exists!',
+      });
 
-      return; // Stop execution if it exists
+      return;
     }
     const todo = addNewTodo(todoText);
     todos.push(todo);
     addTodoToDOM(todo);
     saveTodoToLocalStorage(todos);
-    input.value = ''; // Clear the input
+    input.value = '';
   }
 }
 
@@ -93,7 +136,6 @@ function saveTodoToLocalStorage(todoItemsArray) {
     localStorageKeyTodos,
     JSON.stringify(todoItemsArray || [])
   );
-  console.table(todoItemsArray);
 }
 
 function createTodoLabel(todo) {
@@ -104,6 +146,9 @@ function createTodoLabel(todo) {
     editTodo(todo, event);
   });
 
+  if (todo.completed) {
+    label.classList.add('completed');
+  }
   return label;
 }
 
@@ -139,8 +184,8 @@ function addTodoToDOM(todo) {
   });
 
   const removeBtn = li.querySelector('.btn-danger');
-  removeBtn.addEventListener('click', (event) => {
-    removeTodo(event, todo);
+  removeBtn.addEventListener('click', () => {
+    removeTodo(todo);
   });
 
   document.getElementById('todo-list').appendChild(li);
@@ -193,6 +238,15 @@ function toggleComplete(todoId, event) {
   if (todo && checkbox) {
     todo.completed = checkbox.checked;
     saveTodoToLocalStorage(todos);
+
+    const todoElement = getTodoElementById(todoId);
+    const label = todoElement.querySelector('.todo-label'); // Locate the label within the todo item
+
+    if (todo.completed) {
+      label.classList.add('completed'); // Add line-through
+    } else {
+      label.classList.remove('completed'); // Remove line-through
+    }
   }
 }
 
@@ -210,7 +264,7 @@ function removeTodoElement(todoId) {
   }
 }
 
-function removeTodo(event, todo) {
+function removeTodo(todo) {
   const removeTodoItemAndElement = () => {
     removeTodoItem(todo.id);
     removeTodoElement(todo.id);
@@ -219,13 +273,18 @@ function removeTodo(event, todo) {
   if (todo.completed) {
     removeTodoItemAndElement();
   } else {
-    // TODO: Pakeisti i modal
-    const confirmDelete = window.confirm(
-      'This todo is not finished. Do you really want to delete it?'
-    );
-    if (confirmDelete) {
-      removeTodoItemAndElement();
-    }
+    showModal({
+      title: 'Please confirm',
+      message: `Todo <strong>${todo.text}</strong> is not completed. Do you really want to delete it?`,
+      actions: [
+        { label: 'Cancel' },
+        {
+          label: 'Delete',
+          btnStyle: 'btn-danger',
+          callback: removeTodoItemAndElement,
+        },
+      ],
+    });
   }
 }
 
@@ -243,7 +302,6 @@ function hideCompletedTodos() {
     const todoElement = getTodoElementById(todoItem.id);
     if (todoElement)
       if (todoItem.completed) {
-        // Hide or show based on the 'completed' status
         todoElement.classList.add('d-none');
       } else {
         todoElement.classList.remove('d-none');
