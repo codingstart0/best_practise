@@ -241,6 +241,7 @@ function removeTodoElement(todoId) {
   }
 }
 
+// TODO: BUG If the event removing from parameters it's not warking. Deletion not executing, modal shows even on completed todos.
 function removeTodo(event, todo) {
   const removeTodoItemAndElement = () => {
     removeTodoItem(todo.id);
