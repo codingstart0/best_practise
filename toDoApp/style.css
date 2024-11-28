@@ -1,6 +1,6 @@
 /* https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js */
 :root {
-  --bs-primary: #fd0dd1;
+  /* --bs-primary: #fd0dd1; */
   --gap-md: 10px;
 }
 
@@ -30,28 +30,9 @@
   align-items: center;
 }
 .form-check-input:focus {
-  /* border-color: #86b7fe;
-  outline: 0; */
   box-shadow: 0 0 0 0.25rem var(--bs-primary);
 }
 
-.todo-complete .todo-label {
+.todo-label.completed {
   text-decoration: line-through;
-}
-
-.todo-complete .btn {
-  text-decoration: line-through;
-}
-
-.test-modal {
-  width: 50vw;
-  height: 50vh;
-  position: fixed;
-  background-color: white;
-  box-shadow: 10px 0 20px rgba(0, 0, 0, 10);
-  z-index: 1000;
-}
-
-.hidden {
-  display: none;
 }
