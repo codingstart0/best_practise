@@ -250,13 +250,18 @@ function removeTodo(event, todo) {
   if (todo.completed) {
     removeTodoItemAndElement();
   } else {
-    // TODO: Pakeisti i modal
-    const confirmDelete = window.confirm(
-      'This todo is not finished. Do you really want to delete it?'
-    );
-    if (confirmDelete) {
-      removeTodoItemAndElement();
-    }
+    showModal({
+      message: 'This todo is not finished. Do you really want to delete it?',
+      actions: [
+        { label: 'Cancel', callback: () => {} }, // Do nothing on "Cancel"
+        {
+          label: 'Delete',
+          callback: () => {
+            removeTodoItemAndElement();
+          },
+        },
+      ],
+    });
   }
 }
 
